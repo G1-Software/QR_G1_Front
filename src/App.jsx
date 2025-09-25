@@ -3,7 +3,7 @@ import "./styles/App.css";
 function App() {
   return (
     <>
-      <h1>Proyecto QR UC CHRISTUS Testeando CI</h1>
+      <h1>Proyecto QR UC CHRISTUS Testeando CI!!</h1>
     </>
   );
 }
