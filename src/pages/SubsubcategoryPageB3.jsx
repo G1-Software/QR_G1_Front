@@ -17,7 +17,6 @@ export function SubsubategoryPageB3() {
       <main>
         <Button text={"PRESUPUESTOS"}></Button>
         <Button text={"CUENTA HOSPITALARIA Y PAGOS"}></Button>
-        <Button text={"LEY DE URGENCIA"}></Button>
       </main>
       {qrData && (
         <Footer
