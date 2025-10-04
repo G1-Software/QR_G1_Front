@@ -7,7 +7,7 @@ import { SubCategoryPageB } from "./pages/SubcategoryPageB";
 import { SubCategoryPageC } from "./pages/SubcategoryPageC";
 import { SubsubategoryPageB1 } from "./pages/SubsubcategoryPageB1";
 import { SubsubategoryPageB3 } from "./pages/SubsubcategoryPageB3";
-import { SubsubategoryPageC1 } from "./pages/SubsubcategoryPageC1.JSX";
+import { SubsubategoryPageC1 } from "./pages/SubsubcategoryPageC1";
 import { SubsubategoryPageC2 } from "./pages/SubsubcategoryPageC2";
 import { SubsubategoryPageC3 } from "./pages/SubsubcategoryPageC3";
 import { ScanQrNotice } from "./pages/ScanQrNotice";
