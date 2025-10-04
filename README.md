@@ -26,6 +26,3 @@ hooks/ # Custom hooks (useAuth, useFetch, etc.)
 lib/ # Librerías y utilidades (axios instance, helpers)
 assets/ # Imágenes, íconos, fuentes
 styles/ # CSS global y variables de estilo
-
-
-Cambios para testear CI
