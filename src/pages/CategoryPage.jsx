@@ -22,7 +22,7 @@ export function CategoryPage() {
         setError(null);
 
         const response = await axios.get(
-          `https://qr-g1-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${id}`
         );
 
         setQrData(response.data.data);
