@@ -10,6 +10,7 @@ import { SubsubategoryPageB3 } from "./pages/SubsubcategoryPageB3";
 import { SubsubategoryPageC1 } from "./pages/SubsubcategoryPageC1";
 import { SubsubategoryPageC2 } from "./pages/SubsubcategoryPageC2";
 import { SubsubategoryPageC3 } from "./pages/SubsubcategoryPageC3";
+import { RequestPage } from "./pages/RequestPage";
 import { ScanQrNotice } from "./pages/ScanQrNotice";
 import "./styles/index.css";
 
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/subsubcategoryC1/:id" element={<SubsubategoryPageC1 />} />
         <Route path="/subsubcategoryC2/:id" element={<SubsubategoryPageC2 />} />
         <Route path="/subsubcategoryC3/:id" element={<SubsubategoryPageC3 />} />
+        <Route path="/requests/:id" element={<RequestPage/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

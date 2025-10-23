@@ -2,7 +2,7 @@ import logo from "../assets/logotipo.jpg";
 import { Link } from "react-router-dom";
 import "../styles/index.css";
 
-export function Header({ to, isCategoryPage = false, title }) {
+export function Header({ to, isCategoryPage = false, title, subtitle }) {
   return (
     <header>
       <div className="return-box">
@@ -13,7 +13,7 @@ export function Header({ to, isCategoryPage = false, title }) {
         )}
       </div>
       <img src={logo} alt="Logotipo" />
-      <p>Por favor indíquenos de qué área es su consulta</p>
+      <p>{subtitle || "Por favor indíquenos de qué área es su consulta"}</p>
       {!isCategoryPage && <h1>{title}</h1>}
     </header>
   );
