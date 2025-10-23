@@ -12,12 +12,11 @@ export function RequestPage() {
   const { id } = useParams();
   const { qrData } = useQrStore();
 
-  const areas = ["Asistencia Social", "Ropería", "Apoyo Espiritual", "Nutrición", "Aseo", "Mantención"];
+  const areas = ["Asistencia Social", "Apoyo Espiritual", "Nutrición", "Aseo", "Mantención"];
   const subareaMaintenance = ["Aire Acondicionado","Cama", "Baño", "WC - Ducha - Lavamanos","Iluminación - Enchufes","Televisor y Control Remoto","Mobiliario","Superficies y/o Pared","Timbre Defectuoso","Otro"];
-  const subareaLaundry = ["Toallas", "Ropa de Cama", "Ropa del Paciente", "Almohada", "Otro"];
   const subareaNutrition = ["Demora Entrega Alimento", "Alimentos que No son Según mi Condición de Salud", "Necesito Visita Nutricionista", "Otro"];
   const subareaSpiritual = ["Solicitar Visita de Apoyo Espiritual", "Solicita Oraciones para su Salud", "Solicita Sacramento, Comunión y Confesión", "Otro"];
-  const subareaCleaning = ["Baño", "Retirar Basura", "Limpieza Diaria", "Derrame de Líquidos", "Reposición de Insumos", "Horario de Aseo", "Otro"];
+  const subareaCleaning = ["Baño", "Retirar Basura", "Limpieza Diaria", "Derrame de Líquidos", "Ropería", "Reposición de Insumos", "Horario de Aseo", "Otro"];
 
   const [areaSelected, setAreaSelected] = useState("");
   const [subareaSelected, setSubareaSelected] = useState("");
@@ -36,7 +35,6 @@ export function RequestPage() {
     if (areaSelected === "Aseo") return subareaCleaning;
     if (areaSelected === "Apoyo Espiritual") return subareaSpiritual;
     if (areaSelected === "Nutrición") return subareaNutrition;
-    if (areaSelected === "Ropería") return subareaLaundry;
     return [];
   };
 
