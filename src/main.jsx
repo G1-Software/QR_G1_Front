@@ -12,9 +12,12 @@ import { SubsubategoryPageC1 } from "./pages/SubsubcategoryPageC1";
 import { SubsubategoryPageC2 } from "./pages/SubsubcategoryPageC2";
 import { SubsubategoryPageC3 } from "./pages/SubsubcategoryPageC3";
 import { ScanQrNotice } from "./pages/ScanQrNotice";
+import { EditorPage } from "./pages/EditorPage";
 import { StaffPage } from "./pages/StaffPage";
 import { PrivateRoute } from "./components/PrivateRoute";
 import "./styles/index.css";
+import { Instructive } from "./pages/Instructive";
+import { InformationPage } from "./pages/InformationPage";
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -46,6 +49,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/subsubcategoryC1/:id" element={<SubsubategoryPageC1 />} />
           <Route path="/subsubcategoryC2/:id" element={<SubsubategoryPageC2 />} />
           <Route path="/subsubcategoryC3/:id" element={<SubsubategoryPageC3 />} />
+          <Route path="/editor" element={<EditorPage></EditorPage>} />
+          <Route path="/instructive" element={<Instructive></Instructive>} />
+          <Route path="/information-page/:id" element={<InformationPage></InformationPage>}/>
           <Route path="/staff" element={
     <PrivateRoute>
       <StaffPage />

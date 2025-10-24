@@ -2,28 +2,35 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
 
 export function SubCategoryPageA() {
-  const { id } = useParams();
   const { qrData } = useQrStore();
   return (
     <div className="container">
-      <Header to={`/${id}`} title={"INFORMACIÓN CLÍNICA"}></Header>
+      <Header title={"INFORMACIÓN CLÍNICA"}></Header>
 
       <main>
         <Button
+          to={`/information-page/1`}
           text={"RESULTADOS DE EXÁMENES (LABORATORIOS E IMÁGENES)"}
         ></Button>
         <Button
+          to={`/information-page/2`}
           text={"DOCUMENTACIÓN CLINICA (FICHA CLÍNICA, EPICRISIS, ETC)"}
         ></Button>
         <Button
+          to={`/information-page/3`}
           text={"INFORMACIÓN SOBRE DIÁGNOSTICO O DE TRATAMIENTO MÉDICO"}
         ></Button>
-        <Button text={"¿DÓNDE AGENDO UNA CITA POST HOSPITALIZACIÓN?"}></Button>
-        <Button text={"HORARIO VISITAS  Y BANCO SANGRE"}></Button>
-        <Button text={"PROCESO DE ALTA"}></Button>
+        <Button
+          to={`/information-page/4`}
+          text={"¿DÓNDE AGENDO UNA CITA POST HOSPITALIZACIÓN?"}
+        ></Button>
+        <Button
+          to={`/information-page/5`}
+          text={"HORARIO VISITAS  Y BANCO SANGRE"}
+        ></Button>
+        <Button to={`/information-page/6`} text={"PROCESO DE ALTA"}></Button>
       </main>
 
       {qrData && (

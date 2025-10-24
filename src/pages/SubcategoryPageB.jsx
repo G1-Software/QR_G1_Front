@@ -9,14 +9,17 @@ export function SubCategoryPageB() {
   const { id } = useParams();
   return (
     <div className="container">
-      <Header to={`/${id}`} title={"INFORMACIÓN ADMINISTRATIVA"}></Header>
+      <Header title={"INFORMACIÓN ADMINISTRATIVA"}></Header>
 
       <main>
         <Button
           to={`/subsubcategoryB1/${id}`}
           text={"INFORMACIÓN GES - CAEC - LEY DE URGENCIA"}
         ></Button>
-        <Button text={"COSTO DE PRESTACIONES"}></Button>
+        <Button
+          to={`/information-page/10`}
+          text={"COSTO DE PRESTACIONES"}
+        ></Button>
         <Button
           to={`/subsubcategoryB3/${id}`}
           text={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}
