@@ -2,11 +2,9 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
 
 export function SubsubategoryPageB3() {
   const { qrData } = useQrStore();
-  const { id } = useParams();
   return (
     <div className="container">
       <Header title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}></Header>
