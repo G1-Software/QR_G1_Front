@@ -19,6 +19,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import "./styles/index.css";
 import { Instructive } from "./pages/Instructive";
 import { InformationPage } from "./pages/InformationPage";
+import { AdminHome } from "./pages/AdminHome"; 
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -54,11 +55,21 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/instructive" element={<Instructive></Instructive>} />
           <Route path="/information-page/:id" element={<InformationPage></InformationPage>}/>
           <Route path="/requests/:id" element={<RequestPage/>}/>
-          <Route path="/staff" element={
+{/*           
+    <Route path="/staff" element={
     <PrivateRoute>
       <StaffPage />
     </PrivateRoute>
-  } />
+  } /> */}
+
+  <Route
+  path="/admin"
+  element={
+    <PrivateRoute>
+      <AdminHome />
+    </PrivateRoute>
+  }
+  />
         </Routes>
       </BrowserRouter>
     </Auth0Provider>
