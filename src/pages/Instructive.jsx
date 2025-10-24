@@ -9,7 +9,6 @@ import { useMarkdownEditor } from "../hooks/useMarkdownEditor";
 export function Instructive() {
   const {
     text,
-    setText,
     html,
     handleTextChange,
     handleUndo,
