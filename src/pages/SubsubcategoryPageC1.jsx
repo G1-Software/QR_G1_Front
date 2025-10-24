@@ -10,7 +10,6 @@ export function SubsubategoryPageC1() {
   return (
     <div className="container">
       <Header
-        to={`/subcategoryC/${id}`}
         title={"INFORMACIÓN GENERAL DE ACOMPAÑANTES \nY VISITAS"}
       ></Header>
 

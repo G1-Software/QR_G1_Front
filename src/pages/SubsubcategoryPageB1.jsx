@@ -9,15 +9,12 @@ export function SubsubategoryPageB1() {
   const { id } = useParams();
   return (
     <div className="container">
-      <Header
-        to={`/subcategoryB/${id}`}
-        title={"INFORMACIÓN GES - CAEC - LEY DE URGENCIA"}
-      ></Header>
+      <Header title={"INFORMACIÓN GES - CAEC - LEY DE URGENCIA"}></Header>
 
       <main>
-        <Button text={"GES"}></Button>
-        <Button text={"CAEC"}></Button>
-        <Button text={"LEY DE URGENCIA"}></Button>
+        <Button to={`/information-page/7`} text={"GES"}></Button>
+        <Button to={`/information-page/8`} text={"CAEC"}></Button>
+        <Button to={`/information-page/9`} text={"LEY DE URGENCIA"}></Button>
       </main>
       {qrData && (
         <Footer

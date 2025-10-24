@@ -9,10 +9,7 @@ export function SubsubategoryPageC2() {
   const { qrData } = useQrStore();
   return (
     <div className="container">
-      <Header
-        to={`/subcategoryC/${id}`}
-        title={"HORARIOS Y CONDICIONES"}
-      ></Header>
+      <Header title={"HORARIOS Y CONDICIONES"}></Header>
 
       <main>
         <Button text={"HORARIOS VISITAS"}></Button>

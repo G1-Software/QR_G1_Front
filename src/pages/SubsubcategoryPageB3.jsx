@@ -9,14 +9,14 @@ export function SubsubategoryPageB3() {
   const { id } = useParams();
   return (
     <div className="container">
-      <Header
-        to={`/subcategoryB/${id}`}
-        title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}
-      ></Header>
+      <Header title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}></Header>
 
       <main>
-        <Button text={"PRESUPUESTOS"}></Button>
-        <Button text={"CUENTA HOSPITALARIA Y PAGOS"}></Button>
+        <Button to={`/information-page/11`} text={"PRESUPUESTOS"}></Button>
+        <Button
+          to={`/information-page/12`}
+          text={"CUENTA HOSPITALARIA Y PAGOS"}
+        ></Button>
       </main>
       {qrData && (
         <Footer
