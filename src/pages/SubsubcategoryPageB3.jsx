@@ -2,21 +2,19 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
 
 export function SubsubategoryPageB3() {
   const { qrData } = useQrStore();
-  const { id } = useParams();
   return (
     <div className="container">
-      <Header
-        to={`/subcategoryB/${id}`}
-        title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}
-      ></Header>
+      <Header title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}></Header>
 
       <main>
-        <Button text={"PRESUPUESTOS"}></Button>
-        <Button text={"CUENTA HOSPITALARIA Y PAGOS"}></Button>
+        <Button to={`/information-page/11`} text={"PRESUPUESTOS"}></Button>
+        <Button
+          to={`/information-page/12`}
+          text={"CUENTA HOSPITALARIA Y PAGOS"}
+        ></Button>
       </main>
       {qrData && (
         <Footer
