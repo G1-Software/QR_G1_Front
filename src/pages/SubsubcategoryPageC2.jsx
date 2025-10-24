@@ -10,8 +10,18 @@ export function SubsubategoryPageC2() {
       <Header title={"HORARIOS Y CONDICIONES"}></Header>
 
       <main>
-        <Button text={"HORARIOS VISITAS"}></Button>
-        <Button text={"CONDICIONES DE ENTRADA DE VISITAS AL HOSPITAL"}></Button>
+        <Button
+          to={`/information-page/21`}
+          text={"HORARIO VISITAS Y BANCO DE SANGRE"}
+        ></Button>
+        <Button
+          to={`/information-page/22`}
+          text={"CONDICIONES DE ENTRADA DE VISITAS AL HOSPITAL"}
+        ></Button>
+        <Button
+          to={`/information-page/23`}
+          text={"ELEMENTOS PERMITIDOS Y NO PERMITIDOS AL INGRESO AL HOSPITAL"}
+        ></Button>
       </main>
       {qrData && (
         <Footer

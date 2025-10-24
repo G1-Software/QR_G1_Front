@@ -24,8 +24,11 @@ export function SubCategoryPageB() {
           to={`/subsubcategoryB3/${id}`}
           text={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}
         ></Button>
-        <Button text={"BENEFICIOS SOCIALES / ASISTENCIA SOCIAL"}></Button>
-        <Button text={"SUGERENCIAS, RECLAMOS Y FELICITACIONES"}></Button>
+
+        <Button
+          to={`/information-page/13`}
+          text={"SUGERENCIAS, RECLAMOS Y FELICITACIONES"}
+        ></Button>
       </main>
       {qrData && (
         <Footer

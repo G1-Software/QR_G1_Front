@@ -18,7 +18,7 @@ export function SubCategoryPageC() {
         ></Button>
         <Button
           to={`/subsubcategoryC2/${id}`}
-          text={"HORARIOS Y CONDICIONES"}
+          text={"HORARIOS, CONDICIONES Y ELEMENTOS NO PERMITIDOS"}
         ></Button>
 
         <Button
