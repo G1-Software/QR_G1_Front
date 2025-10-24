@@ -60,7 +60,8 @@ export function CategoryPage() {
           isCategoryPage={true}
           text={"ACOMPAÑANTES, VISITAS Y SERVICIOS DISPONIBLES"}
         />
-        <Button isCategoryPage={true} text={"SOLICITUDES"} />
+        <Button to={`/requests/${id}`}
+        isCategoryPage={true} text={"SOLICITUDES"} />
       </main>
 
       {qrData && (

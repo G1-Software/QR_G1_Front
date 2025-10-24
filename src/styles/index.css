@@ -184,6 +184,44 @@ footer p {
   width: 150px;
 }
 
+.form-field-container {
+  width: 310px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field-label {
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.form-field-input {
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 11px;
+  background: #4344452e;
+}
+
+.form-field-input.textarea {
+  height: 90px;
+  resize: none;
+}
+
+.form-error {
+  color: #d11;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.form-field-input:focus {
+  outline: none;                
+  border: 1px solid #4344452e;    
+  box-shadow: 0 0 0 2px #6820761b; 
+}
+
 .editor-container {
   display: flex;
   flex-direction: column;

@@ -11,6 +11,7 @@ import { SubsubategoryPageB3 } from "./pages/SubsubcategoryPageB3";
 import { SubsubategoryPageC1 } from "./pages/SubsubcategoryPageC1";
 import { SubsubategoryPageC2 } from "./pages/SubsubcategoryPageC2";
 import { SubsubategoryPageC3 } from "./pages/SubsubcategoryPageC3";
+import { RequestPage } from "./pages/RequestPage";
 import { ScanQrNotice } from "./pages/ScanQrNotice";
 import { EditorPage } from "./pages/EditorPage";
 import { StaffPage } from "./pages/StaffPage";
@@ -52,6 +53,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/editor" element={<EditorPage></EditorPage>} />
           <Route path="/instructive" element={<Instructive></Instructive>} />
           <Route path="/information-page/:id" element={<InformationPage></InformationPage>}/>
+          <Route path="/requests/:id" element={<RequestPage/>}/>
           <Route path="/staff" element={
     <PrivateRoute>
       <StaffPage />

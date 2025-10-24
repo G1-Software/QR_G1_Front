@@ -2,15 +2,14 @@ import logo from "../assets/logotipo.jpg";
 import { useNavigate } from "react-router-dom";
 import "../styles/index.css";
 
-export function Header({ isCategoryPage = false, title }) {
+export function Header({ isCategoryPage = false, title, subtitle }) {
   const navigate = useNavigate();
-
   return (
     <header>
       <div className="return-box">
         {!isCategoryPage && (
           <button
-            onClick={() => navigate(-1)} // 🔙 Volver atrás
+            onClick={() => navigate(-1)} 
             className="material-symbols-outlined"
             style={{
               background: "none",
@@ -24,7 +23,7 @@ export function Header({ isCategoryPage = false, title }) {
       </div>
 
       <img src={logo} alt="Logotipo" />
-      <p>Por favor indíquenos de qué área es su consulta</p>
+      <p>{subtitle || "Por favor indíquenos de qué área es su consulta"}</p>
       {!isCategoryPage && <h1>{title}</h1>}
     </header>
   );
