@@ -4,7 +4,7 @@ import logo from "../assets/logotipo.jpg";
 import "../styles/adminHome.css";
 
 export const AdminHome = () => {
-  const { user, logout } = useAuth0();
+  const { logout } = useAuth0();
 
   return (
     <div className="admin-home">
