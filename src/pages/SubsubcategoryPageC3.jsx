@@ -2,10 +2,8 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
 
 export function SubsubategoryPageC3() {
-  const { id } = useParams();
   const { qrData } = useQrStore();
   return (
     <div className="container">

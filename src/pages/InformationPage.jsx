@@ -10,9 +10,9 @@ import { ErrorPage } from "./ErrorPage";
 export function InformationPage() {
   const { qrData } = useQrStore();
   const { id } = useParams();
-  const [contentHtml, setContentHtml] = useState(null); // Estado para almacenar el contenido HTML
-  const [loading, setLoading] = useState(true); // Estado de carga
-  const [error, setError] = useState(null); // Estado para manejar errores
+  const [contentHtml, setContentHtml] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -20,33 +20,32 @@ export function InformationPage() {
         const response = await axios.get(
           `https://qr-g1-software-back.onrender.com/page/${id}`
         );
-        setContentHtml(response.data.data.content_html); // Almacenar el contenido HTML
+        setContentHtml(response.data.data.content_html);
       } catch (error) {
-        setError("Error al cargar el contenido.");
+        setError("Error al cargar el contenido.", error);
       } finally {
-        setLoading(false); // Terminar de cargar
+        setLoading(false);
       }
     };
 
     fetchContent();
-  }, [id]); // Ejecutar efecto cuando el ID cambie
+  }, [id]);
 
   if (loading) {
-    return <Loader></Loader>; // Mostrar mensaje de carga
+    return <Loader></Loader>;
   }
 
   if (error) {
-    return <ErrorPage></ErrorPage>; // Mostrar mensaje de error si algo falla
+    return <ErrorPage></ErrorPage>;
   }
 
   return (
     <div className="container">
       <HeaderInfoPage to={`/`} />
 
-      {/* Mostrar el contenido HTML recuperado de la API */}
       <div
         className="visualizer-content"
-        dangerouslySetInnerHTML={{ __html: contentHtml }} // Renderiza el HTML de forma segura
+        dangerouslySetInnerHTML={{ __html: contentHtml }}
       />
 
       {qrData && (

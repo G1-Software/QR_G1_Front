@@ -22,20 +22,18 @@ export function EditorPage() {
   } = useMarkdownEditor(editor);
 
   const [selectedPage, setSelectedPage] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Estado para la sidebar
-  const [isSaved, setIsSaved] = useState(false); // Estado para mostrar la modal de guardado
-  const [showErrorModal, setShowErrorModal] = useState(false); // Estado para la modal de error
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
-  // Función para abrir/cerrar la sidebar
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
   const closeSidebar = () => setSidebarOpen(false);
 
-  // Manejo de selección de página
   const handleSelectChange = (e) => {
     const pageId = parseInt(e.target.value);
     if (!pageId) {
       setSelectedPage(null);
-      setText(editor); // Aquí lo cambio por "editor" en lugar de "instructivo"
+      setText(editor);
       return;
     }
     const page = pages.find((p) => p.id === pageId);
@@ -43,10 +41,9 @@ export function EditorPage() {
     setText(page?.content_markdown || "");
   };
 
-  // Función para manejar el guardado
   const handleSave = () => {
     if (!selectedPage) {
-      setShowErrorModal(true); // Mostrar la modal de error si no hay página seleccionada
+      setShowErrorModal(true);
       return;
     }
     const updatedPage = {
@@ -56,24 +53,21 @@ export function EditorPage() {
       updated_at: new Date().toISOString(),
     };
     savePage(updatedPage);
-    setIsSaved(true); // Mostrar la modal de "Se guardaron los cambios"
+    setIsSaved(true);
   };
 
-  // Función para cerrar la modal de éxito
   const handleCloseModal = () => {
-    setIsSaved(false); // Cerrar la modal de "Se guardaron los cambios"
+    setIsSaved(false);
   };
 
-  // Función para cerrar la modal de error
   const handleCloseErrorModal = () => {
-    setShowErrorModal(false); // Cerrar la modal de error
+    setShowErrorModal(false);
   };
 
   return (
     <div className="editor-container">
-      {/* 🧭 Barra de herramientas */}
       <Toolbar
-        onToggleSidebar={toggleSidebar} // Cambié el nombre del prop aquí
+        onToggleSidebar={toggleSidebar}
         onUndo={handleUndo}
         onRedo={handleRedo}
         onFormat={applyMarkdown}
@@ -84,10 +78,8 @@ export function EditorPage() {
         isSaving={isSaving}
       />
 
-      {/* 🧱 Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
-      {/* 📝 Editor + vista previa */}
       <main className="editor-main">
         <textarea
           ref={textareaRef}
@@ -112,14 +104,12 @@ export function EditorPage() {
         </div>
       </main>
 
-      {/* Modal de confirmación de guardado */}
       <Modal
         isOpen={isSaved}
         onClose={handleCloseModal}
         message="Se guardaron los cambios"
       />
 
-      {/* Modal de error si no hay página seleccionada */}
       <Modal
         isOpen={showErrorModal}
         onClose={handleCloseErrorModal}
