@@ -53,7 +53,7 @@ img {
 .material-symbols-outlined {
   color: #682076;
   text-decoration: none;
-  background-color: none;
+  background-color: transparent;
   border: none;
 }
 

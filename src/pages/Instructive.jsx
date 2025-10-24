@@ -3,7 +3,7 @@ import logotipo from "../assets/logotipo.jpg";
 import instructivo from "../assets/instructivo.md?raw";
 
 import { Toolbar } from "../components/Toolbar";
-import { Sidebar } from "../components/Sidebar"; // Importa la Sidebar
+import { Sidebar } from "../components/Sidebar";
 import { useMarkdownEditor } from "../hooks/useMarkdownEditor";
 
 export function Instructive() {
@@ -17,27 +17,23 @@ export function Instructive() {
     textareaRef,
   } = useMarkdownEditor(instructivo);
 
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Estado para la sidebar
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Función para abrir/cerrar la sidebar
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
   const closeSidebar = () => setSidebarOpen(false);
 
   return (
     <div className="editor-container">
-      {/* 🧭 Barra de herramientas */}
       <Toolbar
-        onToggleSidebar={toggleSidebar} // Cambié el nombre del prop aquí
+        onToggleSidebar={toggleSidebar}
         onUndo={handleUndo}
         onRedo={handleRedo}
         onFormat={applyMarkdown}
         isInstructive={true}
       />
 
-      {/* 🧱 Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
-      {/* 📝 Editor + vista previa */}
       <main className="editor-main">
         <textarea
           ref={textareaRef}
