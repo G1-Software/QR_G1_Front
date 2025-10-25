@@ -2,25 +2,26 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
 
 export function SubsubategoryPageC3() {
-  const { id } = useParams();
   const { qrData } = useQrStore();
   return (
     <div className="container">
-      <Header
-        to={`/subcategoryC/${id}`}
-        title={"SERVICIOS PARA VISITAS"}
-      ></Header>
+      <Header title={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"}></Header>
 
       <main>
         <Button
+          to={`/information-page/24`}
           text={"CAFETERÍAS, MARKETPLACES, MÁQUINAS EXPENDEDORAS, ETC"}
         ></Button>
-        <Button text={"CAPILLAS O ESPACIOS DE REFLEXIÓN"}></Button>
-        <Button text={"ESTACIONAMIENTO, CAJERO AUTOMÁTICO, WIFI"}></Button>
-        <Button text={"OTRO"}></Button>
+        <Button
+          to={`/information-page/25`}
+          text={"ESPACIOS DE ORACIÓN Y REFLEXIÓN ESPIRITUAL"}
+        ></Button>
+        <Button
+          to={`/information-page/26`}
+          text={"CAJERO AUTOMÁTICO, WIFI Y ESTACIONAMIENTOS"}
+        ></Button>
       </main>
       {qrData && (
         <Footer

@@ -2,25 +2,40 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
 
 export function SubsubategoryPageC1() {
-  const { id } = useParams();
   const { qrData } = useQrStore();
   return (
     <div className="container">
       <Header
-        to={`/subcategoryC/${id}`}
         title={"INFORMACIÓN GENERAL DE ACOMPAÑANTES \nY VISITAS"}
       ></Header>
 
       <main>
-        <Button text={"DIFERENCIA ENTRE ACOMPAÑANTE Y VISITA"}></Button>
         <Button
+          to={`/information-page/14`}
+          text={"DIFERENCIA ENTRE ACOMPAÑANTE Y VISITA"}
+        ></Button>
+        <Button
+          to={`/information-page/15`}
           text={"ROL Y RESPONSABILIDADES DEL ACOMPAÑANTE RESPONSABLE"}
         ></Button>
         <Button
-          text={"DIFERENCIA ENTRE RESPONSABLE DE PAGARÉ Y ACOMPAÑANTE"}
+          to={`/information-page/16`}
+          text={"ROL DEL RESPONSABLE DEL PAGARÉ"}
+        ></Button>
+        <Button
+          to={`/information-page/17`}
+          text={"CUIDADOR DE EMPRESA EXTERNA"}
+        ></Button>
+        <Button to={`/information-page/18`} text={"LEY MILA N°21.372"}></Button>
+        <Button
+          to={`/information-page/19`}
+          text={"INGRESO DE PERROS DE ASISTENCIA"}
+        ></Button>
+        <Button
+          to={`/information-page/20`}
+          text={"INGRESO DE MASCOTAS"}
         ></Button>
       </main>
       {qrData && (

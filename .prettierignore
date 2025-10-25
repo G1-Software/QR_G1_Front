@@ -1,0 +1,5 @@
+# Ignorar todos los archivos Markdown
+*.md
+
+# (opcional) Ignorar también el contenido de la carpeta assets
+assets/**

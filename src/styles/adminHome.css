@@ -1,0 +1,183 @@
+/* ===========================
+   Estilos UC CHRISTUS - Admin
+   =========================== */
+
+:root {
+  --uc-purple: #67308f;
+  --uc-blue: #4a7bd6;
+  --uc-blue-hover: #3c6ac0;
+  --uc-bg: #f7f9fc;
+  --uc-white: #ffffff;
+  --uc-gray: #6b7280;
+  --uc-dark: #1f2937;
+  --uc-radius: 18px;
+  --uc-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --uc-transition: all 0.2s ease;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+/* ===== Layout general ===== */
+
+.admin-home {
+  min-height: 100vh;
+  background-color: var(--uc-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* ===== Header ===== */
+
+.admin-header {
+  width: 100%;
+  background-color: var(--uc-white);
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin-header__inner {
+  height: 80px;
+  margin: 0 auto;
+  padding: 0 40px;
+  max-width: 1300px;
+
+  /* 🔹 Este flex coloca el logo a la izquierda y el botón totalmente a la derecha */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand__logo {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+/* Botón de cerrar sesión */
+.btn-logout {
+  margin-left: auto; /* 🔹 Empuja el botón hacia el extremo derecho */
+  background-color: var(--uc-blue);
+  color: var(--uc-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--uc-transition);
+  box-shadow: 0 3px 8px rgba(74, 123, 214, 0.25);
+}
+
+.btn-logout:hover {
+  background-color: var(--uc-blue-hover);
+  transform: translateY(-1px);
+}
+
+.logout-container {
+  margin-left: auto;
+  display: flex;
+  align-items: right;
+}
+.spacer{ flex:5; }  
+
+
+/* ===== Main content ===== */
+
+.admin-home main {
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  margin-top: 60px;
+  padding: 0 20px 80px;
+}
+
+.admin-home h2 {
+  font-size: 2rem;
+  color: var(--uc-dark);
+  margin-bottom: 8px;
+}
+
+.admin-home p {
+  color: var(--uc-gray);
+  font-size: 1.1rem;
+  margin-bottom: 36px;
+}
+
+/* ===== Cards de acceso ===== */
+
+.admin-links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  justify-items: center;
+}
+
+.admin-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--uc-white);
+  color: var(--uc-dark);
+  text-decoration: none;
+  border-radius: var(--uc-radius);
+  box-shadow: var(--uc-shadow);
+  padding: 32px 20px;
+  width: 100%;
+  max-width: 380px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-top: 5px solid var(--uc-blue);
+  transition: var(--uc-transition);
+}
+
+.admin-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(74, 123, 214, 0.25);
+  border-top-color: var(--uc-purple);
+}
+
+.admin-card::after {
+  content: "→";
+  font-size: 1.2rem;
+  margin-top: 6px;
+  color: var(--uc-blue);
+  transition: var(--uc-transition);
+}
+
+.admin-card:hover::after {
+  color: var(--uc-purple);
+  transform: translateX(4px);
+}
+
+/* ===== Footer ===== */
+
+.admin-footer {
+  text-align: center;
+  color: var(--uc-gray);
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* ===== Responsive ===== */
+
+@media (min-width: 720px) {
+  .admin-links {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-home main {
+    margin-top: 80px;
+  }
+}
