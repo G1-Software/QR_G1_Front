@@ -30,7 +30,10 @@ export function SubCategoryPageA() {
           to={`/information-page/5`}
           text={"HORARIO VISITAS  Y BANCO SANGRE"}
         ></Button>
-        <Button to={`/information-page/6`} text={"PROCESO DE ALTA"}></Button>
+        <Button
+          to={`/information-page/6`}
+          text={"CUIDADOS EN EL ALTA"}
+        ></Button>
       </main>
 
       {qrData && (

@@ -53,15 +53,18 @@ export function CategoryPage() {
         <Button
           to={`/subcategoryB/${id}`}
           isCategoryPage={true}
-          text={"INFORMACIÓN ADMINISTRATIVA, PAGOS Y BENEFICIOS SOCIALES"}
+          text={"INFORMACIÓN ADMINISTRATIVA Y PAGOS"}
         />
         <Button
           to={`/subcategoryC/${id}`}
           isCategoryPage={true}
           text={"ACOMPAÑANTES, VISITAS Y SERVICIOS DISPONIBLES"}
         />
-        <Button to={`/requests/${id}`}
-        isCategoryPage={true} text={"SOLICITUDES"} />
+        <Button
+          to={`/requests/${id}`}
+          isCategoryPage={true}
+          text={"SOLICITUDES"}
+        />
       </main>
 
       {qrData && (

@@ -12,12 +12,30 @@ export function SubsubategoryPageC1() {
       ></Header>
 
       <main>
-        <Button text={"DIFERENCIA ENTRE ACOMPAÑANTE Y VISITA"}></Button>
         <Button
+          to={`/information-page/14`}
+          text={"DIFERENCIA ENTRE ACOMPAÑANTE Y VISITA"}
+        ></Button>
+        <Button
+          to={`/information-page/15`}
           text={"ROL Y RESPONSABILIDADES DEL ACOMPAÑANTE RESPONSABLE"}
         ></Button>
         <Button
-          text={"DIFERENCIA ENTRE RESPONSABLE DE PAGARÉ Y ACOMPAÑANTE"}
+          to={`/information-page/16`}
+          text={"ROL DEL RESPONSABLE DEL PAGARÉ"}
+        ></Button>
+        <Button
+          to={`/information-page/17`}
+          text={"CUIDADOR DE EMPRESA EXTERNA"}
+        ></Button>
+        <Button to={`/information-page/18`} text={"LEY MILA N°21.372"}></Button>
+        <Button
+          to={`/information-page/19`}
+          text={"INGRESO DE PERROS DE ASISTENCIA"}
+        ></Button>
+        <Button
+          to={`/information-page/20`}
+          text={"INGRESO DE MASCOTAS"}
         ></Button>
       </main>
       {qrData && (

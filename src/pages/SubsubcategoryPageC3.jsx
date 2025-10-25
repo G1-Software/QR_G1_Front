@@ -7,15 +7,21 @@ export function SubsubategoryPageC3() {
   const { qrData } = useQrStore();
   return (
     <div className="container">
-      <Header title={"SERVICIOS PARA VISITAS"}></Header>
+      <Header title={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"}></Header>
 
       <main>
         <Button
+          to={`/information-page/24`}
           text={"CAFETERÍAS, MARKETPLACES, MÁQUINAS EXPENDEDORAS, ETC"}
         ></Button>
-        <Button text={"CAPILLAS O ESPACIOS DE REFLEXIÓN"}></Button>
-        <Button text={"ESTACIONAMIENTO, CAJERO AUTOMÁTICO, WIFI"}></Button>
-        <Button text={"OTRO"}></Button>
+        <Button
+          to={`/information-page/25`}
+          text={"ESPACIOS DE ORACIÓN Y REFLEXIÓN ESPIRITUAL"}
+        ></Button>
+        <Button
+          to={`/information-page/26`}
+          text={"CAJERO AUTOMÁTICO, WIFI Y ESTACIONAMIENTOS"}
+        ></Button>
       </main>
       {qrData && (
         <Footer
