@@ -19,7 +19,7 @@ export const AdminHome = () => {
             <button
                 className="btn-logout"
                 onClick={() =>
-                logout({ logoutParams: { returnTo: window.location.origin } })
+                logout({ logoutParams: { returnTo: window.location.href } })
                 }
             >
                 Cerrar sesión
