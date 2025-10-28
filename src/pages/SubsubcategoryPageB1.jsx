@@ -48,7 +48,7 @@ export function SubsubategoryPageB1() {
 
   return (
     <div className="container">
-      <Header title={"INFORMACIÓN GES - CAEC - LEY DE URGENCIA"} />
+      <Header id={id} title={"INFORMACIÓN GES - CAEC - LEY DE URGENCIA"} />
 
       <main>
         <Button to={`/information-page/${id}/7`} text={"GES"} />

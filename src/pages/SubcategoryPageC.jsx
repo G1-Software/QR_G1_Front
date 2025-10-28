@@ -48,7 +48,7 @@ export function SubCategoryPageC() {
 
   return (
     <div className="container">
-      <Header title={"ACOMPAÑANTES Y VISITAS"} />
+      <Header id={id} title={"ACOMPAÑANTES Y VISITAS"} />
 
       <main>
         <Button

@@ -13,12 +13,14 @@ export function Sidebar({ isOpen, onClose }) {
       </div>
 
       <div className="links-container">
-        <Link className="link">Inicio</Link>
+        <Link to="/admin" className="link">
+          Inicio
+        </Link>
         <Link className="link">Dashboards</Link>
-        <Link to="/editor" className="link">
+        <Link to="/admin/editor" className="link">
           Editor
         </Link>
-        <Link to="/instructive" className="link">
+        <Link to="/admin/instructive" className="link">
           Instructivo
         </Link>
       </div>

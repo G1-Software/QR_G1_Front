@@ -48,7 +48,7 @@ export function SubCategoryPageB() {
 
   return (
     <div className="container">
-      <Header title={"INFORMACIÓN ADMINISTRATIVA"} />
+      <Header id={id} title={"INFORMACIÓN ADMINISTRATIVA"} />
 
       <main>
         <Button

@@ -28,6 +28,7 @@ export function Toolbar({
       "",
       true
     );
+  const insertPhone = () => onFormat("[Teléfono]", "(tel:+569XXXXXXXX)");
 
   return (
     <nav className="toolbar">
@@ -40,6 +41,7 @@ export function Toolbar({
         >
           <span className="material-symbols-outlined">menu</span>
         </button>
+
         <button
           type="button"
           onClick={onUndo}
@@ -72,7 +74,7 @@ export function Toolbar({
         <button
           type="button"
           onClick={insertItalic}
-          title="Cursiva (Ctrl+I)"
+          title="Cursiva"
           aria-label="Cursiva"
         >
           <span className="material-symbols-outlined">format_italic</span>
@@ -152,6 +154,15 @@ export function Toolbar({
           aria-label="Insertar video"
         >
           <span className="material-symbols-outlined">smart_display</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={insertPhone}
+          title="Insertar teléfono"
+          aria-label="Insertar teléfono"
+        >
+          <span className="material-symbols-outlined">call</span>
         </button>
       </div>
 

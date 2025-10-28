@@ -67,8 +67,22 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             path="/subsubcategoryC3/:id"
             element={<SubsubategoryPageC3 />}
           />
-          <Route path="/admin/editor" element={<EditorPage></EditorPage>} />
-          <Route path="/instructive" element={<Instructive></Instructive>} />
+          <Route
+            path="/admin/editor"
+            element={
+              <PrivateRoute>
+                <EditorPage></EditorPage>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/instructive"
+            element={
+              <PrivateRoute>
+                <Instructive></Instructive>
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/information-page/:idQR/:idPage"
             element={<InformationPage></InformationPage>}
