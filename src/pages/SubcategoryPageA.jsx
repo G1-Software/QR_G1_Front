@@ -48,7 +48,7 @@ export function SubCategoryPageA() {
 
   return (
     <div className="container">
-      <Header title={"INFORMACIÓN CLÍNICA"} />
+      <Header id={id} title={"INFORMACIÓN CLÍNICA"} />
 
       <main>
         <Button

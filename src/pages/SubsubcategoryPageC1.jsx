@@ -48,7 +48,10 @@ export function SubsubategoryPageC1() {
 
   return (
     <div className="container">
-      <Header title={"INFORMACIÓN GENERAL DE ACOMPAÑANTES \nY VISITAS"} />
+      <Header
+        id={id}
+        title={"INFORMACIÓN GENERAL DE ACOMPAÑANTES \nY VISITAS"}
+      />
 
       <main>
         <Button

@@ -48,7 +48,7 @@ export function SubsubategoryPageC2() {
 
   return (
     <div className="container">
-      <Header title={"HORARIOS Y CONDICIONES"} />
+      <Header id={id} title={"HORARIOS Y CONDICIONES"} />
 
       <main>
         <Button

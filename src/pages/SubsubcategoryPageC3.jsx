@@ -48,7 +48,7 @@ export function SubsubategoryPageC3() {
 
   return (
     <div className="container">
-      <Header title={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"} />
+      <Header id={id} title={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"} />
 
       <main>
         <Button

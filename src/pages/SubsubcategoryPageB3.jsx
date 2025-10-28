@@ -48,7 +48,7 @@ export function SubsubategoryPageB3() {
 
   return (
     <div className="container">
-      <Header title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"} />
+      <Header id={id} title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"} />
 
       <main>
         <Button to={`/information-page/${id}/11`} text={"PRESUPUESTOS"} />

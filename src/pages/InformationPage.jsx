@@ -47,7 +47,7 @@ export function InformationPage() {
 
   return (
     <div className="container">
-      <HeaderInfoPage to={`/`} />
+      <HeaderInfoPage id={idQR} />
 
       <div
         className="visualizer-content"
