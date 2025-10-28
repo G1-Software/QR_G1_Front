@@ -1,28 +1,70 @@
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
+import { Loader } from "./Loader";
+import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
+import { useParams } from "react-router-dom";
 
 export function SubsubategoryPageC3() {
-  const { qrData } = useQrStore();
+  const { qrData, setQrData } = useQrStore();
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    const fetchQrIfNeeded = async () => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
+
+      setLoading(true);
+      try {
+        if (qrData) {
+          setLoading(false);
+          return;
+        }
+
+        const qrResponse = await axios.get(
+          `https://qr-g1-software-back.onrender.com/qr/${id}`
+        );
+        const qr = qrResponse.data.data;
+        setQrData(qr);
+      } catch (err) {
+        console.error("Error al cargar QR:", err);
+        setError("Error al cargar los datos del QR.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQrIfNeeded();
+  }, [id, qrData, setQrData]);
+
+  if (loading) return <Loader />;
+  if (error) return <ErrorPage />;
+
   return (
     <div className="container">
-      <Header title={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"}></Header>
+      <Header title={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"} />
 
       <main>
         <Button
-          to={`/information-page/24`}
+          to={`/information-page/${id}/24`}
           text={"CAFETERÍAS, MARKETPLACES, MÁQUINAS EXPENDEDORAS, ETC"}
-        ></Button>
+        />
         <Button
-          to={`/information-page/25`}
+          to={`/information-page/${id}/25`}
           text={"ESPACIOS DE ORACIÓN Y REFLEXIÓN ESPIRITUAL"}
-        ></Button>
+        />
         <Button
-          to={`/information-page/26`}
+          to={`/information-page/${id}/26`}
           text={"CAJERO AUTOMÁTICO, WIFI Y ESTACIONAMIENTOS"}
-        ></Button>
+        />
       </main>
+
       {qrData && (
         <Footer
           bed={qrData.bed}
