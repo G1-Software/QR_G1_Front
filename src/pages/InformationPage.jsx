@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios"; // Importa Axios
+import axios from "axios";
 import { HeaderInfoPage } from "../components/HeaderInfoPage";
 import { useQrStore } from "../stores/QRStore.js";
 import { Footer } from "../components/Footer";
@@ -8,36 +8,42 @@ import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 
 export function InformationPage() {
-  const { qrData } = useQrStore();
-  const { id } = useParams();
+  const { qrData, setQrData } = useQrStore();
+  const { idQR, idPage } = useParams();
   const [contentHtml, setContentHtml] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchContent = async () => {
+    const fetchAll = async () => {
+      setLoading(true);
       try {
-        const response = await axios.get(
-          `https://qr-g1-software-back.onrender.com/page/${id}`
+        let qr = qrData;
+        if (!qr) {
+          const qrResponse = await axios.get(
+            `https://qr-g1-software-back.onrender.com/qr/${idQR}`
+          );
+          qr = qrResponse.data.data;
+          setQrData(qr);
+        }
+
+        const pageResponse = await axios.get(
+          `https://qr-g1-software-back.onrender.com/page/${idPage}`
         );
-        setContentHtml(response.data.data.content_html);
-      } catch (error) {
-        setError("Error al cargar el contenido.", error);
+        setContentHtml(pageResponse.data.data.content_html);
+      } catch (err) {
+        console.error("Error al cargar datos:", err);
+        setError("Error al cargar los datos.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchContent();
-  }, [id]);
+    fetchAll();
+  }, [idQR, idPage, qrData, setQrData]);
 
-  if (loading) {
-    return <Loader></Loader>;
-  }
-
-  if (error) {
-    return <ErrorPage></ErrorPage>;
-  }
+  if (loading) return <Loader />;
+  if (error) return <ErrorPage />;
 
   return (
     <div className="container">

@@ -11,9 +11,8 @@ export function Toolbar({
   selectedPageId = "",
   onSelectChange,
   isSaving = false,
-  isInstructive = false, // Nueva prop para determinar si es un instructivo
+  isInstructive = false,
 }) {
-  // wrappers para formatos complejos (para que el JSX sea más legible)
   const insertBold = () => onFormat("**", "**");
   const insertItalic = () => onFormat("_", "_");
   const insertH1 = () => onFormat("# ", "", true);
@@ -35,7 +34,7 @@ export function Toolbar({
       <div className="tools" role="toolbar" aria-label="Editor toolbar">
         <button
           type="button"
-          onClick={onToggleSidebar} // Cambié el nombre aquí
+          onClick={onToggleSidebar}
           title="Abrir menú lateral"
           aria-label="Abrir menú"
         >
@@ -156,7 +155,6 @@ export function Toolbar({
         </button>
       </div>
 
-      {/* Solo se renderiza el selector y el botón de guardar si no es un instructivo */}
       {!isInstructive && (
         <div className="select-and-save">
           <select

@@ -7,9 +7,12 @@ import { Sidebar } from "../components/Sidebar";
 import { useMarkdownEditor } from "../hooks/useMarkdownEditor";
 import { usePagesAPI } from "../hooks/usePagesAPI";
 import { Modal } from "../components/Modal";
+import { Loader } from "./Loader.jsx";
+import { ErrorPage } from "./ErrorPage.jsx";
 
 export function EditorPage() {
-  const { pages, savePage, isSaving } = usePagesAPI();
+  const { pages, savePage, isSaving, loading, error } = usePagesAPI();
+
   const {
     text,
     setText,
@@ -25,6 +28,9 @@ export function EditorPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
+
+  if (loading) return <Loader />;
+  if (error) return <ErrorPage message={error} />;
 
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
   const closeSidebar = () => setSidebarOpen(false);
@@ -56,13 +62,8 @@ export function EditorPage() {
     setIsSaved(true);
   };
 
-  const handleCloseModal = () => {
-    setIsSaved(false);
-  };
-
-  const handleCloseErrorModal = () => {
-    setShowErrorModal(false);
-  };
+  const handleCloseModal = () => setIsSaved(false);
+  const handleCloseErrorModal = () => setShowErrorModal(false);
 
   return (
     <div className="editor-container">
