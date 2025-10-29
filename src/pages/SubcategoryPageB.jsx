@@ -1,35 +1,76 @@
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
+import { Loader } from "./Loader";
+import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function SubCategoryPageB() {
-  const { qrData } = useQrStore();
-  const { id } = useParams();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
+  const { qrData, setQrData } = useQrStore();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    const fetchQrIfNeeded = async () => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
+
+      setLoading(true);
+      try {
+        if (qrData) {
+          setLoading(false);
+          return;
+        }
+
+        const qrResponse = await axios.get(
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
+        );
+        const qr = qrResponse.data.data;
+        setQrData(qr);
+      } catch (err) {
+        console.error("Error al cargar QR:", err);
+        setError("Error al cargar los datos del QR.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQrIfNeeded();
+  }, [token, qrData, setQrData]);
+
+  if (loading) return <Loader />;
+  if (error) return <ErrorPage />;
+
   return (
     <div className="container">
-      <Header title={"INFORMACIÓN ADMINISTRATIVA"}></Header>
+      <Header to={`/?token=${token}`} title={"INFORMACIÓN ADMINISTRATIVA"} />
 
       <main>
         <Button
-          to={`/subsubcategoryB1/${id}`}
+          to={`/coberturas_especiales?token=${token}`}
           text={"INFORMACIÓN GES - CAEC - LEY DE URGENCIA"}
-        ></Button>
+        />
         <Button
-          to={`/information-page/10`}
+          to={`/pagina_informacion?token=${token}&page=${10}`}
           text={"COSTO DE PRESTACIONES"}
-        ></Button>
+        />
         <Button
-          to={`/subsubcategoryB3/${id}`}
+          to={`/presupuestos_cuenta_pagos?token=${token}`}
           text={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}
-        ></Button>
-
+        />
         <Button
-          to={`/information-page/13`}
+          to={`/pagina_informacion?token=${token}&page=${13}`}
           text={"SUGERENCIAS, RECLAMOS Y FELICITACIONES"}
-        ></Button>
+        />
       </main>
+
       {qrData && (
         <Footer
           bed={qrData.bed}

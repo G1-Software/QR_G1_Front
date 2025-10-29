@@ -1,15 +1,15 @@
 import logo from "../assets/logotipo.jpg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/index.css";
 
-export function Header({ isCategoryPage = false, title, subtitle }) {
+export function Header({ to, isCategoryPage = false, title, subtitle }) {
   const navigate = useNavigate();
   return (
     <header>
       <div className="return-box">
         {!isCategoryPage && (
           <button
-            onClick={() => navigate(-1)} 
+            onClick={() => navigate(-1)}
             className="material-symbols-outlined"
             style={{
               background: "none",
@@ -19,6 +19,12 @@ export function Header({ isCategoryPage = false, title, subtitle }) {
           >
             arrow_back_ios
           </button>
+        )}
+
+        {!isCategoryPage && (
+          <Link className="material-symbols-outlined" to={`${to}`}>
+            Home
+          </Link>
         )}
       </div>
 

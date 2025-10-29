@@ -1,39 +1,82 @@
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useQrStore } from "../stores/QRStore.js";
+import { Loader } from "./Loader";
+import { ErrorPage } from "./ErrorPage";
+import { useLocation } from "react-router-dom";
 
 export function SubCategoryPageA() {
-  const { qrData } = useQrStore();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
+  const { qrData, setQrData } = useQrStore();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    const fetchQrIfNeeded = async () => {
+      if (hasFetched.current) return;
+      hasFetched.current = true;
+
+      setLoading(true);
+      try {
+        if (qrData) {
+          setLoading(false);
+          return;
+        }
+
+        const qrResponse = await axios.get(
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
+        );
+        const qr = qrResponse.data.data;
+        setQrData(qr);
+      } catch (err) {
+        console.error("Error al cargar QR:", err);
+        setError("Error al cargar los datos del QR.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQrIfNeeded();
+  }, [token, qrData, setQrData]);
+
+  if (loading) return <Loader />;
+  if (error) return <ErrorPage />;
+
   return (
     <div className="container">
-      <Header title={"INFORMACIÓN CLÍNICA"}></Header>
+      <Header to={`/?token=${token}`} title={"INFORMACIÓN CLÍNICA"} />
 
       <main>
         <Button
-          to={`/information-page/1`}
+          to={`/pagina_informacion?token=${token}&page=${1}`}
           text={"RESULTADOS DE EXÁMENES (LABORATORIOS E IMÁGENES)"}
-        ></Button>
+        />
         <Button
-          to={`/information-page/2`}
+          to={`/pagina_informacion?token=${token}&page=${2}`}
           text={"DOCUMENTACIÓN CLINICA (FICHA CLÍNICA, EPICRISIS, ETC)"}
-        ></Button>
+        />
         <Button
-          to={`/information-page/3`}
+          to={`/pagina_informacion?token=${token}&page=${3}`}
           text={"INFORMACIÓN SOBRE DIÁGNOSTICO O DE TRATAMIENTO MÉDICO"}
-        ></Button>
+        />
         <Button
-          to={`/information-page/4`}
+          to={`/pagina_informacion?token=${token}&page=${4}`}
           text={"¿DÓNDE AGENDO UNA CITA POST HOSPITALIZACIÓN?"}
-        ></Button>
+        />
         <Button
-          to={`/information-page/5`}
+          to={`/pagina_informacion?token=${token}&page=${5}`}
           text={"HORARIO VISITAS  Y BANCO SANGRE"}
-        ></Button>
+        />
         <Button
-          to={`/information-page/6`}
-          text={"CUIDADOS EN EL ALTA"}
-        ></Button>
+          to={`/pagina_informacion?token=${token}&page=${6}`}
+          text={"PROCESOS Y CUIDADOS EN EL ALTA"}
+        />
       </main>
 
       {qrData && (

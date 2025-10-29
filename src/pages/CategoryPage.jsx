@@ -2,7 +2,7 @@ import "../styles/App.css";
 import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader.jsx";
@@ -10,7 +10,9 @@ import { ErrorPage } from "./ErrorPage.jsx";
 import axios from "axios";
 
 export function CategoryPage() {
-  const { id } = useParams();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
   const { qrData, setQrData } = useQrStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +24,7 @@ export function CategoryPage() {
         setError(null);
 
         const response = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
 
         setQrData(response.data.data);
@@ -35,35 +37,35 @@ export function CategoryPage() {
     };
 
     fetchQrData();
-  }, [id, setQrData]);
+  }, [token, setQrData]);
 
   if (loading) return <Loader></Loader>;
   if (error) return <ErrorPage></ErrorPage>;
 
   return (
     <div className="container">
-      <Header to={`/${id}`} isCategoryPage={true} />
+      <Header isCategoryPage={true} />
 
       <main>
         <Button
-          to={`/subcategoryA/${id}`}
+          to={`/informacion_clinica?token=${token}`}
           isCategoryPage={true}
           text={"INFORMACIÓN CLINICA AL PACIENTE"}
         />
         <Button
-          to={`/subcategoryB/${id}`}
+          to={`/informacion_administrativa?token=${token}`}
           isCategoryPage={true}
           text={"INFORMACIÓN ADMINISTRATIVA Y PAGOS"}
         />
         <Button
-          to={`/subcategoryC/${id}`}
+          to={`/informacion_acompanantes_visitas?token=${token}`}
           isCategoryPage={true}
           text={"ACOMPAÑANTES, VISITAS Y SERVICIOS DISPONIBLES"}
         />
         <Button
-          to={`/requests/${id}`}
+          to={`/solicitudes/?token=${token}`}
           isCategoryPage={true}
-          text={"SOLICITUDES"}
+          text={"SOLICITUDES (LIMPIEZA, MANTENCIÓN, NUTRICIÓN, ETC)"}
         />
       </main>
 

@@ -11,9 +11,8 @@ export function Toolbar({
   selectedPageId = "",
   onSelectChange,
   isSaving = false,
-  isInstructive = false, // Nueva prop para determinar si es un instructivo
+  isInstructive = false,
 }) {
-  // wrappers para formatos complejos (para que el JSX sea más legible)
   const insertBold = () => onFormat("**", "**");
   const insertItalic = () => onFormat("_", "_");
   const insertH1 = () => onFormat("# ", "", true);
@@ -29,18 +28,20 @@ export function Toolbar({
       "",
       true
     );
+  const insertPhone = () => onFormat("[Teléfono]", "(tel:+569XXXXXXXX)");
 
   return (
     <nav className="toolbar">
       <div className="tools" role="toolbar" aria-label="Editor toolbar">
         <button
           type="button"
-          onClick={onToggleSidebar} // Cambié el nombre aquí
+          onClick={onToggleSidebar}
           title="Abrir menú lateral"
           aria-label="Abrir menú"
         >
           <span className="material-symbols-outlined">menu</span>
         </button>
+
         <button
           type="button"
           onClick={onUndo}
@@ -73,7 +74,7 @@ export function Toolbar({
         <button
           type="button"
           onClick={insertItalic}
-          title="Cursiva (Ctrl+I)"
+          title="Cursiva"
           aria-label="Cursiva"
         >
           <span className="material-symbols-outlined">format_italic</span>
@@ -154,9 +155,17 @@ export function Toolbar({
         >
           <span className="material-symbols-outlined">smart_display</span>
         </button>
+
+        <button
+          type="button"
+          onClick={insertPhone}
+          title="Insertar teléfono"
+          aria-label="Insertar teléfono"
+        >
+          <span className="material-symbols-outlined">call</span>
+        </button>
       </div>
 
-      {/* Solo se renderiza el selector y el botón de guardar si no es un instructivo */}
       {!isInstructive && (
         <div className="select-and-save">
           <select

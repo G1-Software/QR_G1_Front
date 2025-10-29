@@ -40,11 +40,9 @@
 
 .admin-header__inner {
   height: 80px;
-  margin: 0 auto;
+  width: 100%;
   padding: 0 40px;
-  max-width: 1300px;
-
-  /* 🔹 Este flex coloca el logo a la izquierda y el botón totalmente a la derecha */
+  /* 🔹 Flex que mantiene el logo a la izquierda y el botón al extremo derecho */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -65,14 +63,13 @@
 
 /* Botón de cerrar sesión */
 .btn-logout {
-  margin-left: auto; /* 🔹 Empuja el botón hacia el extremo derecho */
   background-color: var(--uc-blue);
   color: var(--uc-white);
   border: none;
-  padding: 10px 20px;
+  padding: 14px 32px;
   border-radius: 999px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: var(--uc-transition);
   box-shadow: 0 3px 8px rgba(74, 123, 214, 0.25);
@@ -84,11 +81,10 @@
 }
 
 .logout-container {
-  margin-left: auto;
   display: flex;
-  align-items: right;
+  align-items: center;
+  justify-content: flex-end;
 }
-.spacer{ flex:5; }  
 
 
 /* ===== Main content ===== */
@@ -98,20 +94,20 @@
   width: 100%;
   max-width: 900px;
   text-align: center;
-  margin-top: 60px;
-  padding: 0 20px 80px;
+  margin-top: 80px;
+  padding: 0 28px 110px;
 }
 
 .admin-home h2 {
-  font-size: 2rem;
+  font-size: 2.6rem;
   color: var(--uc-dark);
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .admin-home p {
   color: var(--uc-gray);
-  font-size: 1.1rem;
-  margin-bottom: 36px;
+  font-size: 1.5rem;
+  margin-bottom: 52px;
 }
 
 /* ===== Cards de acceso ===== */
@@ -119,7 +115,7 @@
 .admin-links {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 22px;
+  gap: 32px;
   justify-items: center;
 }
 
@@ -133,11 +129,11 @@
   text-decoration: none;
   border-radius: var(--uc-radius);
   box-shadow: var(--uc-shadow);
-  padding: 32px 20px;
+  padding: 46px 32px;
   width: 100%;
   max-width: 380px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   border-top: 5px solid var(--uc-blue);
   transition: var(--uc-transition);
 }

@@ -13,18 +13,16 @@ export const AdminHome = () => {
           <div className="brand">
             <img src={logo} alt="UC CHRISTUS" className="brand__logo" />
           </div>
-          <div className="spacer"    /> 
-         
           <div className="logout-container">
             <button
-                className="btn-logout"
-                onClick={() =>
-                logout({ logoutParams: { returnTo: window.location.origin } })
-                }
+              className="btn-logout"
+              onClick={() =>
+                logout({ logoutParams: { returnTo: window.location.href } })
+              }
             >
-                Cerrar sesión
+              Cerrar sesión
             </button>
-            </div>
+          </div>
         </div>
       </header>
 
@@ -33,8 +31,12 @@ export const AdminHome = () => {
         <p>Seleccione una acción para comenzar</p>
 
         <div className="admin-links">
-          <Link to="/admin/contenido" className="admin-card">Editar Información</Link>
-          <Link to="/admin/metricas" className="admin-card">Dashboard de Métricas</Link>
+          <Link to="/admin/editor" className="admin-card">
+            Editar Información
+          </Link>
+          <Link to="/admin/metricas" className="admin-card">
+            Dashboard de Métricas
+          </Link>
         </div>
       </main>
     </div>

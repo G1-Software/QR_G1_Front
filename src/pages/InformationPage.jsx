@@ -1,47 +1,56 @@
 import { useState, useEffect } from "react";
-import axios from "axios"; // Importa Axios
+import axios from "axios";
 import { HeaderInfoPage } from "../components/HeaderInfoPage";
 import { useQrStore } from "../stores/QRStore.js";
 import { Footer } from "../components/Footer";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 
 export function InformationPage() {
-  const { qrData } = useQrStore();
-  const { id } = useParams();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
+  const page = query.get("page");
+  const { qrData, setQrData } = useQrStore();
   const [contentHtml, setContentHtml] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchContent = async () => {
+    const fetchAll = async () => {
+      setLoading(true);
       try {
-        const response = await axios.get(
-          `https://qr-g1-software-back.onrender.com/page/${id}`
+        let qr = qrData;
+        if (!qr) {
+          const qrResponse = await axios.get(
+            `https://qr-g1-software-back.onrender.com/qr/${token}`
+          );
+          qr = qrResponse.data.data;
+          setQrData(qr);
+        }
+
+        const pageResponse = await axios.get(
+          `https://qr-g1-software-back.onrender.com/page/${page}`
         );
-        setContentHtml(response.data.data.content_html);
-      } catch (error) {
-        setError("Error al cargar el contenido.", error);
+        setContentHtml(pageResponse.data.data.content_html);
+      } catch (err) {
+        console.error("Error al cargar datos:", err);
+        setError("Error al cargar los datos.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchContent();
-  }, [id]);
+    fetchAll();
+  }, [token, page, qrData, setQrData]);
 
-  if (loading) {
-    return <Loader></Loader>;
-  }
-
-  if (error) {
-    return <ErrorPage></ErrorPage>;
-  }
+  if (loading) return <Loader />;
+  if (error) return <ErrorPage />;
 
   return (
     <div className="container">
-      <HeaderInfoPage to={`/`} />
+      <HeaderInfoPage to={`/?token=${token}`} />
 
       <div
         className="visualizer-content"

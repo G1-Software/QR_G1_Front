@@ -19,12 +19,14 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import "./styles/index.css";
 import { Instructive } from "./pages/Instructive";
 import { InformationPage } from "./pages/InformationPage";
-import { AdminHome } from "./pages/AdminHome"; 
+import { AdminHome } from "./pages/AdminHome";
+import { TokenProtectedRoute } from "./components/TokenProtectedRoute";
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
-const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI || window.location.origin;
+const redirectUri =
+  import.meta.env.VITE_AUTH0_REDIRECT_URI || window.location.origin;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -41,35 +43,120 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     >
       <BrowserRouter>
         <Routes>
-          <Route path="*" element={<ScanQrNotice />} />
-          <Route path="/:id" element={<CategoryPage />} />
-          <Route path="/subcategoryA/:id" element={<SubCategoryPageA />} />
-          <Route path="/subcategoryB/:id" element={<SubCategoryPageB />} />
-          <Route path="/subcategoryC/:id" element={<SubCategoryPageC />} />
-          <Route path="/subsubcategoryB1/:id" element={<SubsubategoryPageB1 />} />
-          <Route path="/subsubcategoryB3/:id" element={<SubsubategoryPageB3 />} />
-          <Route path="/subsubcategoryC1/:id" element={<SubsubategoryPageC1 />} />
-          <Route path="/subsubcategoryC2/:id" element={<SubsubategoryPageC2 />} />
-          <Route path="/subsubcategoryC3/:id" element={<SubsubategoryPageC3 />} />
-          <Route path="/editor" element={<EditorPage></EditorPage>} />
-          <Route path="/instructive" element={<Instructive></Instructive>} />
-          <Route path="/information-page/:id" element={<InformationPage></InformationPage>}/>
-          <Route path="/requests/:id" element={<RequestPage/>}/>
-{/*           
+          <Route path="/scanqrnotice" element={<ScanQrNotice />} />
+
+          <Route
+            path="/"
+            element={
+              <TokenProtectedRoute>
+                <CategoryPage />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/informacion_clinica"
+            element={
+              <TokenProtectedRoute>
+                <SubCategoryPageA />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/informacion_administrativa"
+            element={
+              <TokenProtectedRoute>
+                <SubCategoryPageB />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/informacion_acompanantes_visitas"
+            element={
+              <TokenProtectedRoute>
+                <SubCategoryPageC />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/coberturas_especiales"
+            element={
+              <TokenProtectedRoute>
+                <SubsubategoryPageB1 />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/presupuestos_cuenta_pagos"
+            element={
+              <TokenProtectedRoute>
+                <SubsubategoryPageB3 />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/informacion_general_acompaniantes_visitas"
+            element={
+              <TokenProtectedRoute>
+                <SubsubategoryPageC1 />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/horarios_condiciones"
+            element={
+              <TokenProtectedRoute>
+                <SubsubategoryPageC2 />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/servicios_apoyo_visitas"
+            element={
+              <TokenProtectedRoute>
+                <SubsubategoryPageC3 />
+              </TokenProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/editor"
+            element={
+              <PrivateRoute>
+                <EditorPage></EditorPage>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/instructive"
+            element={
+              <PrivateRoute>
+                <Instructive></Instructive>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/pagina_informacion"
+            element={
+              <TokenProtectedRoute>
+                <InformationPage></InformationPage>
+              </TokenProtectedRoute>
+            }
+          />
+          <Route path="/solicitudes" element={<RequestPage />} />
+          {/*           
     <Route path="/staff" element={
     <PrivateRoute>
       <StaffPage />
     </PrivateRoute>
   } /> */}
 
-  <Route
-  path="/admin"
-  element={
-    <PrivateRoute>
-      <AdminHome />
-    </PrivateRoute>
-  }
-  />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute>
+                <AdminHome />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </Auth0Provider>
