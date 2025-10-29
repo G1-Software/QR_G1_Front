@@ -6,11 +6,13 @@ import { Footer } from "../components/Footer";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function SubsubategoryPageB1() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
   const { qrData, setQrData } = useQrStore();
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
@@ -28,7 +30,7 @@ export function SubsubategoryPageB1() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);
@@ -41,19 +43,31 @@ export function SubsubategoryPageB1() {
     };
 
     fetchQrIfNeeded();
-  }, [id, qrData, setQrData]);
+  }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;
 
   return (
     <div className="container">
-      <Header id={id} title={"INFORMACIÓN GES - CAEC - LEY DE URGENCIA"} />
+      <Header
+        to={`/?token=${token}`}
+        title={"INFORMACIÓN GES - CAEC - LEY DE URGENCIA"}
+      />
 
       <main>
-        <Button to={`/information-page/${id}/7`} text={"GES"} />
-        <Button to={`/information-page/${id}/8`} text={"CAEC"} />
-        <Button to={`/information-page/${id}/9`} text={"LEY DE URGENCIA"} />
+        <Button
+          to={`/pagina_informacion?token=${token}&page=${7}`}
+          text={"GES"}
+        />
+        <Button
+          to={`/pagina_informacion?token=${token}&page=${8}`}
+          text={"CAEC"}
+        />
+        <Button
+          to={`/pagina_informacion?token=${token}&page=${9}`}
+          text={"LEY DE URGENCIA"}
+        />
       </main>
 
       {qrData && (

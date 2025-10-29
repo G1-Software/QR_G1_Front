@@ -2,7 +2,7 @@ import logo from "../assets/logotipo.jpg";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/index.css";
 
-export function HeaderInfoPage({ id }) {
+export function HeaderInfoPage({ to }) {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +20,7 @@ export function HeaderInfoPage({ id }) {
           arrow_back_ios
         </button>
 
-        <Link className="material-symbols-outlined" to={`/${id}`}>
+        <Link className="material-symbols-outlined" to={`${to}`}>
           Home
         </Link>
       </div>

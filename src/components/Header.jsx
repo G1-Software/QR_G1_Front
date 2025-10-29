@@ -2,7 +2,7 @@ import logo from "../assets/logotipo.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/index.css";
 
-export function Header({ id, isCategoryPage = false, title, subtitle }) {
+export function Header({ to, isCategoryPage = false, title, subtitle }) {
   const navigate = useNavigate();
   return (
     <header>
@@ -22,7 +22,7 @@ export function Header({ id, isCategoryPage = false, title, subtitle }) {
         )}
 
         {!isCategoryPage && (
-          <Link className="material-symbols-outlined" to={`/${id}`}>
+          <Link className="material-symbols-outlined" to={`${to}`}>
             Home
           </Link>
         )}

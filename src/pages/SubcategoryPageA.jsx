@@ -6,11 +6,13 @@ import { Footer } from "../components/Footer";
 import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function SubCategoryPageA() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
   const { qrData, setQrData } = useQrStore();
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
@@ -28,7 +30,7 @@ export function SubCategoryPageA() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);
@@ -41,37 +43,40 @@ export function SubCategoryPageA() {
     };
 
     fetchQrIfNeeded();
-  }, [id, qrData, setQrData]);
+  }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;
 
   return (
     <div className="container">
-      <Header id={id} title={"INFORMACIÓN CLÍNICA"} />
+      <Header to={`/?token=${token}`} title={"INFORMACIÓN CLÍNICA"} />
 
       <main>
         <Button
-          to={`/information-page/${id}/1`}
+          to={`/pagina_informacion?token=${token}&page=${1}`}
           text={"RESULTADOS DE EXÁMENES (LABORATORIOS E IMÁGENES)"}
         />
         <Button
-          to={`/information-page/${id}/2`}
+          to={`/pagina_informacion?token=${token}&page=${2}`}
           text={"DOCUMENTACIÓN CLINICA (FICHA CLÍNICA, EPICRISIS, ETC)"}
         />
         <Button
-          to={`/information-page/${id}/3`}
+          to={`/pagina_informacion?token=${token}&page=${3}`}
           text={"INFORMACIÓN SOBRE DIÁGNOSTICO O DE TRATAMIENTO MÉDICO"}
         />
         <Button
-          to={`/information-page/${id}/4`}
+          to={`/pagina_informacion?token=${token}&page=${4}`}
           text={"¿DÓNDE AGENDO UNA CITA POST HOSPITALIZACIÓN?"}
         />
         <Button
-          to={`/information-page/${id}/5`}
+          to={`/pagina_informacion?token=${token}&page=${5}`}
           text={"HORARIO VISITAS  Y BANCO SANGRE"}
         />
-        <Button to={`/information-page/${id}/6`} text={"CUIDADOS EN EL ALTA"} />
+        <Button
+          to={`/pagina_informacion?token=${token}&page=${6}`}
+          text={"PROCESOS Y CUIDADOS EN EL ALTA"}
+        />
       </main>
 
       {qrData && (

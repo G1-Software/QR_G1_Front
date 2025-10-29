@@ -3,13 +3,16 @@ import axios from "axios";
 import { HeaderInfoPage } from "../components/HeaderInfoPage";
 import { useQrStore } from "../stores/QRStore.js";
 import { Footer } from "../components/Footer";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 
 export function InformationPage() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
+  const page = query.get("page");
   const { qrData, setQrData } = useQrStore();
-  const { idQR, idPage } = useParams();
   const [contentHtml, setContentHtml] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,14 +24,14 @@ export function InformationPage() {
         let qr = qrData;
         if (!qr) {
           const qrResponse = await axios.get(
-            `https://qr-g1-software-back.onrender.com/qr/${idQR}`
+            `https://qr-g1-software-back.onrender.com/qr/${token}`
           );
           qr = qrResponse.data.data;
           setQrData(qr);
         }
 
         const pageResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/page/${idPage}`
+          `https://qr-g1-software-back.onrender.com/page/${page}`
         );
         setContentHtml(pageResponse.data.data.content_html);
       } catch (err) {
@@ -40,14 +43,14 @@ export function InformationPage() {
     };
 
     fetchAll();
-  }, [idQR, idPage, qrData, setQrData]);
+  }, [token, page, qrData, setQrData]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;
 
   return (
     <div className="container">
-      <HeaderInfoPage id={idQR} />
+      <HeaderInfoPage to={`/?token=${token}`} />
 
       <div
         className="visualizer-content"
