@@ -6,11 +6,13 @@ import { Footer } from "../components/Footer";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function SubsubategoryPageB3() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
   const { qrData, setQrData } = useQrStore();
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
@@ -28,7 +30,7 @@ export function SubsubategoryPageB3() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);
@@ -41,19 +43,25 @@ export function SubsubategoryPageB3() {
     };
 
     fetchQrIfNeeded();
-  }, [id, qrData, setQrData]);
+  }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;
 
   return (
     <div className="container">
-      <Header id={id} title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"} />
+      <Header
+        to={`/?token=${token}`}
+        title={"PRESUPUESTOS, CUENTA HOSPITALARIA, PAGOS"}
+      />
 
       <main>
-        <Button to={`/information-page/${id}/11`} text={"PRESUPUESTOS"} />
         <Button
-          to={`/information-page/${id}/12`}
+          to={`/pagina_informacion?token=${token}&page=${11}`}
+          text={"PRESUPUESTOS"}
+        />
+        <Button
+          to={`/pagina_informacion?token=${token}&page=${12}`}
           text={"CUENTA HOSPITALARIA Y PAGOS"}
         />
       </main>

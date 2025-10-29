@@ -6,11 +6,13 @@ import { Footer } from "../components/Footer";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function SubCategoryPageC() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
   const { qrData, setQrData } = useQrStore();
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
@@ -28,7 +30,7 @@ export function SubCategoryPageC() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);
@@ -41,26 +43,26 @@ export function SubCategoryPageC() {
     };
 
     fetchQrIfNeeded();
-  }, [id, qrData, setQrData]);
+  }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;
 
   return (
     <div className="container">
-      <Header id={id} title={"ACOMPAÑANTES Y VISITAS"} />
+      <Header to={`/?token=${token}`} title={"ACOMPAÑANTES Y VISITAS"} />
 
       <main>
         <Button
-          to={`/subsubcategoryC1/${id}`}
+          to={`/informacion_general_acompaniantes_visitas?token=${token}`}
           text={"INFORMACIÓN GENERAL DE ACOMPAÑANTES Y VISITAS"}
         />
         <Button
-          to={`/subsubcategoryC2/${id}`}
+          to={`/horarios_condiciones?token=${token}`}
           text={"HORARIOS, CONDICIONES Y ELEMENTOS NO PERMITIDOS"}
         />
         <Button
-          to={`/subsubcategoryC3/${id}`}
+          to={`/servicios_apoyo_visitas?token=${token}`}
           text={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"}
         />
       </main>

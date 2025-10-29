@@ -6,11 +6,13 @@ import { Footer } from "../components/Footer";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function SubsubategoryPageC3() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
   const { qrData, setQrData } = useQrStore();
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
@@ -28,7 +30,7 @@ export function SubsubategoryPageC3() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);
@@ -41,26 +43,29 @@ export function SubsubategoryPageC3() {
     };
 
     fetchQrIfNeeded();
-  }, [id, qrData, setQrData]);
+  }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;
 
   return (
     <div className="container">
-      <Header id={id} title={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"} />
+      <Header
+        to={`/?token=${token}`}
+        title={"SERVICIOS Y APOYO DISPONIBLES PARA VISITAS"}
+      />
 
       <main>
         <Button
-          to={`/information-page/${id}/24`}
+          to={`/pagina_informacion?token=${token}&page=${24}`}
           text={"CAFETERÍAS, MARKETPLACES, MÁQUINAS EXPENDEDORAS, ETC"}
         />
         <Button
-          to={`/information-page/${id}/25`}
+          to={`/pagina_informacion?token=${token}&page=${25}`}
           text={"ESPACIOS DE ORACIÓN Y REFLEXIÓN ESPIRITUAL"}
         />
         <Button
-          to={`/information-page/${id}/26`}
+          to={`/pagina_informacion?token=${token}&page=${26}`}
           text={"CAJERO AUTOMÁTICO, WIFI Y ESTACIONAMIENTOS"}
         />
       </main>

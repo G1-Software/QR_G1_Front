@@ -6,11 +6,13 @@ import { Footer } from "../components/Footer";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function SubsubategoryPageC1() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
   const { qrData, setQrData } = useQrStore();
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
@@ -28,7 +30,7 @@ export function SubsubategoryPageC1() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);
@@ -41,7 +43,7 @@ export function SubsubategoryPageC1() {
     };
 
     fetchQrIfNeeded();
-  }, [id, qrData, setQrData]);
+  }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;
@@ -49,34 +51,37 @@ export function SubsubategoryPageC1() {
   return (
     <div className="container">
       <Header
-        id={id}
+        to={`/?token=${token}`}
         title={"INFORMACIÓN GENERAL DE ACOMPAÑANTES \nY VISITAS"}
       />
 
       <main>
         <Button
-          to={`/information-page/${id}/14`}
+          to={`/pagina_informacion?token=${token}&page=${14}`}
           text={"DIFERENCIA ENTRE ACOMPAÑANTE Y VISITA"}
         />
         <Button
-          to={`/information-page/${id}/15`}
+          to={`/pagina_informacion?token=${token}&page=${15}`}
           text={"ROL Y RESPONSABILIDADES DEL ACOMPAÑANTE RESPONSABLE"}
         />
         <Button
-          to={`/information-page/${id}/16`}
+          to={`/pagina_informacion?token=${token}&page=${16}`}
           text={"ROL DEL RESPONSABLE DEL PAGARÉ"}
         />
         <Button
-          to={`/information-page/${id}/17`}
+          to={`/pagina_informacion?token=${token}&page=${17}`}
           text={"CUIDADOR DE EMPRESA EXTERNA"}
         />
-        <Button to={`/information-page/${id}/18`} text={"LEY MILA N°21.372"} />
         <Button
-          to={`/information-page/${id}/19`}
+          to={`/pagina_informacion?token=${token}&page=${18}`}
+          text={"LEY MILA N°21.372"}
+        />
+        <Button
+          to={`/pagina_informacion?token=${token}&page=${19}`}
           text={"INGRESO DE PERROS DE ASISTENCIA"}
         />
         <Button
-          to={`/information-page/${id}/20`}
+          to={`/pagina_informacion?token=${token}&page=${20}`}
           text={"INGRESO DE MASCOTAS"}
         />
       </main>

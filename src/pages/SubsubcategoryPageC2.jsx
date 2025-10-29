@@ -6,11 +6,13 @@ import { Footer } from "../components/Footer";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function SubsubategoryPageC2() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const token = query.get("token");
   const { qrData, setQrData } = useQrStore();
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
@@ -28,7 +30,7 @@ export function SubsubategoryPageC2() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${id}`
+          `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);
@@ -41,26 +43,26 @@ export function SubsubategoryPageC2() {
     };
 
     fetchQrIfNeeded();
-  }, [id, qrData, setQrData]);
+  }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;
 
   return (
     <div className="container">
-      <Header id={id} title={"HORARIOS Y CONDICIONES"} />
+      <Header to={`/?token=${token}`} title={"HORARIOS Y CONDICIONES"} />
 
       <main>
         <Button
-          to={`/information-page/${id}/21`}
+          to={`/pagina_informacion?token=${token}&page=${21}`}
           text={"HORARIO VISITAS Y BANCO DE SANGRE"}
         />
         <Button
-          to={`/information-page/${id}/22`}
+          to={`/pagina_informacion?token=${token}&page=${22}`}
           text={"CONDICIONES DE ENTRADA DE VISITAS AL HOSPITAL"}
         />
         <Button
-          to={`/information-page/${id}/23`}
+          to={`/pagina_informacion?token=${token}&page=${23}`}
           text={"ELEMENTOS PERMITIDOS Y NO PERMITIDOS AL INGRESO AL HOSPITAL"}
         />
       </main>
