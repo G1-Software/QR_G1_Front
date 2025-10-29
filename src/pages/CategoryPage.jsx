@@ -63,7 +63,7 @@ export function CategoryPage() {
           text={"ACOMPAÑANTES, VISITAS Y SERVICIOS DISPONIBLES"}
         />
         <Button
-          to={`/requests/?token=${token}`}
+          to={`/solicitudes/?token=${token}`}
           isCategoryPage={true}
           text={"SOLICITUDES (LIMPIEZA, MANTENCIÓN, NUTRICIÓN, ETC)"}
         />

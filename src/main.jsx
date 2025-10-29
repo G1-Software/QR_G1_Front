@@ -141,7 +141,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               </TokenProtectedRoute>
             }
           />
-          <Route path="/requests" element={<RequestPage />} />
+          <Route path="/solicitudes" element={<RequestPage />} />
           {/*           
     <Route path="/staff" element={
     <PrivateRoute>
