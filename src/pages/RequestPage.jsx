@@ -81,7 +81,7 @@ export function RequestPage() {
 
   const getSubareasByArea = () => {
     if (areaSelected === "Mantención") return subareaMaintenance;
-    if (areaSelected === "Aseo") return subareaCleaning;
+    if (areaSelected === "Limpieza de Habitación") return subareaCleaning;
     if (areaSelected === "Apoyo Espiritual") return subareaSpiritual;
     if (areaSelected === "Nutrición") return subareaNutrition;
     return [];
