@@ -13,8 +13,6 @@ export const AdminHome = () => {
           <div className="brand">
             <img src={logo} alt="UC CHRISTUS" className="brand__logo" />
           </div>
-          <div className="spacer" />
-
           <div className="logout-container">
             <button
               className="btn-logout"
