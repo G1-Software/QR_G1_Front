@@ -34,6 +34,31 @@ export function InformationPage() {
           `https://qr-g1-software-back.onrender.com/page/${page}`
         );
         setContentHtml(pageResponse.data.data.content_html);
+        
+        const page_id = pageResponse.data.data.id;
+        const key = `pv:${page_id}`;
+        const payload = {
+          page_id: page_id, 
+        };
+
+        // ver si poner esto o no, es para que no se guarde mil veces si recarga por ejemplo
+        // ver si agregar mas cosas como el qr
+        if (!sessionStorage.getItem(key)) {
+          sessionStorage.setItem(key, "1");
+         try {
+          const response = await axios.post(
+            "https://qr-g1-software-back.onrender.com/page_view_log",
+            payload,
+            { headers: { "Content-Type": "application/json" } }
+          );
+          
+
+        } catch (error) {
+          console.error("Error registrando vista de página:", error?.response?.data || error);
+        }
+      }
+
+
       } catch (err) {
         console.error("Error al cargar datos:", err);
         setError("Error al cargar los datos.");
