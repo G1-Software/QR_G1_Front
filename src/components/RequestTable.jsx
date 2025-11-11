@@ -7,9 +7,9 @@ export function RequestTable({ requests, onUpdateStatus }) {
     return <p>No hay solicitudes registradas.</p>;
   }
 
-  const handleClick = async (id, status) => {
+  const handleStatusChange = async (id, newStatus) => {
     setUpdatingId(id);
-    await onUpdateStatus(id, status);
+    await onUpdateStatus(id, newStatus);
     setUpdatingId(null);
   };
 
@@ -22,12 +22,11 @@ export function RequestTable({ requests, onUpdateStatus }) {
             <th>Área</th>
             <th>Subárea</th>
             <th>Descripción</th>
-            <th>Solicitante</th>
-            <th>Correo</th>
+            <th>Nombre del Solicitante</th>
+            <th>Correo Electrónico del Solicitante</th>
             <th>Estado</th>
-            <th>Creada</th>
-            <th>Actualizada</th>
-            <th>Acciones</th>
+            <th>Creación</th>
+            <th>Última Actualización</th>
           </tr>
         </thead>
         <tbody>
@@ -39,33 +38,26 @@ export function RequestTable({ requests, onUpdateStatus }) {
               <td>{req.description}</td>
               <td>{req.requester_full_name}</td>
               <td>{req.requester_email}</td>
-              <td>{req.status}</td>
+
+              <td className="status-cell">
+                <select
+                  value={req.status}
+                  onChange={(e) =>
+                    handleStatusChange(req.id, e.target.value)
+                  }
+                  disabled={updatingId === req.id}
+                  className={`status-select ${req.status
+                    .toLowerCase()
+                    .replace(" ", "-")}`}
+                >
+                  <option value="Pendiente">Pendiente</option>
+                  <option value="En Proceso">En Proceso</option>
+                  <option value="Completado">Completado</option>
+                </select>
+              </td>
+
               <td>{new Date(req.created_at).toLocaleString()}</td>
               <td>{new Date(req.updated_at).toLocaleString()}</td>
-              <td className="actions">
-                <button
-                  onClick={() => handleClick(req.id, "Pendiente")}
-                  disabled={updatingId === req.id}
-                >
-                  <span className="material-symbols-outlined">
-                    pending_actions
-                  </span>
-                </button>
-                <button
-                  onClick={() => handleClick(req.id, "En Proceso")}
-                  disabled={updatingId === req.id}
-                >
-                  <span className="material-symbols-outlined">
-                    manufacturing
-                  </span>
-                </button>
-                <button
-                  onClick={() => handleClick(req.id, "Completado")}
-                  disabled={updatingId === req.id}
-                >
-                  <span className="material-symbols-outlined">check</span>
-                </button>
-              </td>
             </tr>
           ))}
         </tbody>
@@ -73,3 +65,4 @@ export function RequestTable({ requests, onUpdateStatus }) {
     </div>
   );
 }
+

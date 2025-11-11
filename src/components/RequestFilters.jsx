@@ -80,55 +80,73 @@ export function RequestFilters({ filters, onFilterChange }) {
 
   return (
     <div className="filters-container">
-      <select name="area" value={localFilters.area} onChange={handleChange}>
-        <option value="">Todas las áreas</option>
-        <option value="Nutrición">Nutrición</option>
-        <option value="Mantención">Mantención</option>
-        <option value="Asistencia Social">Asistencia Social</option>
-        <option value="Limpieza de Habitación">Limpieza de Habitación</option>
-        <option value="Apoyo Espiritual">Apoyo Espiritual</option>
-      </select>
+      <h2 className="filters-title">Filtros</h2>
 
-      <select
-        name="subarea"
-        value={localFilters.subarea}
-        onChange={handleChange}
-        disabled={!localFilters.area}
-      >
-        <option value="">Todas las subáreas</option>
-        {availableSubareas.map((sub) => (
-          <option key={sub} value={sub}>
-            {sub}
-          </option>
-        ))}
-      </select>
+      <div className="filters-row">
+        <label>
+        Área
+        <select name="area" value={localFilters.area} onChange={handleChange}>
+          <option value="">Todas</option>
+          <option value="Nutrición">Nutrición</option>
+          <option value="Mantención">Mantención</option>
+          <option value="Asistencia Social">Asistencia Social</option>
+          <option value="Limpieza de Habitación">Limpieza de Habitación</option>
+          <option value="Apoyo Espiritual">Apoyo Espiritual</option>
+        </select>
+        </label>
 
-      <select name="status" value={localFilters.status} onChange={handleChange}>
-        <option value="">Todos los estados</option>
-        <option value="Pendiente">Pendiente</option>
-        <option value="En Proceso">En Proceso</option>
-        <option value="Completado">Completado</option>
-      </select>
-
-      <label>
-        Desde:
-        <input
-          type="date"
-          name="startDate"
-          value={localFilters.startDate}
+        <label>
+        Subárea
+        <select
+          name="subarea"
+          value={localFilters.subarea}
           onChange={handleChange}
-        />
-      </label>
+        >
+          <option value="">Todas</option>
+          {availableSubareas.map((sub) => (
+            <option key={sub} value={sub}>
+              {sub}
+            </option>
+          ))}
+        </select>
+         </label>
 
-      <label>
-        Hasta:
-        <input
-          type="date"
-          name="endDate"
-          value={localFilters.endDate}
+        <label>
+        Estado
+        <select
+          name="status"
+          value={localFilters.status}
           onChange={handleChange}
-        />
+        >
+          <option value="">Todos</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="En Proceso">En Proceso</option>
+          <option value="Completado">Completado</option>
+        </select>
       </label>
+      </div>
+
+      <div className="filters-row filters-dates">
+        <label>
+          Inicio
+          <input
+            type="date"
+            name="startDate"
+            value={localFilters.startDate}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          Término
+          <input
+            type="date"
+            name="endDate"
+            value={localFilters.endDate}
+            onChange={handleChange}
+          />
+        </label>
+      </div>
     </div>
   );
 }

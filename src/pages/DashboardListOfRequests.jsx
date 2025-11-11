@@ -77,14 +77,20 @@ export function DashboardListOfRequests() {
   if (error) return <ErrorPage message={error} />;
 
   return (
-    <div className="dashboard-container">
-      <h2>Listado de Solicitudes</h2>
+    <main className="dashboard-container">
+      <h2 className="dashboard-title">Listado de Solicitudes</h2>
 
-      <RequestFilters filters={filters} onFilterChange={handleFilterChange} />
+      <section className="filters-container">
+        <RequestFilters filters={filters} onFilterChange={handleFilterChange} />
 
-      <RequestTable requests={requests} onUpdateStatus={updateRequestStatus} />
+        <div className="request-table">
+          <RequestTable requests={requests} onUpdateStatus={updateRequestStatus} />
+        </div>
 
-      <Pagination pagination={pagination} onPageChange={handlePageChange} />
-    </div>
+        <div className="pagination-container">
+          <Pagination pagination={pagination} onPageChange={handlePageChange} />
+        </div>
+      </section>
+    </main>
   );
 }
