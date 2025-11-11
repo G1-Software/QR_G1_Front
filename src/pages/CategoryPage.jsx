@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader.jsx";
 import { ErrorPage } from "./ErrorPage.jsx";
@@ -16,8 +16,12 @@ export function CategoryPage() {
   const { qrData, setQrData } = useQrStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
+    if (hasFetched.current) return;
+      hasFetched.current = true;
+
     const fetchQrData = async () => {
       try {
         setLoading(true);
@@ -27,7 +31,20 @@ export function CategoryPage() {
           `https://qr-g1-software-back.onrender.com/qr/${token}`
         );
 
-        setQrData(response.data.data);
+        const qrInfo = response.data.data;
+        setQrData(qrInfo);
+
+        if (qrInfo?.id) {
+          try {
+            await axios.post("http://localhost:3000/qr_scan_log", {
+              "qr_id": qrInfo.id,
+            });
+            console.log("QR scan log registrado con éxito:  ");
+          } catch (postError) {
+            console.error("Error al registrar QR scan log:", postError);
+          }
+        }
+
       } catch (err) {
         console.error(err);
         setError(err.response?.data?.message || "Error al obtener el QR");
