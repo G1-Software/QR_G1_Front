@@ -36,10 +36,9 @@ export function CategoryPage() {
 
         if (qrInfo?.id) {
           try {
-            await axios.post("http://localhost:3000/qr_scan_log", {
+            await axios.post("https://qr-g1-software-back.onrender.com/qr_scan_log", {
               "qr_id": qrInfo.id,
             });
-            console.log("QR scan log registrado con éxito:  ");
           } catch (postError) {
             console.error("Error al registrar QR scan log:", postError);
           }
