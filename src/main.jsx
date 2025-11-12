@@ -126,7 +126,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             }
           />
           <Route
-            path="/admin/instructive"
+            path="/admin/instructivo"
             element={
               <PrivateRoute>
                 <Instructive></Instructive>

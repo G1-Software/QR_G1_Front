@@ -1,0 +1,95 @@
+.card {
+  width: 330px;
+  height: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  color: rgb(240, 240, 240);
+  box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* overlay */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.card:hover::before {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.card img {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  transition: opacity 0.2s ease-out;
+  z-index: 0;
+}
+
+.card h2,
+.card p,
+.card a {
+  position: absolute;
+  z-index: 2; /* sobre el overlay */
+}
+
+.card h2 {
+  inset: auto auto 30px 30px;
+  margin: 0;
+  transition: inset 0.3s 0.3s ease-out;
+  color: white;
+  font-weight: normal;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.card p,
+.card a {
+  opacity: 0;
+  font-size: 11px;
+  color: white;
+  text-align: left;
+  max-width: 80%;
+  transition: opacity 0.3s ease-out;
+}
+
+.card p {
+  inset: auto auto 120px 30px;
+}
+
+.card a {
+  inset: auto auto 40px 30px;
+  color: inherit;
+  font-weight: bold;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.card:hover h2 {
+  inset: auto auto 220px 30px;
+  transition: inset 0.3s ease-out;
+}
+
+.card:hover p,
+.card:hover a {
+  opacity: 1;
+  transition: opacity 0.5s 0.1s ease-in;
+}
+
+.card:hover img {
+  transition: opacity 0.3s ease-in;
+  opacity: 1;
+}
+
+.material-symbols-outlined {
+  vertical-align: middle;
+}
