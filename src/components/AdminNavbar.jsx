@@ -35,8 +35,17 @@ export function AdminNavbar() {
           <Link to="/admin/instructivo" className="link" onClick={closeSidebar}>
             Instructivo
           </Link>
+          <Link to="#" className="link" onClick={closeSidebar}>
+            Listado de solicitudes
+          </Link>
           <Link to="/dashboard/metricas-solicitudes" className="link" onClick={closeSidebar}>
             Dashboard de solicitudes
+          </Link>
+          <Link to="#" className="link" onClick={closeSidebar}>
+            Dashboard de métricas QR
+          </Link>
+          <Link to="#" className="link" onClick={closeSidebar}>
+            Dashboard de métricas Chatbot
           </Link>
         </div>
       </aside>
