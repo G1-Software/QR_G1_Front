@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import "../styles/index.css";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
+import { apiUrl } from "../config/api.js";
 
 export function RequestPage() {
   const location = useLocation();
@@ -178,7 +179,7 @@ export function RequestPage() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${token}`
+          `${apiUrl}/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);

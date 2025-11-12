@@ -112,6 +112,32 @@ main {
   margin-bottom: 40px;
 }
 
+.requests-dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.requests-dashboard .dashboard-wrapper {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  padding: 1rem 1.5rem 2rem;
+  box-sizing: border-box;
+  overflow: auto;
+  min-height: 0;
+}
+
+.dashboard-frame {
+  flex-grow: 1;
+  width: 100%;
+  min-height: 900px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+}
+
 /* ===== Responsive ===== */
 
 @media (max-width: 930px) {
@@ -125,3 +151,5 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
+/*-------------------------------*/

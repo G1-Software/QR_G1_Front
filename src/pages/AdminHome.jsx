@@ -60,7 +60,7 @@ export const AdminHome = () => {
             title="Dashboard de Solicitudes"
             description="Dashboard interactivo que integra métricas, tendencias y análisis comparativos para evaluar el desempeño y evolución de las solicitudes en el tiempo."
             linkText="Acceder"
-            linkHref="#"
+            linkHref="/dashboard/metricas-solicitudes"
           />
           <Card
             image="https://media.istockphoto.com/id/1298409663/video/scanning-qr-code-with-mobile-phone.jpg?s=640x640&k=20&c=Sy1BI91EqnXgnD36vCb0fRTd9ddgwRaPjQXk6Bd0uGI="
