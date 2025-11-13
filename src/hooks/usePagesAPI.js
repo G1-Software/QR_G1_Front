@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { apiUrl } from "../config/api";
 import axios from "axios";
 
 export function usePagesAPI() {
@@ -13,9 +14,7 @@ export function usePagesAPI() {
         setLoading(true);
         setError(null);
 
-        const res = await axios.get(
-          "https://qr-g1-software-back.onrender.com/page"
-        );
+        const res = await axios.get(`${apiUrl}/page`);
         setPages(res.data.data || []);
       } catch (err) {
         console.error("Error al obtener páginas:", err);
@@ -33,11 +32,11 @@ export function usePagesAPI() {
   const savePage = async (page) => {
     setIsSaving(true);
     try {
-      await axios.put(
-        `https://qr-g1-software-back.onrender.com/page/${page.id}`,
-        page,
-        { headers: { "Content-Type": "application/json" } }
-      );
+      await axios.put(`${apiUrl}/page/${page.id}`, page, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       setPages((prev) => prev.map((p) => (p.id === page.id ? page : p)));
       console.log("Cambios guardados con éxito.");

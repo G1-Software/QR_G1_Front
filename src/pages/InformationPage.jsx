@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer";
 import { useLocation } from "react-router-dom";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
+import { apiUrl } from "../config/api.js";
 
 export function InformationPage() {
   const location = useLocation();
@@ -23,16 +24,13 @@ export function InformationPage() {
       try {
         let qr = qrData;
         if (!qr) {
-          const qrResponse = await axios.get(
-            `https://qr-g1-software-back.onrender.com/qr/${token}`
-          );
+          const qrResponse = await axios.get(`${apiUrl}/qr/${token}`);
           qr = qrResponse.data.data;
           setQrData(qr);
         }
 
-        const pageResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/page/${page}`
-        );
+        const pageResponse = await axios.get(`${apiUrl}/page/${page}`);
+
         setContentHtml(pageResponse.data.data.content_html);
       } catch (err) {
         console.error("Error al cargar datos:", err);

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import logotipo from "../assets/logotipo.jpg";
 import editor from "../assets/editor.md?raw";
-
 import { Toolbar } from "../components/Toolbar";
-import { Sidebar } from "../components/Sidebar";
+import { AdminNavbar } from "../components/AdminNavbar.jsx";
 import { useMarkdownEditor } from "../hooks/useMarkdownEditor";
 import { usePagesAPI } from "../hooks/usePagesAPI";
 import { Modal } from "../components/Modal";
@@ -25,15 +24,11 @@ export function EditorPage() {
   } = useMarkdownEditor(editor);
 
   const [selectedPage, setSelectedPage] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage message={error} />;
-
-  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
-  const closeSidebar = () => setSidebarOpen(false);
 
   const handleSelectChange = (e) => {
     const pageId = parseInt(e.target.value);
@@ -67,8 +62,8 @@ export function EditorPage() {
 
   return (
     <div className="editor-container">
+      <AdminNavbar/>
       <Toolbar
-        onToggleSidebar={toggleSidebar}
         onUndo={handleUndo}
         onRedo={handleRedo}
         onFormat={applyMarkdown}
@@ -78,9 +73,6 @@ export function EditorPage() {
         onSelectChange={handleSelectChange}
         isSaving={isSaving}
       />
-
-      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
-
       <main className="editor-main">
         <textarea
           ref={textareaRef}

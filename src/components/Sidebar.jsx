@@ -20,7 +20,7 @@ export function Sidebar({ isOpen, onClose }) {
         <Link to="/admin/editor" className="link">
           Editor
         </Link>
-        <Link to="/admin/instructive" className="link">
+        <Link to="/admin/instructivo" className="link">
           Instructivo
         </Link>
       </div>
