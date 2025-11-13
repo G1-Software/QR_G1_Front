@@ -36,13 +36,15 @@ export function InformationPage() {
         setContentHtml(pageResponse.data.data.content_html);
         
         const page_id = pageResponse.data.data.id;
-        const key = `pv:${page_id}`;
+        const qr_id = qr.id;
+        console.log({page_id, qr_id});
+        const key = `pv:${page_id}:qr:${qr_id}`;
         const payload = {
           page_id: page_id, 
+          qr_id: qr_id,
         };
 
-        // ver si poner esto o no, es para que no se guarde mil veces si recarga por ejemplo
-        // ver si agregar mas cosas como el qr
+        
         if (!sessionStorage.getItem(key)) {
           sessionStorage.setItem(key, "1");
          try {
