@@ -35,12 +35,20 @@ export function CategoryPage() {
         setQrData(qrInfo);
 
         if (qrInfo?.id) {
-          try {
-            await axios.post("https://qr-g1-software-back.onrender.com/qr_scan_log", {
-              "qr_id": qrInfo.id,
-            });
-          } catch (postError) {
-            console.error("Error al registrar QR scan log:", postError);
+          const scanKey = `qr_scan_${qrInfo.id}`;
+
+          if (!sessionStorage.getItem(scanKey)) {
+            sessionStorage.setItem(scanKey, "1");
+
+            try {
+              await axios.post(
+                "https://qr-g1-software-back.onrender.com/qr_scan_log",
+                { qr_id: qrInfo.id },
+                { headers: { "Content-Type": "application/json" } }
+              );
+            } catch (postError) {
+              console.error("Error al registrar QR scan log:", postError);
+            }
           }
         }
 
@@ -66,7 +74,7 @@ export function CategoryPage() {
         <Button
           to={`/informacion_clinica?token=${token}`}
           isCategoryPage={true}
-          text={"INFORMACIÓN CLINICA AL PACIENTE"}
+          text={"INFORMACIÓN CLÍNICA AL PACIENTE"}
         />
         <Button
           to={`/informacion_administrativa?token=${token}`}
