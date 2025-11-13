@@ -53,14 +53,14 @@ export const AdminHome = () => {
             title="Listado de Solicitudes"
             description="Muestra todas las solicitudes registradas en el sistema, permitiendo visualizarlas de forma ordenada, filtrarlas por área, subárea, estado o rango de fechas. Además, ofrece la posibilidad de actualizar el estado de cada solicitud."
             linkText="Acceder"
-            linkHref="/admin/editor"
+            linkHref="/dashboard/listado_solicitudes"
           />
           <Card
             image="https://media.istockphoto.com/id/1480239160/photo/an-analyst-uses-a-computer-and-dashboard-for-data-business-analysis-and-data-management.jpg?s=612x612&w=0&k=20&c=Zng3q0-BD8rEl0r6ZYZY0fbt2AWO9q_gC8lSrwCIgdk="
             title="Dashboard de Solicitudes"
             description="Dashboard interactivo que integra métricas, tendencias y análisis comparativos para evaluar el desempeño y evolución de las solicitudes en el tiempo."
             linkText="Acceder"
-            linkHref="/dashboard/metricas-solicitudes"
+            linkHref="/dashboard/metricas_solicitudes"
           />
           <Card
             image="https://media.istockphoto.com/id/1298409663/video/scanning-qr-code-with-mobile-phone.jpg?s=640x640&k=20&c=Sy1BI91EqnXgnD36vCb0fRTd9ddgwRaPjQXk6Bd0uGI="

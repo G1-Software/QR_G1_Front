@@ -5,6 +5,8 @@ import { ErrorPage } from "./ErrorPage.jsx";
 import { RequestTable } from "../components/RequestTable.jsx";
 import { RequestFilters } from "../components/RequestFilters.jsx";
 import { Pagination } from "../components/Pagination.jsx";
+import { apiUrl } from "../config/api.js";
+import { AdminNavbar } from "../components/AdminNavbar.jsx";
 
 export function DashboardListOfRequests() {
   const [requests, setRequests] = useState([]);
@@ -32,7 +34,7 @@ export function DashboardListOfRequests() {
       params.append("limit", 10);
 
       const response = await axios.get(
-        `http://localhost:3000/request?${params.toString()}`
+        `${apiUrl}/request?${params.toString()}`
       );
 
       setRequests(response.data.data || []);
@@ -62,7 +64,7 @@ export function DashboardListOfRequests() {
 
   const updateRequestStatus = async (id, newStatus) => {
     try {
-      const response = await axios.put(`http://localhost:3000/request/${id}`, {
+      const response = await axios.put(`${apiUrl}/request/${id}`, {
         status: newStatus,
       });
       const updated = response.data.data;
@@ -78,20 +80,23 @@ export function DashboardListOfRequests() {
 
   return (
     <main className="dashboard-container">
+      <AdminNavbar></AdminNavbar>
       <h2 className="dashboard-title">Listado de Solicitudes</h2>
 
       <section className="filters-container">
         <RequestFilters filters={filters} onFilterChange={handleFilterChange} />
       </section>
-      
+
       <div className="request-table">
-          <RequestTable requests={requests} onUpdateStatus={updateRequestStatus} />
+        <RequestTable
+          requests={requests}
+          onUpdateStatus={updateRequestStatus}
+        />
       </div>
 
       <div className="pagination-container">
-          <Pagination pagination={pagination} onPageChange={handlePageChange} />
-        </div>
-     
+        <Pagination pagination={pagination} onPageChange={handlePageChange} />
+      </div>
     </main>
   );
 }
