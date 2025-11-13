@@ -24,7 +24,6 @@ import { TokenProtectedRoute } from "./components/TokenProtectedRoute";
 import { DashboardListOfRequests } from "./pages/DashboardListOfRequests";
 import { RequestsDashboard } from "./pages/RequestsDashboard";
 
-
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
@@ -129,10 +128,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             }
           />
           <Route
-            path="/dashboard/metricas-solicitudes"
+            path="/dashboard/metricas_solicitudes"
             element={
               <PrivateRoute>
-                <RequestsDashboard/>
+                <RequestsDashboard />
               </PrivateRoute>
             }
           />
@@ -169,7 +168,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             }
           />
           <Route
-            path="/admin/listado_solicitudes"
+            path="/dashboard/listado_solicitudes"
             element={
               <PrivateRoute>
                 <DashboardListOfRequests></DashboardListOfRequests>
