@@ -26,6 +26,10 @@
   align-items: center;
 }
 
+.admin-layout {
+  width: 100%;
+  position: relative;
+}
 
 /* ===== Header ===== */
 
@@ -39,13 +43,36 @@
 }
 
 .admin-header__inner {
-  height: 80px;
+  height: 70px;
   width: 100%;
   padding: 0 40px;
-  /* 🔹 Flex que mantiene el logo a la izquierda y el botón al extremo derecho */
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.menu-button {
+  border: none;
+  background: transparent;
+  font-size: 32px;
+  line-height: 1;
+  padding: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--uc-dark);
+  transition: var(--uc-transition);
+}
+
+.menu-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Logo */
@@ -56,9 +83,9 @@
 }
 
 .brand__logo {
-  height: 50px;
+  height: 30px;
   width: auto;
-  display: block;
+  object-fit: contain;
 }
 
 /* Botón de cerrar sesión */
@@ -86,94 +113,74 @@
   justify-content: flex-end;
 }
 
-
 /* ===== Main content ===== */
 
-.admin-home main {
-  flex: 1;
-  width: 100%;
-  max-width: 900px;
-  text-align: center;
-  margin-top: 80px;
-  padding: 0 28px 110px;
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
-
 .admin-home h2 {
-  font-size: 2.6rem;
+  font-size: 24px;
   color: var(--uc-dark);
-  margin-bottom: 16px;
+  margin-bottom: 0px;
 }
 
 .admin-home p {
   color: var(--uc-gray);
-  font-size: 1.5rem;
-  margin-bottom: 52px;
+  font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 /* ===== Cards de acceso ===== */
 
 .admin-links {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
   justify-items: center;
+  margin-bottom: 40px;
 }
 
-.admin-card {
+.requests-dashboard {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--uc-white);
-  color: var(--uc-dark);
-  text-decoration: none;
-  border-radius: var(--uc-radius);
-  box-shadow: var(--uc-shadow);
-  padding: 46px 32px;
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.requests-dashboard .dashboard-wrapper {
+  flex-grow: 1;
   width: 100%;
-  max-width: 380px;
-  font-weight: 600;
-  font-size: 1.5rem;
-  border-top: 5px solid var(--uc-blue);
-  transition: var(--uc-transition);
+  display: flex;
+  padding: 1rem 1.5rem 2rem;
+  box-sizing: border-box;
+  overflow: auto;
+  min-height: 0;
 }
 
-.admin-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(74, 123, 214, 0.25);
-  border-top-color: var(--uc-purple);
-}
-
-.admin-card::after {
-  content: "→";
-  font-size: 1.2rem;
-  margin-top: 6px;
-  color: var(--uc-blue);
-  transition: var(--uc-transition);
-}
-
-.admin-card:hover::after {
-  color: var(--uc-purple);
-  transform: translateX(4px);
-}
-
-/* ===== Footer ===== */
-
-.admin-footer {
-  text-align: center;
-  color: var(--uc-gray);
-  font-size: 0.9rem;
-  margin-top: 40px;
+.dashboard-frame {
+  flex-grow: 1;
+  width: 100%;
+  min-height: 900px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
 }
 
 /* ===== Responsive ===== */
 
-@media (min-width: 720px) {
+@media (max-width: 930px) {
   .admin-links {
     grid-template-columns: 1fr 1fr;
   }
+}
 
-  .admin-home main {
-    margin-top: 80px;
+@media (max-width: 680px) {
+  .admin-links {
+    grid-template-columns: 1fr;
   }
 }
+
+/*-------------------------------*/

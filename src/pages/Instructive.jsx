@@ -1,9 +1,7 @@
-import { useState } from "react";
 import logotipo from "../assets/logotipo.jpg";
 import instructivo from "../assets/instructivo.md?raw";
-
+import { AdminNavbar } from "../components/AdminNavbar";
 import { Toolbar } from "../components/Toolbar";
-import { Sidebar } from "../components/Sidebar";
 import { useMarkdownEditor } from "../hooks/useMarkdownEditor";
 
 export function Instructive() {
@@ -17,22 +15,15 @@ export function Instructive() {
     textareaRef,
   } = useMarkdownEditor(instructivo);
 
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
-  const closeSidebar = () => setSidebarOpen(false);
-
   return (
     <div className="editor-container">
+      <AdminNavbar/>
       <Toolbar
-        onToggleSidebar={toggleSidebar}
         onUndo={handleUndo}
         onRedo={handleRedo}
         onFormat={applyMarkdown}
         isInstructive={true}
       />
-
-      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
       <main className="editor-main">
         <textarea

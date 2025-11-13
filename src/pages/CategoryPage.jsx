@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader.jsx";
 import { ErrorPage } from "./ErrorPage.jsx";
+import { apiUrl } from "../config/api.js";
 import axios from "axios";
 
 export function CategoryPage() {
@@ -23,9 +24,7 @@ export function CategoryPage() {
         setLoading(true);
         setError(null);
 
-        const response = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${token}`
-        );
+        const response = await axios.get(`${apiUrl}/qr/${token}`);
 
         setQrData(response.data.data);
       } catch (err) {
