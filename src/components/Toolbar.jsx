@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/index.css";
 
 export function Toolbar({
-  onToggleSidebar,
   onUndo,
   onRedo,
   onFormat,
@@ -33,15 +32,6 @@ export function Toolbar({
   return (
     <nav className="toolbar">
       <div className="tools" role="toolbar" aria-label="Editor toolbar">
-        <button
-          type="button"
-          onClick={onToggleSidebar}
-          title="Abrir menú lateral"
-          aria-label="Abrir menú"
-        >
-          <span className="material-symbols-outlined">menu</span>
-        </button>
-
         <button
           type="button"
           onClick={onUndo}

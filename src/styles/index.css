@@ -468,6 +468,7 @@ textarea ::-webkit-scrollbar {
 
 .link {
   text-decoration: none;
+  color: #682076;
   padding: 10px;
 }
 
