@@ -82,15 +82,16 @@ export function DashboardListOfRequests() {
 
       <section className="filters-container">
         <RequestFilters filters={filters} onFilterChange={handleFilterChange} />
-
-        <div className="request-table">
+      </section>
+      
+      <div className="request-table">
           <RequestTable requests={requests} onUpdateStatus={updateRequestStatus} />
-        </div>
+      </div>
 
-        <div className="pagination-container">
+      <div className="pagination-container">
           <Pagination pagination={pagination} onPageChange={handlePageChange} />
         </div>
-      </section>
+     
     </main>
   );
 }

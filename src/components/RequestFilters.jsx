@@ -79,12 +79,10 @@ export function RequestFilters({ filters, onFilterChange }) {
   };
 
   return (
-    <div className="filters-container">
+    <div>
       <h2 className="filters-title">Filtros</h2>
-
       <div className="filters-row">
-        <label>
-        Área
+        <label>Área
         <select name="area" value={localFilters.area} onChange={handleChange}>
           <option value="">Todas</option>
           <option value="Nutrición">Nutrición</option>
@@ -95,8 +93,7 @@ export function RequestFilters({ filters, onFilterChange }) {
         </select>
         </label>
 
-        <label>
-        Subárea
+        <label>Subárea
         <select
           name="subarea"
           value={localFilters.subarea}
@@ -111,8 +108,7 @@ export function RequestFilters({ filters, onFilterChange }) {
         </select>
          </label>
 
-        <label>
-        Estado
+        <label>Estado
         <select
           name="status"
           value={localFilters.status}
@@ -127,8 +123,7 @@ export function RequestFilters({ filters, onFilterChange }) {
       </div>
 
       <div className="filters-row filters-dates">
-        <label>
-          Inicio
+        <label>Inicio
           <input
             type="date"
             name="startDate"
@@ -137,8 +132,7 @@ export function RequestFilters({ filters, onFilterChange }) {
           />
         </label>
 
-        <label>
-          Término
+        <label>Término
           <input
             type="date"
             name="endDate"

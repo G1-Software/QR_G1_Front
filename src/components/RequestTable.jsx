@@ -14,8 +14,8 @@ export function RequestTable({ requests, onUpdateStatus }) {
   };
 
   return (
-    <div className="table-container">
-      <table className="request-table">
+    <div>
+      <table>
         <thead>
           <tr>
             <th>ID</th>
@@ -39,7 +39,7 @@ export function RequestTable({ requests, onUpdateStatus }) {
               <td>{req.requester_full_name}</td>
               <td>{req.requester_email}</td>
 
-              <td className="status-cell">
+              <td>
                 <select
                   value={req.status}
                   onChange={(e) =>
