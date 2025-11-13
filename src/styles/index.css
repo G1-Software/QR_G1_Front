@@ -522,80 +522,91 @@ textarea ::-webkit-scrollbar {
 }
 
 .request-table {
-  max-height: 600px;
   width: 100%;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.request-table table {
+  width: 100%;
+  min-width: 900px;
   border-collapse: collapse;
   color: #2d2d2d;
-  max-width:100%;
 }
 
-.request-table th{
+.request-table th {
   text-align: left;
-  padding: 8px;
+  padding: 0.75rem;
   color: #682076;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
-.request-table td{
+.request-table td {
   text-align: left;
-  padding: 8px;
-  font-size: 1rem;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  vertical-align: top;
+  border-bottom: 1px solid #f1f1f1;
 }
 
-table th:nth-child(1), /* ID */
-table td:nth-child(1) {
+.request-table table th:nth-child(1), /*ID */
+.request-table table td:nth-child(1) {
   width: 5%;
+  white-space: nowrap;
 }
 
-table th:nth-child(2), /* Área */
-table td:nth-child(2) {
-  width: 5%;
-  word-wrap: break-word;
-  white-space: normal;
+.request-table table th:nth-child(2), /*Área */
+.request-table table td:nth-child(2) {
+  width: 7%;
+  word-break: break-word;
 }
 
-table th:nth-child(3), /* Subárea */
-table td:nth-child(3) {
+.request-table table th:nth-child(3), /*Subárea*/
+.request-table table td:nth-child(3) {
   width: 10%;
-  word-wrap: break-word;
-  white-space: normal;
+  word-break: break-word;
 }
 
-table th:nth-child(4), /* Descripción */
-table td:nth-child(4) {
-  width: 30%;
-  word-wrap: break-word;
-  white-space: normal;
+.request-table table th:nth-child(4), /*Descripción*/
+.request-table table td:nth-child(4) {
+  width: 28%;
+  word-break: break-word;
 }
 
-table th:nth-child(5), /* Nombre del Solicitante */
-table td:nth-child(5) {
+.request-table table th:nth-child(5), /*Nombre Solicitante */
+.request-table table td:nth-child(5) {
   width: 15%;
-  word-wrap: break-word;
-  white-space: normal;
+  word-break: break-word;
 }
 
-table th:nth-child(6), /* Correo Electrónico del Solicitante */
-table td:nth-child(6) {
+.request-table table th:nth-child(6), /*Correo Electrónico del Solicitante*/
+.request-table table td:nth-child(6) {
   width: 15%;
-  word-wrap: break-word;
-  white-space: normal;
+  word-break: break-word;
 }
 
-table th:nth-child(7), /* Estado */
-table td:nth-child(7) {
+.request-table table th:nth-child(7), /*Estado*/
+.request-table table td:nth-child(7) {
   width: 10%;
+  white-space: nowrap;
 }
 
-table th:nth-child(8), /* Creación */
-table td:nth-child(8) {
-  width: 5%;
+.request-table table th:nth-child(8), /*Creación*/
+.request-table table td:nth-child(8) {
+  width: 10%;
+  white-space: nowrap;
 }
 
-table th:nth-child(8), /* última Actualización*/
-table td:nth-child(8) {
-  width: 5%;
+.request-table table th:nth-child(9), /*Última Actualización*/
+.request-table table td:nth-child(9) {
+  width: 10%;
+  white-space: nowrap;
 }
 
 .dashboard-container {
