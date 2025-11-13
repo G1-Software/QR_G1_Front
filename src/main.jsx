@@ -21,7 +21,9 @@ import { Instructive } from "./pages/Instructive";
 import { InformationPage } from "./pages/InformationPage";
 import { AdminHome } from "./pages/AdminHome";
 import { TokenProtectedRoute } from "./components/TokenProtectedRoute";
+import { DashboardListOfRequests } from "./pages/DashboardListOfRequests";
 import { RequestsDashboard } from "./pages/RequestsDashboard";
+
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -163,6 +165,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             element={
               <PrivateRoute>
                 <AdminHome />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/listado_solicitudes"
+            element={
+              <PrivateRoute>
+                <DashboardListOfRequests></DashboardListOfRequests>
               </PrivateRoute>
             }
           />
