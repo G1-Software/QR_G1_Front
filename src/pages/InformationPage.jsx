@@ -32,6 +32,32 @@ export function InformationPage() {
         const pageResponse = await axios.get(`${apiUrl}/page/${page}`);
 
         setContentHtml(pageResponse.data.data.content_html);
+        
+        const page_id = pageResponse.data.data.id;
+        const qr_id = qr.id;
+        const key = `pv:${page_id}:qr:${qr_id}`;
+        const payload = {
+          page_id: page_id, 
+          qr_id: qr_id,
+        };
+
+        
+        if (!sessionStorage.getItem(key)) {
+          sessionStorage.setItem(key, "1");
+         try {
+          await axios.post(
+            "https://qr-g1-software-back.onrender.com/page_view_log",
+            payload,
+            { headers: { "Content-Type": "application/json" } }
+          );
+          
+
+        } catch (error) {
+          console.error("Error registrando vista de página:", error?.response?.data || error);
+        }
+      }
+
+
       } catch (err) {
         console.error("Error al cargar datos:", err);
         setError("Error al cargar los datos.");
