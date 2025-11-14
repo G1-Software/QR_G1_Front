@@ -37,7 +37,6 @@ export function InformationPage() {
         
         const page_id = pageResponse.data.data.id;
         const qr_id = qr.id;
-        console.log({page_id, qr_id});
         const key = `pv:${page_id}:qr:${qr_id}`;
         const payload = {
           page_id: page_id, 
