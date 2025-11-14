@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 import { Button } from "../components/Button";
 import { Footer } from "../components/Footer";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader.jsx";
 import { ErrorPage } from "./ErrorPage.jsx";
@@ -17,8 +17,12 @@ export function CategoryPage() {
   const { qrData, setQrData } = useQrStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
+    if (hasFetched.current) return;
+      hasFetched.current = true;
+
     const fetchQrData = async () => {
       try {
         setLoading(true);
@@ -26,7 +30,27 @@ export function CategoryPage() {
 
         const response = await axios.get(`${apiUrl}/qr/${token}`);
 
-        setQrData(response.data.data);
+        const qrInfo = response.data.data;
+        setQrData(qrInfo);
+
+        if (qrInfo?.id) {
+          const scanKey = `qr_scan_${qrInfo.id}`;
+
+          if (!sessionStorage.getItem(scanKey)) {
+            sessionStorage.setItem(scanKey, "1");
+
+            try {
+              await axios.post(
+                "https://qr-g1-software-back.onrender.com/qr_scan_log",
+                { qr_id: qrInfo.id },
+                { headers: { "Content-Type": "application/json" } }
+              );
+            } catch (postError) {
+              console.error("Error al registrar QR scan log:", postError);
+            }
+          }
+        }
+
       } catch (err) {
         console.error(err);
         setError(err.response?.data?.message || "Error al obtener el QR");
@@ -49,7 +73,7 @@ export function CategoryPage() {
         <Button
           to={`/informacion_clinica?token=${token}`}
           isCategoryPage={true}
-          text={"INFORMACIÓN CLINICA AL PACIENTE"}
+          text={"INFORMACIÓN CLÍNICA AL PACIENTE"}
         />
         <Button
           to={`/informacion_administrativa?token=${token}`}
