@@ -49,7 +49,7 @@ export function AdminNavbar() {
           >
             Dashboard de solicitudes
           </Link>
-          <Link to="#" className="link" onClick={closeSidebar}>
+          <Link to="/dashboard/metricas_qr" className="link" onClick={closeSidebar}>
             Dashboard de métricas QR
           </Link>
           <Link to="#" className="link" onClick={closeSidebar}>
