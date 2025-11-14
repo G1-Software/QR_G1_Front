@@ -47,7 +47,7 @@ export function InformationPage() {
         if (!sessionStorage.getItem(key)) {
           sessionStorage.setItem(key, "1");
          try {
-          const response = await axios.post(
+          await axios.post(
             "https://qr-g1-software-back.onrender.com/page_view_log",
             payload,
             { headers: { "Content-Type": "application/json" } }
