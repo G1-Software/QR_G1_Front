@@ -14,8 +14,8 @@ export function useChatbotLogic() {
   const [messages, setMessages] = useState([
     {
       author: "Chatbot UCChristus",
-      time: "10:05",
-      datetime: "2025-10-16T10:05",
+      time: new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit",}),
+      datetime: new Date().toISOString(),
       text: "Hola! ¿Cómo puedo ayudarte?",
     },
   ]);
@@ -105,7 +105,7 @@ export function useChatbotLogic() {
     setMessages((prev) => [
       ...prev,
       {
-        author: "You",
+        author: "Tú",
         time,
         datetime: now.toISOString(),
         text: value,

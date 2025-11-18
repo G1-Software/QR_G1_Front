@@ -70,7 +70,9 @@ export default function Chatbot() {
             {messages.map((m, i) => (
               <div
                 key={i}
-                className="chat-message"
+                className={`chat-message ${
+                  m.author === "Tú" ? "from-user" : "from-bot"
+                }`}
                 role="listitem"
                 tabIndex={i === messages.length - 1 ? 0 : -1}
               >

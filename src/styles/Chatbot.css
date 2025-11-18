@@ -133,6 +133,8 @@ button:focus-visible {
 
 /* === Chat messages === */
 .chat-messages {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   overflow-y: auto;
   padding: 1rem;
@@ -152,15 +154,26 @@ button:focus-visible {
   flex-direction: column;
 }
 
+.chat-message.from-bot {
+  align-self: flex-start;
+}
+
+.chat-message.from-user {
+  align-self: flex-end !important;
+}
+
 .chat-message strong {
   color: #682076;
   display: block;
   font-weight: 600;
+  margin-bottom: 0rem;
 }
 
 .chat-message p {
   line-height: 1.4;
   text-align: left;
+  margin-top: 0.25rem;
+  margin-bottom: 0rem;
 }
 
 .chat-message time {
