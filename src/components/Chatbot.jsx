@@ -9,9 +9,21 @@ export default function Chatbot() {
     modalRef,
     messagesRef,
     messages,
+    message,
+    maxMessageLength,
+    handleInputChange,
     handleMessageKey,
     sendMessage,
   } = useChatbotLogic();
+
+  const remainingChars = maxMessageLength - message.length;
+
+  const handleTextareaKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
 
   return (
     <div className="chatbotContainer">
@@ -22,7 +34,7 @@ export default function Chatbot() {
         aria-controls="chatModal"
         onClick={() => setOpen(true)}
       >
-        <span class="material-symbols-outlined">smart_toy</span>
+        <span className="material-symbols-outlined">smart_toy</span>
       </button>
 
       {/* MODAL */}
@@ -47,11 +59,6 @@ export default function Chatbot() {
             </button>
           </header>
 
-          <p id="chatInstructions" className="sr-only">
-            Use Arrow keys to navigate, Home to jump to the top, End to jump to
-            the bottom, and Escape to close the chat.
-          </p>
-
           {/* MESSAGES */}
           <div
             id="chatDesc"
@@ -68,23 +75,35 @@ export default function Chatbot() {
                 tabIndex={i === messages.length - 1 ? 0 : -1}
               >
                 <strong>{m.author}:</strong>
-                <time dateTime={m.datetime}>{m.time}</time>
                 <p>{m.text}</p>
+                <time dateTime={m.datetime}>{m.time}</time>
               </div>
             ))}
           </div>
 
           {/* FOOTER */}
           <footer className="chat-footer">
-            <label htmlFor="chatInput">Message:</label>
-            <input
-              id="chatInput"
-              type="text"
-              ref={inputRef}
-              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            />
+            <div className="chat-input-wrapper">
+              <label htmlFor="chatInput">Mensaje:</label>
+              <div className="chat-input-field">
+                <textarea
+                  id="chatInput"
+                  ref={inputRef}
+                  value={message}
+                  onChange={handleInputChange}
+                  onKeyDown={handleTextareaKeyDown}
+                  maxLength={maxMessageLength}
+                  aria-describedby="chatCharInfo"
+                  rows={1}
+                />
+                <span id="chatCharInfo" className="chat-char-info">
+                  *Caracteres restantes para realizar la pregunta:{" "}
+                  {remainingChars}
+                </span>
+              </div>
+            </div>
             <button id="sendBtn" onClick={sendMessage}>
-              Send
+              Enviar
             </button>
           </footer>
         </div>

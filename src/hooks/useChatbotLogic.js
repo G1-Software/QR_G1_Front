@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { apiUrl } from "../config/api";
 import axios from "axios";
+import { useQrStore } from "../stores/QRStore";
 
-const API_URL = `${apiUrl}/chatbot/message`;
-const QR_ID = 4;
+const API_URL = `${apiUrl}/chatbot_questions/question`;
+const MAX_MESSAGE_LENGTH = 500;
+const MAX_TEXTAREA_HEIGHT = 96; 
 
 export function useChatbotLogic() {
+  const { qrData } = useQrStore();
+  const QR_ID = qrData.id;
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -16,9 +20,29 @@ export function useChatbotLogic() {
     },
   ]);
 
+  const [message, setMessage] = useState("");
   const inputRef = useRef(null);
   const modalRef = useRef(null);
   const messagesRef = useRef(null);
+
+  const adjustTextareaHeight = () => {
+    const textarea = inputRef.current;
+    if (!textarea) return;
+    textarea.style.height = "auto";
+    const newHeight = Math.min(textarea.scrollHeight, MAX_TEXTAREA_HEIGHT);
+    textarea.style.height = `${newHeight}px`;
+    textarea.style.overflowY =
+      textarea.scrollHeight > MAX_TEXTAREA_HEIGHT ? "auto" : "hidden";
+  };
+
+  const handleInputChange = (event) => {
+    const limitedValue = event.target.value.slice(0, MAX_MESSAGE_LENGTH);
+    if (limitedValue !== event.target.value) {
+      event.target.value = limitedValue;
+    }
+    setMessage(limitedValue);
+    requestAnimationFrame(adjustTextareaHeight);
+  };
 
   // === FOCUS TRAP ===
   useEffect(() => {
@@ -68,7 +92,7 @@ export function useChatbotLogic() {
 
   // === SEND MESSAGE (conexión al backend) ===
   const sendMessage = async () => {
-    const value = inputRef.current.value.trim();
+    const value = message.trim();
     if (!value) return;
 
     const now = new Date();
@@ -89,24 +113,18 @@ export function useChatbotLogic() {
     ]);
 
     const userMessage = value;
-    inputRef.current.value = "";
+    setMessage("");
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      inputRef.current.style.height = "";
+      inputRef.current.style.overflowY = "hidden";
+    }
     scrollToBottom();
+    const botTime = new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit",});
 
     try {
-      // ⬇️ Enviar al backend
-      const response = await axios.post(API_URL, {
-        message: userMessage,
-        qr_id: QR_ID,
-      });
-
+      const response = await axios.post(API_URL, {question: userMessage, qr_id: QR_ID,});
       const botReply = response.data.reply || "No tengo respuesta disponible.";
-
-      const botTime = new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-
-      // ⬇️ Añadir mensaje del chatbot real
       setMessages((prev) => [
         ...prev,
         {
@@ -119,12 +137,6 @@ export function useChatbotLogic() {
     } catch (error) {
       console.error("Error en backend:", error);
 
-      const botTime = new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-
-      // ⬇️ Mensaje de error
       setMessages((prev) => [
         ...prev,
         {
@@ -187,6 +199,9 @@ export function useChatbotLogic() {
     modalRef,
     messagesRef,
     messages,
+    message,
+    maxMessageLength: MAX_MESSAGE_LENGTH,
+    handleInputChange,
     handleMessageKey,
     sendMessage,
   };
