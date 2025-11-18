@@ -8,6 +8,7 @@ import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader.jsx";
 import { ErrorPage } from "./ErrorPage.jsx";
 import { apiUrl } from "../config/api.js";
+import Chatbot from "../components/Chatbot.jsx";
 import axios from "axios";
 
 export function CategoryPage() {
@@ -21,7 +22,7 @@ export function CategoryPage() {
 
   useEffect(() => {
     if (hasFetched.current) return;
-      hasFetched.current = true;
+    hasFetched.current = true;
 
     const fetchQrData = async () => {
       try {
@@ -50,7 +51,6 @@ export function CategoryPage() {
             }
           }
         }
-
       } catch (err) {
         console.error(err);
         setError(err.response?.data?.message || "Error al obtener el QR");
@@ -91,6 +91,8 @@ export function CategoryPage() {
           text={"SOLICITUDES (LIMPIEZA, MANTENCIÓN, NUTRICIÓN, ETC)"}
         />
       </main>
+
+      <Chatbot></Chatbot>
 
       {qrData && (
         <Footer
