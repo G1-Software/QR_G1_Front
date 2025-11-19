@@ -67,7 +67,7 @@ export const AdminHome = () => {
             title="Dashboard de métricas QR"
             description="Presenta datos analíticos sobre el uso de los QR, ofreciendo una visión del uso del sistema, las ubicaciones de escaneo y las páginas más consultadas."
             linkText="Acceder"
-            linkHref="/admin/editor"
+            linkHref="/dashboard/metricas_qr"
           />
           <Card
             image="https://media.istockphoto.com/id/1413855189/photo/chat-bot-service-concept-virtual-assistant-and-crm-software-automation-technology-customer.jpg?s=612x612&w=0&k=20&c=5wY13TF0YQWF_Ktt0HU9CcjRE6h0wvBpxG78XSLU0-U="
