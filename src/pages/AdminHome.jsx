@@ -74,7 +74,7 @@ export const AdminHome = () => {
             title="Dashboard de métricas Chatbot"
             description="Reúne métricas e indicadores sobre el uso del chatbot, permitiendo analizar la frecuencia de interacción, los tipos de consultas y el nivel de actividad de los usuarios."
             linkText="Acceder"
-            linkHref="#"
+            linkHref="/dashboard/metricas_chatbot"
           />
         </div>
       </main>
