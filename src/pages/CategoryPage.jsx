@@ -8,7 +8,6 @@ import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader.jsx";
 import { ErrorPage } from "./ErrorPage.jsx";
 import { apiUrl } from "../config/api.js";
-import Chatbot from "../components/Chatbot.jsx";
 import axios from "axios";
 
 export function CategoryPage() {
@@ -91,8 +90,6 @@ export function CategoryPage() {
           text={"SOLICITUDES (LIMPIEZA, MANTENCIÓN, NUTRICIÓN, ETC)"}
         />
       </main>
-
-      <Chatbot></Chatbot>
 
       {qrData && (
         <Footer

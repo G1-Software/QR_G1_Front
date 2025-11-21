@@ -617,15 +617,14 @@ textarea ::-webkit-scrollbar {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
   color: #2d2d2d;
-  max-width:1200px;
-  margin:auto;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .dashboard-title,
 .filters-title {
   color: #682076;
   font-weight: 700;
-  
 }
 
 .dashboard-title {
@@ -713,11 +712,11 @@ textarea ::-webkit-scrollbar {
   gap: 8px;
   padding: 10px 0;
   font-size: 1rem;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .pagination-container button {
-  background-color: #7b1fa2; 
+  background-color: #7b1fa2;
   color: white;
   border: none;
   border-radius: 6px;
@@ -752,4 +751,8 @@ textarea ::-webkit-scrollbar {
     padding: 5px 10px;
     font-size: 0.8rem;
   }
+}
+
+#chatbase-bubble-button {
+  margin-bottom: 60px;
 }
