@@ -19,6 +19,7 @@ export function CategoryPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
+  const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
     if (hasFetched.current) return;
@@ -42,9 +43,14 @@ export function CategoryPage() {
 
             try {
               await axios.post(
-                "https://qr-g1-software-back.onrender.com/qr_scan_log",
+                `${apiUrl}/qr_scan_log`,
                 { qr_id: qrInfo.id },
-                { headers: { "Content-Type": "application/json" } }
+                {
+                  headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    "Content-Type": "application/json",
+                  },
+                }
               );
             } catch (postError) {
               console.error("Error al registrar QR scan log:", postError);
@@ -60,7 +66,7 @@ export function CategoryPage() {
     };
 
     fetchQrData();
-  }, [token, setQrData]);
+  }, [token, setQrData, accessToken]);
 
   if (loading) return <Loader></Loader>;
   if (error) return <ErrorPage></ErrorPage>;

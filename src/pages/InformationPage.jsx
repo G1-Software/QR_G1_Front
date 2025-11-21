@@ -17,6 +17,7 @@ export function InformationPage() {
   const [contentHtml, setContentHtml] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -29,7 +30,14 @@ export function InformationPage() {
           setQrData(qr);
         }
 
-        const pageResponse = await axios.get(`${apiUrl}/page/${page}`);
+        const pageResponse = await axios.get(
+          `${apiUrl}/page/${page}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
 
         setContentHtml(pageResponse.data.data.content_html);
         
@@ -46,16 +54,20 @@ export function InformationPage() {
           sessionStorage.setItem(key, "1");
          try {
           await axios.post(
-            "https://qr-g1-software-back.onrender.com/page_view_log",
-            payload,
-            { headers: { "Content-Type": "application/json" } }
-          );
+              `${apiUrl}/page_view_log`,
+              payload,
+              {
+                headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            );
           
-
-        } catch (error) {
-          console.error("Error registrando vista de página:", error?.response?.data || error);
+          } catch (error) {
+            console.error("Error registrando vista de página:", error?.response?.data || error);
+          }
         }
-      }
 
 
       } catch (err) {
@@ -67,7 +79,7 @@ export function InformationPage() {
     };
 
     fetchAll();
-  }, [token, page, qrData, setQrData]);
+  }, [token, page, qrData, setQrData, accessToken]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorPage />;

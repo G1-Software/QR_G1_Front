@@ -30,7 +30,7 @@ export function SubsubategoryPageC3() {
         }
 
         const qrResponse = await axios.get(
-          `https://qr-g1-software-back.onrender.com/qr/${token}`
+          `${apiUrl}/qr/${token}`
         );
         const qr = qrResponse.data.data;
         setQrData(qr);
