@@ -57,15 +57,15 @@ export function SubsubategoryPageC3() {
 
       <main>
         <Button
-          to={`/pagina_informacion?token=${token}&page=${24}`}
+          to={`/pagina_informacion?token=${token}&page=${23}`}
           text={"CAFETERÍAS, MARKETPLACES, MÁQUINAS EXPENDEDORAS, ETC"}
         />
         <Button
-          to={`/pagina_informacion?token=${token}&page=${25}`}
+          to={`/pagina_informacion?token=${token}&page=${24}`}
           text={"ESPACIOS DE ORACIÓN Y REFLEXIÓN ESPIRITUAL"}
         />
         <Button
-          to={`/pagina_informacion?token=${token}&page=${26}`}
+          to={`/pagina_informacion?token=${token}&page=${25}`}
           text={"CAJERO AUTOMÁTICO, WIFI Y ESTACIONAMIENTOS"}
         />
       </main>

@@ -54,15 +54,15 @@ export function SubsubategoryPageC2() {
 
       <main>
         <Button
-          to={`/pagina_informacion?token=${token}&page=${21}`}
+          to={`/pagina_informacion?token=${token}&page=${5}`}
           text={"HORARIO VISITAS Y BANCO DE SANGRE"}
         />
         <Button
-          to={`/pagina_informacion?token=${token}&page=${22}`}
+          to={`/pagina_informacion?token=${token}&page=${21}`}
           text={"CONDICIONES DE ENTRADA DE VISITAS AL HOSPITAL"}
         />
         <Button
-          to={`/pagina_informacion?token=${token}&page=${23}`}
+          to={`/pagina_informacion?token=${token}&page=${22}`}
           text={"ELEMENTOS PERMITIDOS Y NO PERMITIDOS AL INGRESO AL HOSPITAL"}
         />
       </main>
