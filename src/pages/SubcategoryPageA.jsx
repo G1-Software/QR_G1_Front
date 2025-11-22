@@ -71,11 +71,11 @@ export function SubCategoryPageA() {
         />
         <Button
           to={`/pagina_informacion?token=${token}&page=${5}`}
-          text={"HORARIO VISITAS  Y BANCO SANGRE"}
+          text={"HORARIO VISITAS Y BANCO SANGRE"}
         />
         <Button
           to={`/pagina_informacion?token=${token}&page=${6}`}
-          text={"PROCESOS Y CUIDADOS EN EL ALTA"}
+          text={"PROCESO Y CUIDADOS EN EL ALTA"}
         />
       </main>
 
