@@ -8,6 +8,7 @@ import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader.jsx";
 import { ErrorPage } from "./ErrorPage.jsx";
 import { apiUrl } from "../config/api.js";
+import { buildErrorState } from "../utils/error.js";
 import axios from "axios";
 
 export function CategoryPage() {
@@ -52,7 +53,7 @@ export function CategoryPage() {
         }
       } catch (err) {
         console.error(err);
-        setError(err.response?.data?.message || "Error al obtener el QR");
+        setError(buildErrorState(err, "Escanea de nuevo el código QR ubicado junto a tu cama para acceder a la información."));
       } finally {
         setLoading(false);
       }
@@ -62,7 +63,7 @@ export function CategoryPage() {
   }, [token, setQrData]);
 
   if (loading) return <Loader></Loader>;
-  if (error) return <ErrorPage></ErrorPage>;
+  if (error) return <ErrorPage status={error.status} message={error.message}></ErrorPage>;
 
   return (
     <div className="container">

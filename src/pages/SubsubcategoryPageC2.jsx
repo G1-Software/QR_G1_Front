@@ -7,6 +7,7 @@ import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
 import { useLocation } from "react-router-dom";
+import { buildErrorState } from "../utils/error.js";
 
 export function SubsubategoryPageC2() {
   const location = useLocation();
@@ -36,7 +37,7 @@ export function SubsubategoryPageC2() {
         setQrData(qr);
       } catch (err) {
         console.error("Error al cargar QR:", err);
-        setError("Error al cargar los datos del QR.");
+        setError(buildErrorState(err, "Error al cargar los datos del QR."));
       } finally {
         setLoading(false);
       }
@@ -46,7 +47,7 @@ export function SubsubategoryPageC2() {
   }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage />;
+  if (error) return <ErrorPage status={error.status} message={error.message} />;
 
   return (
     <div className="container">
