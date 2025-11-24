@@ -14,7 +14,7 @@ export function RequestTable({ requests, onUpdateStatus }) {
   };
 
   return (
-    <div>
+    <div className="table-container">
       <table>
         <thead>
           <tr>
@@ -24,11 +24,18 @@ export function RequestTable({ requests, onUpdateStatus }) {
             <th>Descripción</th>
             <th>Nombre del Solicitante</th>
             <th>Correo Electrónico del Solicitante</th>
+            <th>Institución</th>
+            <th>Edificio</th>
+            <th>Piso</th>
+            <th>Servicio</th>
+            <th>Habitación</th>
+            <th>Cama</th>
             <th>Estado</th>
             <th>Creación</th>
             <th>Última Actualización</th>
           </tr>
         </thead>
+
         <tbody>
           {requests.map((req) => (
             <tr key={req.id}>
@@ -39,12 +46,18 @@ export function RequestTable({ requests, onUpdateStatus }) {
               <td>{req.requester_full_name}</td>
               <td>{req.requester_email}</td>
 
+              {/* Datos del QR asociados */}
+              <td>{req.institution || "-"}</td>
+              <td>{req.building || "-"}</td>
+              <td>{req.floor ?? "-"}</td>
+              <td>{req.service || "-"}</td>
+              <td>{req.room ?? "-"}</td>
+              <td>{req.bed ?? "-"}</td>
+
               <td>
                 <select
                   value={req.status}
-                  onChange={(e) =>
-                    handleStatusChange(req.id, e.target.value)
-                  }
+                  onChange={(e) => handleStatusChange(req.id, e.target.value)}
                   disabled={updatingId === req.id}
                   className={`status-select ${req.status
                     .toLowerCase()
@@ -65,4 +78,3 @@ export function RequestTable({ requests, onUpdateStatus }) {
     </div>
   );
 }
-

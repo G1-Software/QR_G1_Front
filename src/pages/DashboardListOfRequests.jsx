@@ -20,11 +20,16 @@ export function DashboardListOfRequests() {
   });
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchRequests = async (appliedFilters = {}, currentPage = 1) => {
+  const fetchRequests = async (
+    appliedFilters = {},
+    currentPage = 1,
+    skipLoading = false
+  ) => {
     try {
-      setLoading(true);
+      if (!skipLoading) setLoading(true);
 
       const params = new URLSearchParams();
       Object.entries(appliedFilters).forEach(([key, value]) => {
@@ -45,7 +50,7 @@ export function DashboardListOfRequests() {
         err.response?.data?.message || "Error al obtener las solicitudes"
       );
     } finally {
-      setLoading(false);
+      if (!skipLoading) setLoading(false);
     }
   };
 
@@ -64,18 +69,22 @@ export function DashboardListOfRequests() {
 
   const updateRequestStatus = async (id, newStatus) => {
     try {
-      const response = await axios.put(`${apiUrl}/request/${id}`, {
+      setIsUpdating(true);
+
+      await axios.put(`${apiUrl}/request/${id}`, {
         status: newStatus,
       });
-      const updated = response.data.data;
-      setRequests((prev) => prev.map((req) => (req.id === id ? updated : req)));
+
+      await fetchRequests(filters, page, true);
     } catch (err) {
       console.error("Error al actualizar solicitud:", err);
       alert("Error al actualizar la solicitud.");
+    } finally {
+      setIsUpdating(false);
     }
   };
 
-  if (loading) return <Loader />;
+  if (loading && !isUpdating) return <Loader />;
   if (error) return <ErrorPage message={error} />;
 
   return (
