@@ -7,8 +7,11 @@ import { RequestFilters } from "../components/RequestFilters.jsx";
 import { Pagination } from "../components/Pagination.jsx";
 import { apiUrl } from "../config/api.js";
 import { AdminNavbar } from "../components/AdminNavbar.jsx";
+import { RequestsDashboard } from "./RequestsDashboard.jsx"; // IMPORTANTE
 
 export function DashboardListOfRequests() {
+  const [view, setView] = useState("list"); // 👈 NUEVO: controla qué se muestra
+
   const [requests, setRequests] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [filters, setFilters] = useState({
@@ -55,8 +58,10 @@ export function DashboardListOfRequests() {
   };
 
   useEffect(() => {
-    fetchRequests(filters, page);
-  }, [filters, page]);
+    if (view === "list") {
+      fetchRequests(filters, page);
+    }
+  }, [filters, page, view]);
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
@@ -84,13 +89,35 @@ export function DashboardListOfRequests() {
     }
   };
 
-  if (loading && !isUpdating) return <Loader />;
+  if (loading && !isUpdating && view === "list") return <Loader />;
   if (error) return <ErrorPage message={error} />;
+
+  if (view === "dashboard") {
+    return (
+      <div className="dashboard-container">
+        <AdminNavbar />
+        <h2 className="dashboard-title padding-title">
+          <span className="view-toggle" onClick={() => setView("list")}>
+            ◀
+          </span>
+          Dashboard de métricas de solicitudes
+        </h2>
+
+        <RequestsDashboard />
+      </div>
+    );
+  }
 
   return (
     <main className="dashboard-container">
-      <AdminNavbar></AdminNavbar>
-      <h2 className="dashboard-title">Listado de Solicitudes</h2>
+      <AdminNavbar />
+
+      <h2 className="dashboard-title">
+        Listado de solicitudes
+        <span className="view-toggle" onClick={() => setView("dashboard")}>
+          ▶
+        </span>
+      </h2>
 
       <section className="filters-container">
         <RequestFilters filters={filters} onFilterChange={handleFilterChange} />

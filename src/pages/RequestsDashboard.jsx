@@ -9,7 +9,7 @@ export function RequestsDashboard() {
   useEffect(() => {
     const updateHeight = () => {
       const headerHeight = headerRef.current?.offsetHeight ?? 0;
-      const verticalPadding = 48; 
+      const verticalPadding = 48;
       const available = window.innerHeight - headerHeight - verticalPadding;
       setFrameHeight(Math.max(available, 900));
     };
@@ -21,8 +21,6 @@ export function RequestsDashboard() {
 
   return (
     <div className="requests-dashboard">
-      <AdminNavbar/>
-
       <section className="dashboard-wrapper">
         <iframe
           title="Google Looker Studio dashboard"
