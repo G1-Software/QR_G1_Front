@@ -24,6 +24,7 @@ import { TokenProtectedRoute } from "./components/TokenProtectedRoute";
 import { DashboardListOfRequests } from "./pages/DashboardListOfRequests";
 import { RequestsDashboard } from "./pages/RequestsDashboard";
 import { QRMetricsDashboard } from "./pages/QRMetricsDashboard";
+import { PublicHome } from "./pages/PublicHome";
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -47,6 +48,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <Routes>
           <Route path="/scanqrnotice" element={<ScanQrNotice />} />
+          <Route path="/home" element={<PublicHome />} />
 
           <Route
             path="/"
@@ -160,6 +162,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               </TokenProtectedRoute>
             }
           />
+          
           <Route path="/solicitudes" element={<RequestPage />} />
           {/*           
     <Route path="/staff" element={
