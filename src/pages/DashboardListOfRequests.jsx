@@ -7,6 +7,7 @@ import { RequestFilters } from "../components/RequestFilters.jsx";
 import { Pagination } from "../components/Pagination.jsx";
 import { apiUrl } from "../config/api.js";
 import { AdminNavbar } from "../components/AdminNavbar.jsx";
+import { buildErrorState } from "../utils/error.js";
 
 export function DashboardListOfRequests() {
   const [requests, setRequests] = useState([]);
@@ -41,9 +42,7 @@ export function DashboardListOfRequests() {
       setPagination(response.data.pagination || null);
     } catch (err) {
       console.error(err);
-      setError(
-        err.response?.data?.message || "Error al obtener las solicitudes"
-      );
+      setError(buildErrorState(err, "Error al obtener las solicitudes"));
     } finally {
       setLoading(false);
     }
@@ -76,7 +75,7 @@ export function DashboardListOfRequests() {
   };
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage message={error} />;
+  if (error) return <ErrorPage status={error.status} message={error.message} />;
 
   return (
     <main className="dashboard-container">

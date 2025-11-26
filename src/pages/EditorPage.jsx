@@ -28,7 +28,7 @@ export function EditorPage() {
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage message={error} />;
+  if (error) return <ErrorPage status={error.status} message={error.message} />;
 
   const handleSelectChange = (e) => {
     const pageId = parseInt(e.target.value);
