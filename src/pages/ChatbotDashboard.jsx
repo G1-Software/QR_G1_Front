@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "../styles/App.css";
 import "../styles/adminHome.css";
 import { AdminNavbar } from "../components/AdminNavbar";
-export function RequestsDashboard({ embbed = false }) {
+export function ChatbotDashboard() {
   const headerRef = useRef(null);
   const [frameHeight, setFrameHeight] = useState(900);
 
@@ -21,12 +21,12 @@ export function RequestsDashboard({ embbed = false }) {
 
   return (
     <div className="requests-dashboard">
-      {!embbed && <AdminNavbar />}
+      <AdminNavbar />
 
       <section className="dashboard-wrapper">
         <iframe
           title="Google Looker Studio dashboard"
-          src={import.meta.env.VITE_LOOKER_REQUEST}
+          src={import.meta.env.VITE_LOOKER_CHATBOT}
           loading="lazy"
           sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
           allowFullScreen

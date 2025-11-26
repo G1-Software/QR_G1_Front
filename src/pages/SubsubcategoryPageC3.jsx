@@ -7,6 +7,7 @@ import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
 import { useLocation } from "react-router-dom";
+import { buildErrorState } from "../utils/error.js";
 
 export function SubsubategoryPageC3() {
   const location = useLocation();
@@ -36,7 +37,7 @@ export function SubsubategoryPageC3() {
         setQrData(qr);
       } catch (err) {
         console.error("Error al cargar QR:", err);
-        setError("Error al cargar los datos del QR.");
+        setError(buildErrorState(err, "Error al cargar los datos del QR."));
       } finally {
         setLoading(false);
       }
@@ -46,7 +47,7 @@ export function SubsubategoryPageC3() {
   }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage />;
+  if (error) return <ErrorPage status={error.status} message={error.message} />;
 
   return (
     <div className="container">
@@ -57,15 +58,15 @@ export function SubsubategoryPageC3() {
 
       <main>
         <Button
-          to={`/pagina_informacion?token=${token}&page=${24}`}
+          to={`/pagina_informacion?token=${token}&page=${23}`}
           text={"CAFETERÍAS, MARKETPLACES, MÁQUINAS EXPENDEDORAS, ETC"}
         />
         <Button
-          to={`/pagina_informacion?token=${token}&page=${25}`}
+          to={`/pagina_informacion?token=${token}&page=${24}`}
           text={"ESPACIOS DE ORACIÓN Y REFLEXIÓN ESPIRITUAL"}
         />
         <Button
-          to={`/pagina_informacion?token=${token}&page=${26}`}
+          to={`/pagina_informacion?token=${token}&page=${25}`}
           text={"CAJERO AUTOMÁTICO, WIFI Y ESTACIONAMIENTOS"}
         />
       </main>

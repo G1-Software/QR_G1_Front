@@ -315,13 +315,28 @@ textarea ::-webkit-scrollbar {
 
 .vizualizer-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   background: rgba(255, 255, 255, 0.48);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10.7px);
   -webkit-backdrop-filter: blur(10.7px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 10px;
+  gap: 10px;
+}
+
+.char-counter {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 14px;
+  background-color: #ffffff;
+  border-radius: 999px;
+  color: #682076;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 6px;
+  align-self: center;
 }
 
 .visualizer-content {
@@ -521,92 +536,141 @@ textarea ::-webkit-scrollbar {
   background-color: #682076;
 }
 
+/* CONTENEDOR GENERAL */
 .request-table {
   width: 100%;
-  padding: 1.25rem;
-  border-radius: 1rem;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
   overflow-x: auto;
-  margin-bottom: 1.5rem;
+  padding: 1rem 0;
 }
 
+/* CONTENEDOR SCROLL */
+.request-table .table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+/* TABLA */
 .request-table table {
   width: 100%;
-  min-width: 900px;
+  min-width: 1300px;
   border-collapse: collapse;
   color: #2d2d2d;
+  table-layout: fixed;
 }
 
+/* CABECERA */
 .request-table th {
   text-align: left;
   padding: 0.75rem;
   color: #682076;
   font-weight: 700;
   font-size: 1.05rem;
+  background: #faf6fc;
+  border-bottom: 2px solid #e2cdee;
 }
 
+/* CELDAS */
 .request-table td {
   text-align: left;
   padding: 0.75rem;
   font-size: 0.95rem;
   vertical-align: top;
   border-bottom: 1px solid #f1f1f1;
-}
-
-.request-table table th:nth-child(1), /*ID */
-.request-table table td:nth-child(1) {
-  width: 5%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.request-table table th:nth-child(2), /*Área */
-.request-table table td:nth-child(2) {
-  width: 7%;
-  word-break: break-word;
+/* ID */
+.request-table th:nth-child(1),
+.request-table td:nth-child(1) {
+  width: 60px;
 }
 
-.request-table table th:nth-child(3), /*Subárea*/
-.request-table table td:nth-child(3) {
-  width: 10%;
-  word-break: break-word;
+/* Área */
+.request-table th:nth-child(2),
+.request-table td:nth-child(2) {
+  width: 120px;
 }
 
-.request-table table th:nth-child(4), /*Descripción*/
-.request-table table td:nth-child(4) {
-  width: 28%;
-  word-break: break-word;
+/* Subárea */
+.request-table th:nth-child(3),
+.request-table td:nth-child(3) {
+  width: 120px;
 }
 
-.request-table table th:nth-child(5), /*Nombre Solicitante */
-.request-table table td:nth-child(5) {
-  width: 15%;
-  word-break: break-word;
+/* Descripción */
+.request-table th:nth-child(4),
+.request-table td:nth-child(4) {
+  width: 250px;
+  white-space: normal;
 }
 
-.request-table table th:nth-child(6), /*Correo Electrónico del Solicitante*/
-.request-table table td:nth-child(6) {
-  width: 15%;
-  word-break: break-word;
+/* Nombre solicitante */
+.request-table th:nth-child(5),
+.request-table td:nth-child(5) {
+  width: 180px;
 }
 
-.request-table table th:nth-child(7), /*Estado*/
-.request-table table td:nth-child(7) {
-  width: 10%;
-  white-space: nowrap;
+/* Correo solicitante */
+.request-table th:nth-child(6),
+.request-table td:nth-child(6) {
+  width: 200px;
 }
 
-.request-table table th:nth-child(8), /*Creación*/
-.request-table table td:nth-child(8) {
-  width: 10%;
-  white-space: nowrap;
+/* Institución */
+.request-table th:nth-child(7),
+.request-table td:nth-child(7) {
+  width: 120px;
 }
 
-.request-table table th:nth-child(9), /*Última Actualización*/
-.request-table table td:nth-child(9) {
-  width: 10%;
-  white-space: nowrap;
+/* Edificio */
+.request-table th:nth-child(8),
+.request-table td:nth-child(8) {
+  width: 80px;
+}
+
+/* Piso */
+.request-table th:nth-child(9),
+.request-table td:nth-child(9) {
+  width: 80px;
+}
+
+/* Servicio */
+.request-table th:nth-child(10),
+.request-table td:nth-child(10) {
+  width: 120px;
+}
+
+/* Habitación */
+.request-table th:nth-child(11),
+.request-table td:nth-child(11) {
+  width: 100px;
+}
+
+/* Cama */
+.request-table th:nth-child(12),
+.request-table td:nth-child(12) {
+  width: 80px;
+}
+
+/* Estado */
+.request-table th:nth-child(13),
+.request-table td:nth-child(13) {
+  width: 140px;
+}
+
+/* Creación */
+.request-table th:nth-child(14),
+.request-table td:nth-child(14) {
+  width: 160px;
+}
+
+/* Última actualización */
+.request-table th:nth-child(15),
+.request-table td:nth-child(15) {
+  width: 160px;
 }
 
 .dashboard-container {
@@ -617,17 +681,18 @@ textarea ::-webkit-scrollbar {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   margin-bottom: 1.5rem;
   color: #2d2d2d;
-  max-width:1200px;
-  margin:auto;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .dashboard-title,
 .filters-title {
   color: #682076;
   font-weight: 700;
-  
 }
-
+.label-creation-date {
+  margin-bottom: 10px;
+}
 .dashboard-title {
   text-align: center;
   margin: 0;
@@ -713,11 +778,11 @@ textarea ::-webkit-scrollbar {
   gap: 8px;
   padding: 10px 0;
   font-size: 1rem;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .pagination-container button {
-  background-color: #7b1fa2; 
+  background-color: #7b1fa2;
   color: white;
   border: none;
   border-radius: 6px;
@@ -752,4 +817,19 @@ textarea ::-webkit-scrollbar {
     padding: 5px 10px;
     font-size: 0.8rem;
   }
+}
+
+#chatbase-bubble-button {
+  margin-bottom: 60px;
+}
+
+.view-toggle {
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.padding-title {
+  padding: 20px;
 }

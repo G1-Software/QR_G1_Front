@@ -7,6 +7,7 @@ import { useQrStore } from "../stores/QRStore.js";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { useLocation } from "react-router-dom";
+import { buildErrorState } from "../utils/error.js";
 
 export function SubCategoryPageA() {
   const location = useLocation();
@@ -36,7 +37,7 @@ export function SubCategoryPageA() {
         setQrData(qr);
       } catch (err) {
         console.error("Error al cargar QR:", err);
-        setError("Error al cargar los datos del QR.");
+        setError(buildErrorState(err, "Error al cargar los datos del QR."));
       } finally {
         setLoading(false);
       }
@@ -46,7 +47,7 @@ export function SubCategoryPageA() {
   }, [token, qrData, setQrData]);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage />;
+  if (error) return <ErrorPage status={error.status} message={error.message} />;
 
   return (
     <div className="container">
@@ -71,11 +72,11 @@ export function SubCategoryPageA() {
         />
         <Button
           to={`/pagina_informacion?token=${token}&page=${5}`}
-          text={"HORARIO VISITAS  Y BANCO SANGRE"}
+          text={"HORARIO VISITAS Y BANCO SANGRE"}
         />
         <Button
           to={`/pagina_informacion?token=${token}&page=${6}`}
-          text={"PROCESOS Y CUIDADOS EN EL ALTA"}
+          text={"PROCESO Y CUIDADOS EN EL ALTA"}
         />
       </main>
 

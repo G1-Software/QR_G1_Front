@@ -28,7 +28,7 @@ export function EditorPage() {
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage message={error} />;
+  if (error) return <ErrorPage status={error.status} message={error.message} />;
 
   const handleSelectChange = (e) => {
     const pageId = parseInt(e.target.value);
@@ -43,6 +43,10 @@ export function EditorPage() {
   };
 
   const handleSave = () => {
+    if (text.length > 1500) {
+      alert("El contenido supera el límite de 1500 caracteres.");
+      return;
+    }
     if (!selectedPage) {
       setShowErrorModal(true);
       return;
@@ -77,11 +81,18 @@ export function EditorPage() {
         <textarea
           ref={textareaRef}
           value={text}
-          onChange={(e) => handleTextChange(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value.length <= 1500) {
+              handleTextChange(e.target.value);
+            }
+          }}
           className="editor-textarea"
           spellCheck="false"
         />
         <div className="vizualizer-container">
+          <div className="char-counter">
+            {text.length}/1500 caracteres
+          </div>
           <div className="visualizer">
             <img
               src={logotipo}
