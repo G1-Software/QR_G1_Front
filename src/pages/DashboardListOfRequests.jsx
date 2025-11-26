@@ -46,6 +46,18 @@ export function DashboardListOfRequests() {
         `${apiUrl}/request?${params.toString()}`
       );
 
+      console.log(
+        "FETCH EXECUTED",
+        "filters:",
+        appliedFilters,
+        "currentPage:",
+        currentPage,
+        "skipLoading:",
+        skipLoading
+      );
+
+      console.log("REQUEST URL:", `${apiUrl}/request?${params.toString()}`);
+
       setRequests(response.data.data || []);
       setPagination(response.data.pagination || null);
     } catch (err) {
@@ -63,13 +75,27 @@ export function DashboardListOfRequests() {
   }, [filters, page, view]);
 
   const handleFilterChange = (newFilters) => {
-    setFilters(newFilters);
-    setPage(1);
+    setFilters((prevFilters) => {
+      const isDifferent = Object.keys(newFilters).some(
+        (key) => newFilters[key] !== prevFilters[key]
+      );
+
+      if (isDifferent) {
+        setPage(1);
+      }
+
+      return newFilters;
+    });
   };
 
   const handlePageChange = (newPage) => {
+    console.log("SET PAGE REQUESTED:", newPage);
     setPage(newPage);
   };
+
+  useEffect(() => {
+    console.log("EFECTO: page cambió →", page);
+  }, [page]);
 
   const updateRequestStatus = async (id, newStatus) => {
     try {
@@ -89,7 +115,7 @@ export function DashboardListOfRequests() {
   };
   if (loading && !isUpdating && view === "list") return <Loader />;
   if (error) return <ErrorPage status={error.status} message={error.message} />;
-  
+
   if (view === "dashboard") {
     return (
       <div className="dashboard-container">

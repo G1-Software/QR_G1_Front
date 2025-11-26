@@ -3,9 +3,14 @@ export function Pagination({ pagination, onPageChange }) {
 
   const { page, totalPages } = pagination;
 
+  const handleClick = (newPage) => {
+    console.log("CLICK en paginación — newPage:", newPage);
+    onPageChange(newPage);
+  };
+
   return (
     <div className="pagination-container">
-      <button disabled={page <= 1} onClick={() => onPageChange(page - 1)}>
+      <button disabled={page <= 1} onClick={() => handleClick(page - 1)}>
         ← Anterior
       </button>
 
@@ -15,7 +20,7 @@ export function Pagination({ pagination, onPageChange }) {
 
       <button
         disabled={page >= totalPages}
-        onClick={() => onPageChange(page + 1)}
+        onClick={() => handleClick(page + 1)}
       >
         Siguiente →
       </button>
