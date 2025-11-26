@@ -1,13 +1,13 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import logo from "../assets/logotipo.jpg";
+//import logo from "../assets/logotipo.jpg";
 import "../styles/adminHome.css";
 import Card from "../components/Card";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useEffect } from "react";
+//import { useNavigate } from "react-router-dom";
 import { AdminNavbar } from "../components/AdminNavbar.jsx";
 
 export const AdminHome = () => {
-  const { logout, user} = useAuth0();
+  const { user } = useAuth0();
   const role = user.role
 
   if (role === "staff") {
