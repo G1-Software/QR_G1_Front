@@ -86,7 +86,18 @@ export function useChatbaseTracker() {
       initialized = true;
 
       window.chatbase.addEventListener("user-message", (event) => {
-        lastQuestionRef.current = event.data.content;
+        const msg = event.data.content || "";
+
+        if (msg.length > 500) {
+          console.warn(
+            "Mensaje demasiado largo, no se enviará al backend:",
+            msg.length
+          );
+          lastQuestionRef.current = null; // resetea para que handleAssistant tampoco lo logre postear
+          return;
+        }
+
+        lastQuestionRef.current = msg;
         handleUser(event);
       });
 

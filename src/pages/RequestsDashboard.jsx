@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import "../styles/App.css";
 import "../styles/adminHome.css";
 import { AdminNavbar } from "../components/AdminNavbar";
-export function RequestsDashboard() {
+export function RequestsDashboard({ embbed = false }) {
   const headerRef = useRef(null);
   const [frameHeight, setFrameHeight] = useState(900);
 
   useEffect(() => {
     const updateHeight = () => {
       const headerHeight = headerRef.current?.offsetHeight ?? 0;
-      const verticalPadding = 48; 
+      const verticalPadding = 48;
       const available = window.innerHeight - headerHeight - verticalPadding;
       setFrameHeight(Math.max(available, 900));
     };
@@ -21,7 +21,7 @@ export function RequestsDashboard() {
 
   return (
     <div className="requests-dashboard">
-      <AdminNavbar/>
+      {!embbed && <AdminNavbar />}
 
       <section className="dashboard-wrapper">
         <iframe
