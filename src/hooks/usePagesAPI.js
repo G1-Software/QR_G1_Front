@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { apiUrl } from "../config/api";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { buildErrorState } from "../utils/error.js";
+
 
 export function usePagesAPI() {
   const [pages, setPages] = useState([]);
@@ -27,9 +29,7 @@ export function usePagesAPI() {
         setPages(res.data.data || []);
       } catch (err) {
         console.error("Error al obtener páginas:", err);
-        setError(
-          err.response?.data?.message || "Error al obtener las páginas."
-        );
+        setError(buildErrorState(err, "Error al obtener las páginas."));
       } finally {
         setLoading(false);
       }
@@ -55,7 +55,7 @@ export function usePagesAPI() {
       console.log("Cambios guardados con éxito.");
     } catch (err) {
       console.error("Error al guardar los cambios:", err);
-      setError("Error al guardar los cambios.");
+      setError(buildErrorState(err, "Error al guardar los cambios."));
     } finally {
       setIsSaving(false);
     }

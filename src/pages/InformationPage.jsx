@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import { Loader } from "./Loader";
 import { ErrorPage } from "./ErrorPage";
 import { apiUrl } from "../config/api.js";
+import { buildErrorState } from "../utils/error.js";
 
 export function InformationPage() {
   const location = useLocation();
@@ -72,7 +73,7 @@ export function InformationPage() {
 
       } catch (err) {
         console.error("Error al cargar datos:", err);
-        setError("Error al cargar los datos.");
+        setError(buildErrorState(err, "No encontramos lo que buscabas. El recurso solicitado no existe o fue retirado."));
       } finally {
         setLoading(false);
       }
@@ -82,7 +83,7 @@ export function InformationPage() {
   }, [token, page, qrData, setQrData, accessToken]);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage />;
+  if (error) return <ErrorPage status={error.status} message={error.message} />;
 
   return (
     <div className="container">

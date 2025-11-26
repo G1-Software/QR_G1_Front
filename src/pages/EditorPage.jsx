@@ -33,7 +33,7 @@ export function EditorPage() {
   const [showErrorModal, setShowErrorModal] = useState(false);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorPage message={error} />;
+  if (error) return <ErrorPage status={error.status} message={error.message} />;
 
   const handleSelectChange = (e) => {
     const pageId = parseInt(e.target.value);
@@ -48,6 +48,10 @@ export function EditorPage() {
   };
 
   const handleSave = () => {
+    if (text.length > 1500) {
+      alert("El contenido supera el límite de 1500 caracteres.");
+      return;
+    }
     if (!selectedPage) {
       setShowErrorModal(true);
       return;
@@ -64,6 +68,7 @@ export function EditorPage() {
 
   const handleCloseModal = () => setIsSaved(false);
   const handleCloseErrorModal = () => setShowErrorModal(false);
+
 
   if (role != "admin") return <PublicHome/>;
   
@@ -102,6 +107,7 @@ export function EditorPage() {
                 dangerouslySetInnerHTML={{ __html: html }}
               />
             </div>
+
           </div>
         </main>
 
