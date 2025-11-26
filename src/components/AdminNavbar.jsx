@@ -14,7 +14,6 @@ export function AdminNavbar() {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
 
-  const redirectUri = import.meta.env.VITE_AUTH0_REDIRECT_URI 
 
   return (
     <div className="admin-layout">
