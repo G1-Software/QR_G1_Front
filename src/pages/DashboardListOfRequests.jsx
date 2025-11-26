@@ -103,7 +103,7 @@ export function DashboardListOfRequests() {
           Dashboard de métricas de solicitudes
         </h2>
 
-        <RequestsDashboard />
+        <RequestsDashboard embbed={true} />
       </div>
     );
   }

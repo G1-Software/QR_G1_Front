@@ -553,10 +553,10 @@ textarea ::-webkit-scrollbar {
 /* TABLA */
 .request-table table {
   width: 100%;
-  min-width: 1300px; /* Ajustable */
+  min-width: 1300px;
   border-collapse: collapse;
   color: #2d2d2d;
-  table-layout: fixed; /* Importante para scroll y controlar anchos */
+  table-layout: fixed;
 }
 
 /* CABECERA */
@@ -582,8 +582,6 @@ textarea ::-webkit-scrollbar {
   white-space: nowrap;
 }
 
-/* ======= CONFIGURACIÓN DE ANCHOS POR COLUMNA ======= */
-
 /* ID */
 .request-table th:nth-child(1),
 .request-table td:nth-child(1) {
@@ -602,11 +600,11 @@ textarea ::-webkit-scrollbar {
   width: 120px;
 }
 
-/* Descripción (más larga) */
+/* Descripción */
 .request-table th:nth-child(4),
 .request-table td:nth-child(4) {
   width: 250px;
-  white-space: normal; /* Permite salto de línea */
+  white-space: normal;
 }
 
 /* Nombre solicitante */

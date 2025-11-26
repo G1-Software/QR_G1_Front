@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "../styles/App.css";
 import "../styles/adminHome.css";
 import { AdminNavbar } from "../components/AdminNavbar";
-export function RequestsDashboard() {
+export function RequestsDashboard({ embbed = false }) {
   const headerRef = useRef(null);
   const [frameHeight, setFrameHeight] = useState(900);
 
@@ -21,6 +21,8 @@ export function RequestsDashboard() {
 
   return (
     <div className="requests-dashboard">
+      {!embbed && <AdminNavbar />}
+
       <section className="dashboard-wrapper">
         <iframe
           title="Google Looker Studio dashboard"

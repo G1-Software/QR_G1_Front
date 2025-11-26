@@ -98,53 +98,6 @@ export function RequestFilters({ filters, onFilterChange }) {
       <h2 className="filters-title">Filtros</h2>
 
       <div className="filters-row">
-        {/* Área */}
-        <label>
-          Área
-          <select name="area" value={localFilters.area} onChange={handleChange}>
-            <option value="">Todas</option>
-            {Object.keys(SUBAREAS).map((area) => (
-              <option key={area} value={area}>
-                {area}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        {/* Subárea */}
-        <label>
-          Subárea
-          <select
-            name="subarea"
-            value={localFilters.subarea}
-            onChange={handleChange}
-          >
-            <option value="">Todas</option>
-            {availableSubareas.map((sub) => (
-              <option key={sub} value={sub}>
-                {sub}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        {/* Estado */}
-        <label>
-          Estado
-          <select
-            name="status"
-            value={localFilters.status}
-            onChange={handleChange}
-          >
-            <option value="">Todos</option>
-            <option value="Pendiente">Pendiente</option>
-            <option value="En Proceso">En Proceso</option>
-            <option value="Completado">Completado</option>
-          </select>
-        </label>
-      </div>
-
-      <div className="filters-row">
         {/* Nuevos filtros de QR */}
         <label>
           Institución
@@ -239,6 +192,53 @@ export function RequestFilters({ filters, onFilterChange }) {
                 {b}
               </option>
             ))}
+          </select>
+        </label>
+      </div>
+
+      <div className="filters-row">
+        {/* Área */}
+        <label>
+          Área
+          <select name="area" value={localFilters.area} onChange={handleChange}>
+            <option value="">Todas</option>
+            {Object.keys(SUBAREAS).map((area) => (
+              <option key={area} value={area}>
+                {area}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        {/* Subárea */}
+        <label>
+          Subárea
+          <select
+            name="subarea"
+            value={localFilters.subarea}
+            onChange={handleChange}
+          >
+            <option value="">Todas</option>
+            {availableSubareas.map((sub) => (
+              <option key={sub} value={sub}>
+                {sub}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        {/* Estado */}
+        <label>
+          Estado
+          <select
+            name="status"
+            value={localFilters.status}
+            onChange={handleChange}
+          >
+            <option value="">Todos</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="En Proceso">En Proceso</option>
+            <option value="Completado">Completado</option>
           </select>
         </label>
       </div>
