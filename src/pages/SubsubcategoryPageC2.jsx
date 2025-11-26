@@ -8,6 +8,7 @@ import { ErrorPage } from "./ErrorPage";
 import { useQrStore } from "../stores/QRStore.js";
 import { useLocation } from "react-router-dom";
 import { buildErrorState } from "../utils/error.js";
+import { apiUrl } from "../config/api.js";
 
 export function SubsubategoryPageC2() {
   const location = useLocation();
