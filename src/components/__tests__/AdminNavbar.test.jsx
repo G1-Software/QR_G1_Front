@@ -23,7 +23,7 @@ const renderWithRouter = (component) => {
   )
 }
 
-describe('AdminNavbar - Real Component Tests', () => {
+describe('Test del componente AdminNavBar', () => {
   const mockLogout = vi.fn()
 
   beforeEach(() => {
@@ -33,14 +33,14 @@ describe('AdminNavbar - Real Component Tests', () => {
     })
   })
 
-  it('renders the AdminNavbar component', () => {
+  it('renderiza el componente AdminNavbar', () => {
     renderWithRouter(<AdminNavbar />)
     
     // Verifica que el layout principal existe
     expect(document.querySelector('.admin-layout')).toBeInTheDocument()
   })
 
-  it('renders sidebar in closed state by default', () => {
+  it('renderiza el sidebar en estado cerrado por defecto', () => {
     renderWithRouter(<AdminNavbar />)
     
     // El sidebar debe estar cerrado inicialmente
@@ -49,7 +49,7 @@ describe('AdminNavbar - Real Component Tests', () => {
     expect(sidebar).not.toHaveClass('open')
   })
 
-  it('renders all navigation links', () => {
+  it('renderiza todos los enlaces de navegación', () => {
     renderWithRouter(<AdminNavbar />)
     
     // Verifica todos los links de navegación
@@ -62,7 +62,7 @@ describe('AdminNavbar - Real Component Tests', () => {
     expect(screen.getByText('Dashboard de métricas Chatbot')).toBeInTheDocument()
   })
 
-  it('toggles sidebar when menu button is clicked', () => {
+  it('cambia el estado del sidebar cuando se hace click en el botón de menú', () => {
     renderWithRouter(<AdminNavbar />)
     
     const sidebar = document.querySelector('.sidebar')
@@ -82,7 +82,7 @@ describe('AdminNavbar - Real Component Tests', () => {
     expect(sidebar).not.toHaveClass('open')
   })
 
-  it('closes sidebar when close button is clicked', () => {
+  it('cierra el sidebar cuando se hace click en el botón de cerrar', () => {
     renderWithRouter(<AdminNavbar />)
     
     const sidebar = document.querySelector('.sidebar')
@@ -98,7 +98,7 @@ describe('AdminNavbar - Real Component Tests', () => {
     expect(sidebar).toHaveClass('close')
   })
 
-  it('closes sidebar when a navigation link is clicked', () => {
+  it('cierra el sidebar cuando se hace click en un enlace de navegación', () => {
     renderWithRouter(<AdminNavbar />)
     
     const sidebar = document.querySelector('.sidebar')
@@ -116,20 +116,20 @@ describe('AdminNavbar - Real Component Tests', () => {
     expect(sidebar).toHaveClass('close')
   })
 
-  it('renders logout button and calls logout function', () => {
+  it('renderiza el botón de cerrar sesión y llama a la función de logout', () => {
     renderWithRouter(<AdminNavbar />)
     
     const logoutButton = screen.getByText('Cerrar sesión')
     expect(logoutButton).toBeInTheDocument()
     
-    // Click en logout
+    // se hace click en logout
     fireEvent.click(logoutButton)
     expect(mockLogout).toHaveBeenCalledWith({
       logoutParams: { returnTo: window.location.href }
     })
   })
 
-  it('renders brand logo with correct attributes', () => {
+  it('renderiza el logo con los atributos correctos', () => {
     renderWithRouter(<AdminNavbar />)
     
     const logo = screen.getByAltText('UC CHRISTUS')
@@ -137,7 +137,7 @@ describe('AdminNavbar - Real Component Tests', () => {
     expect(logo).toHaveClass('brand__logo')
   })
 
-  it('has correct navigation link paths', () => {
+  it('tiene las rutas correctas en los links', () => {
     renderWithRouter(<AdminNavbar />)
     
     // Verifica que los links tienen las rutas correctas
@@ -146,7 +146,7 @@ describe('AdminNavbar - Real Component Tests', () => {
     expect(screen.getByText('Instructivo').closest('a')).toHaveAttribute('href', '/admin/instructivo')
   })
 
-  it('renders header with correct structure', () => {
+  it('renderiza el header con la estructura correcta', () => {
     renderWithRouter(<AdminNavbar />)
     
     // Verifica la estructura del header
