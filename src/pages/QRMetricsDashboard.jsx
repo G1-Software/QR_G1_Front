@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import "../styles/App.css";
 import "../styles/adminHome.css";
 import { AdminNavbar } from "../components/AdminNavbar";
+import { useAuth0 } from "@auth0/auth0-react";
+import { PublicHome } from "./PublicHome.jsx";
+
 export function QRMetricsDashboard() {
+  const { user } = useAuth0();
+  const role = user.role;
+
   const headerRef = useRef(null);
   const [frameHeight, setFrameHeight] = useState(900);
 
@@ -19,24 +25,27 @@ export function QRMetricsDashboard() {
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
+  if (role != "admin") return <PublicHome/>;
+  
+  if (role == "admin") {
+    return (
+      <div className="qr-metrics-dashboard">
+        <AdminNavbar/>
 
-  return (
-    <div className="qr-metrics-dashboard">
-      <AdminNavbar/>
-
-      <section className="dashboard-wrapper">
-        <iframe
-          title="Google Looker Studio dashboard"
-          src={import.meta.env.VITE_LOOKER_PAGES}
-          loading="lazy"
-          sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-          allowFullScreen
-          referrerPolicy="no-referrer-when-downgrade"
-          height={frameHeight}
-          className="dashboard-frame"
-          style={{ height: `${frameHeight}px` }}
-        />
-      </section>
-    </div>
-  );
+        <section className="dashboard-wrapper">
+          <iframe
+            title="Google Looker Studio dashboard"
+            src={import.meta.env.VITE_LOOKER_PAGES}
+            loading="lazy"
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+            height={frameHeight}
+            className="dashboard-frame"
+            style={{ height: `${frameHeight}px` }}
+          />
+        </section>
+      </div>
+    );
+  }
 }

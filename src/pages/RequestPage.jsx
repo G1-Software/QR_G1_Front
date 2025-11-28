@@ -148,7 +148,7 @@ export function RequestPage() {
 
     try {
       const response = await axios.post(
-        `https://qr-g1-software-back.onrender.com/request`,
+        `${apiUrl}/request`,
         payload,
         { headers: { "Content-Type": "application/json" } }
       );

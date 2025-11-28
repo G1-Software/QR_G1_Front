@@ -5,16 +5,20 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "../styles/adminHome.css";
 
 export function AdminNavbar() {
-  const { logout } = useAuth0();
+  const { logout, user } = useAuth0();
+  const role = user.role;
+  const isStaff = role === "staff";
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const headerRef = useRef(null);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
 
+
   return (
     <div className="admin-layout">
       {/* SIDEBAR */}
+      {!isStaff && (
       <aside className={`sidebar ${sidebarOpen ? "open" : "close"}`}>
         <div className="close-container">
           <button
@@ -65,17 +69,20 @@ export function AdminNavbar() {
           </Link>
         </div>
       </aside>
+      )}
 
       {/* HEADER */}
       <header className="admin-header" ref={headerRef}>
         <div className="admin-header__inner">
           <div className="header-left">
+          {!isStaff && (
             <button
               className="material-symbols-outlined menu-button"
               onClick={toggleSidebar}
             >
               menu
             </button>
+          )}
 
             <div className="brand">
               <img src={logo} alt="UC CHRISTUS" className="brand__logo" />
@@ -86,8 +93,13 @@ export function AdminNavbar() {
             <button
               className="btn-logout"
               onClick={() =>
-                logout({ logoutParams: { returnTo: window.location.href } })
+                logout({
+                  logoutParams: {
+                    returnTo: `${window.location.origin}/home`,
+                  },
+                })
               }
+              
             >
               Cerrar sesión
             </button>
