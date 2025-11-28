@@ -81,11 +81,19 @@ export function RequestPage() {
     "Otro",
   ];
 
+  const subareaAsistenciaSocial = [
+    "Solicita Contacto Familiar",
+    "Apoyo con Documentación",
+    "Acompañamiento",
+    "Otro",
+  ];
+
   const getSubareasByArea = () => {
     if (areaSelected === "Mantención") return subareaMaintenance;
     if (areaSelected === "Limpieza de Habitación") return subareaCleaning;
     if (areaSelected === "Apoyo Espiritual") return subareaSpiritual;
     if (areaSelected === "Nutrición") return subareaNutrition;
+    if (areaSelected === "Asistencia Social") return subareaAsistenciaSocial;
     return [];
   };
 
@@ -179,9 +187,7 @@ export function RequestPage() {
           return;
         }
 
-        const qrResponse = await axios.get(
-          `${apiUrl}/qr/${token}`
-        );
+        const qrResponse = await axios.get(`${apiUrl}/qr/${token}`);
         const qr = qrResponse.data.data;
         setQrData(qr);
       } catch (err) {
