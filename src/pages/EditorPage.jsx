@@ -8,8 +8,13 @@ import { usePagesAPI } from "../hooks/usePagesAPI";
 import { Modal } from "../components/Modal";
 import { Loader } from "./Loader.jsx";
 import { ErrorPage } from "./ErrorPage.jsx";
+import { useAuth0 } from "@auth0/auth0-react";
+import { PublicHome } from "./PublicHome.jsx";
 
 export function EditorPage() {
+  const { user } = useAuth0();
+  const role = user.role;
+
   const { pages, savePage, isSaving, loading, error } = usePagesAPI();
 
   const {
@@ -64,61 +69,60 @@ export function EditorPage() {
   const handleCloseModal = () => setIsSaved(false);
   const handleCloseErrorModal = () => setShowErrorModal(false);
 
-  return (
-    <div className="editor-container">
-      <AdminNavbar/>
-      <Toolbar
-        onUndo={handleUndo}
-        onRedo={handleRedo}
-        onFormat={applyMarkdown}
-        onSave={handleSave}
-        pages={pages}
-        selectedPageId={selectedPage?.id}
-        onSelectChange={handleSelectChange}
-        isSaving={isSaving}
-      />
-      <main className="editor-main">
-        <textarea
-          ref={textareaRef}
-          value={text}
-          onChange={(e) => {
-            if (e.target.value.length <= 1500) {
-              handleTextChange(e.target.value);
-            }
-          }}
-          className="editor-textarea"
-          spellCheck="false"
+
+  if (role != "admin") return <PublicHome/>;
+  
+  if (role == "admin") {
+    return (
+      <div className="editor-container">
+        <AdminNavbar/>
+        <Toolbar
+          onUndo={handleUndo}
+          onRedo={handleRedo}
+          onFormat={applyMarkdown}
+          onSave={handleSave}
+          pages={pages}
+          selectedPageId={selectedPage?.id}
+          onSelectChange={handleSelectChange}
+          isSaving={isSaving}
         />
-        <div className="vizualizer-container">
-          <div className="char-counter">
-            {text.length}/1500 caracteres
-          </div>
-          <div className="visualizer">
-            <img
-              src={logotipo}
-              alt="Logotipo"
-              width={143}
-              className="logotipo"
-            />
-            <div
-              className="visualizer-content"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          </div>
-        </div>
-      </main>
+        <main className="editor-main">
+          <textarea
+            ref={textareaRef}
+            value={text}
+            onChange={(e) => handleTextChange(e.target.value)}
+            className="editor-textarea"
+            spellCheck="false"
+          />
+          <div className="vizualizer-container">
+            <div className="visualizer">
+              <img
+                src={logotipo}
+                alt="Logotipo"
+                width={143}
+                className="logotipo"
+              />
+              <div
+                className="visualizer-content"
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            </div>
 
-      <Modal
-        isOpen={isSaved}
-        onClose={handleCloseModal}
-        message="Se guardaron los cambios"
-      />
+          </div>
+        </main>
 
-      <Modal
-        isOpen={showErrorModal}
-        onClose={handleCloseErrorModal}
-        message="Selecciona una página antes de guardar."
-      />
-    </div>
-  );
+        <Modal
+          isOpen={isSaved}
+          onClose={handleCloseModal}
+          message="Se guardaron los cambios"
+        />
+
+        <Modal
+          isOpen={showErrorModal}
+          onClose={handleCloseErrorModal}
+          message="Selecciona una página antes de guardar."
+        />
+      </div>
+    );
+  }
 }

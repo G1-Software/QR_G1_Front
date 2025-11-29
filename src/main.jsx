@@ -23,6 +23,7 @@ import { TokenProtectedRoute } from "./components/TokenProtectedRoute";
 import { DashboardListOfRequests } from "./pages/DashboardListOfRequests";
 import { RequestsDashboard } from "./pages/RequestsDashboard";
 import { QRMetricsDashboard } from "./pages/QRMetricsDashboard";
+import { PublicHome } from "./pages/PublicHome";
 import { RootWrapper } from "./components/RootWrapper";
 import { ChatbotDashboard } from "./pages/ChatbotDashboard";
 
@@ -46,10 +47,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       cacheLocation="localstorage"
     >
       <BrowserRouter>
+
         <RootWrapper>
           <Routes>
             <Route path="/scanqrnotice" element={<ScanQrNotice />} />
-
+            <Route path="/home" element={<PublicHome />} />
             <Route
               path="/"
               element={
@@ -177,6 +179,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
      <StaffPage />
    </PrivateRoute>
  } /> */}
+
 
             <Route
               path="/admin"
