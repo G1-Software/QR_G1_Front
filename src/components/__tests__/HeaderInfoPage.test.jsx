@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { BrowserRouter } from 'react-router-dom'
 import { HeaderInfoPage } from '../HeaderInfoPage'
 
@@ -29,9 +29,10 @@ const renderWithRouter = (component) => {
   )
 }
 
-describe('HeaderInfoPage Component - Tests del Componente REAL', () => {
+describe('Test HeaderInfoPage Component', () => {
+
   beforeEach(() => {
-    mockNavigate.mockClear()
+    vi.clearAllMocks()
   })
 
   it('renderiza exactamente como tu código: header > return-box + logo', () => {
