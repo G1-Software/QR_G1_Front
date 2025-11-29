@@ -51,7 +51,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <RootWrapper>
           <Routes>
             <Route path="/scanqrnotice" element={<ScanQrNotice />} />
-
+            <Route path="/home" element={<PublicHome />} />
             <Route
               path="/"
               element={
