@@ -78,6 +78,7 @@ describe('Button Component - Tests del Componente', () => {
       <BrowserRouter>
         <Button text="Category Button" to="/category" isCategoryPage={true} />
       </BrowserRouter>
+      
     )
     
     linkElement = screen.getByRole('link')
