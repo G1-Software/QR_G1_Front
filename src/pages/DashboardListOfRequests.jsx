@@ -7,12 +7,14 @@ import { RequestFilters } from "../components/RequestFilters.jsx";
 import { Pagination } from "../components/Pagination.jsx";
 import { apiUrl } from "../config/api.js";
 import { AdminNavbar } from "../components/AdminNavbar.jsx";
-import { RequestsDashboard } from "./RequestsDashboard.jsx"; // IMPORTANTE
+import { RequestsDashboard } from "./RequestsDashboard.jsx";
 import { buildErrorState } from "../utils/error.js";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function DashboardListOfRequests() {
-  const [view, setView] = useState("list"); // 👈 NUEVO: controla qué se muestra
+  const { getAccessTokenSilently } = useAuth0();
 
+  const [view, setView] = useState("list");
   const [requests, setRequests] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [filters, setFilters] = useState({
@@ -22,52 +24,68 @@ export function DashboardListOfRequests() {
     startDate: "",
     endDate: "",
   });
+
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchRequests = async (
-    appliedFilters = {},
-    currentPage = 1,
-    skipLoading = false
-  ) => {
+  /** Construye headers con token */
+  const buildAuthHeaders = async () => {
+  try {
+    console.log("🔵 buildAuthHeaders ejecutándose...");
+
+    const token = await getAccessTokenSilently({
+      authorizationParams: {
+        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+        scope: "read:requests update:requests",
+      },
+    });
+
+    console.log("🟢 TOKEN OBTENIDO:", token?.slice(0, 25) + "...");
+
+    return {
+      Authorization: `Bearer ${token}`,
+    };
+  } catch (error) {
+    console.error("🔴 ERROR EN getAccessTokenSilently:", error);
+    throw error;
+  }
+};
+
+  /** Petición principal */
+  const fetchRequests = async (appliedFilters = {}, currentPage = 1, skipLoading = false) => {
     try {
       if (!skipLoading) setLoading(true);
 
       const params = new URLSearchParams();
+
       Object.entries(appliedFilters).forEach(([key, value]) => {
         if (value && value !== "all") params.append(key, value);
       });
+
       params.append("page", currentPage);
       params.append("limit", 10);
 
+      const headers = await buildAuthHeaders();
+
       const response = await axios.get(
-        `${apiUrl}/request?${params.toString()}`
+        `${apiUrl}/request?${params.toString()}`,
+        { headers }
       );
-
-      console.log(
-        "FETCH EXECUTED",
-        "filters:",
-        appliedFilters,
-        "currentPage:",
-        currentPage,
-        "skipLoading:",
-        skipLoading
-      );
-
-      console.log("REQUEST URL:", `${apiUrl}/request?${params.toString()}`);
 
       setRequests(response.data.data || []);
       setPagination(response.data.pagination || null);
+
     } catch (err) {
-      console.error(err);
+      console.error("ERROR FETCH:", err);
       setError(buildErrorState(err, "Error al obtener las solicitudes"));
     } finally {
       if (!skipLoading) setLoading(false);
     }
   };
 
+  /** Efecto cuando cambian filtros/página/vista */
   useEffect(() => {
     if (view === "list") {
       fetchRequests(filters, page);
@@ -80,67 +98,62 @@ export function DashboardListOfRequests() {
         (key) => newFilters[key] !== prevFilters[key]
       );
 
-      if (isDifferent) {
-        setPage(1);
-      }
+      if (isDifferent) setPage(1);
 
       return newFilters;
     });
   };
 
-  const handlePageChange = (newPage) => {
-    console.log("SET PAGE REQUESTED:", newPage);
-    setPage(newPage);
-  };
+  const handlePageChange = (newPage) => setPage(newPage);
 
-  useEffect(() => {
-    console.log("EFECTO: page cambió →", page);
-  }, [page]);
-
+  /** Actualizar estado */
   const updateRequestStatus = async (id, newStatus) => {
     try {
       setIsUpdating(true);
 
-      await axios.put(`${apiUrl}/request/${id}`, {
-        status: newStatus,
-      });
+      const headers = await buildAuthHeaders();
+
+      await axios.put(
+        `${apiUrl}/request/${id}`,
+        { status: newStatus },
+        { headers }
+      );
 
       await fetchRequests(filters, page, true);
+
     } catch (err) {
-      console.error("Error al actualizar solicitud:", err);
+      console.error("Error actualizando:", err);
       alert("Error al actualizar la solicitud.");
     } finally {
       setIsUpdating(false);
     }
   };
+
   if (loading && !isUpdating && view === "list") return <Loader />;
   if (error) return <ErrorPage status={error.status} message={error.message} />;
 
+  /** vista dashboard */
   if (view === "dashboard") {
     return (
       <div className="dashboard-container">
         <AdminNavbar />
         <h2 className="dashboard-title padding-title">
-          <span className="view-toggle" onClick={() => setView("list")}>
-            ◀
-          </span>
+          <span className="view-toggle" onClick={() => setView("list")}>◀</span>
           Dashboard de métricas de solicitudes
         </h2>
-
         <RequestsDashboard embbed={true} />
       </div>
     );
   }
 
+  /** vista lista */
   return (
     <main className="dashboard-container">
       <AdminNavbar />
 
       <h2 className="dashboard-title">
         Listado de solicitudes
-        <span className="view-toggle" onClick={() => setView("dashboard")}>
-          ▶
-        </span>
+        <span className="view-toggle" onClick={() => setView("dashboard")}>▶</span>
       </h2>
 
       <section className="filters-container">
@@ -148,10 +161,7 @@ export function DashboardListOfRequests() {
       </section>
 
       <div className="request-table">
-        <RequestTable
-          requests={requests}
-          onUpdateStatus={updateRequestStatus}
-        />
+        <RequestTable requests={requests} onUpdateStatus={updateRequestStatus} />
       </div>
 
       <div className="pagination-container">

@@ -31,7 +31,8 @@ const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
 const redirectUri =
-  import.meta.env.VITE_AUTH0_REDIRECT_URI || window.location.origin;
+  import.meta.env.VITE_AUTH0_REDIRECT_URI ||
+  window.location.origin + "/admin";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -41,7 +42,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       authorizationParams={{
         redirect_uri: redirectUri,
         audience: audience,
-        scope: "openid profile email",
+        scope: "openid profile email read:requests update:requests",
       }}
       useRefreshTokens={true}
       cacheLocation="localstorage"
