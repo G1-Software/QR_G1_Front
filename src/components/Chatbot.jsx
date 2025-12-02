@@ -27,7 +27,6 @@ export default function Chatbot() {
 
   return (
     <div className="chatbotContainer">
-      {/* OPEN BUTTON */}
       <button
         id="openChatBtn"
         aria-haspopup="dialog"
@@ -37,7 +36,6 @@ export default function Chatbot() {
         <span className="material-symbols-outlined">smart_toy</span>
       </button>
 
-      {/* MODAL */}
       <div
         id="chatModal"
         ref={modalRef}
@@ -48,7 +46,6 @@ export default function Chatbot() {
         aria-describedby="chatInstructions"
       >
         <div className="chat-window">
-          {/* HEADER */}
           <header className="chat-header">
             <button
               id="closeChatBtn"
@@ -59,7 +56,6 @@ export default function Chatbot() {
             </button>
           </header>
 
-          {/* MESSAGES */}
           <div
             id="chatDesc"
             className="chat-messages"
@@ -83,7 +79,6 @@ export default function Chatbot() {
             ))}
           </div>
 
-          {/* FOOTER */}
           <footer className="chat-footer">
             <div className="chat-input-wrapper">
               <label htmlFor="chatInput">Mensaje:</label>

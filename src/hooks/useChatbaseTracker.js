@@ -93,7 +93,7 @@ export function useChatbaseTracker() {
             "Mensaje demasiado largo, no se enviará al backend:",
             msg.length
           );
-          lastQuestionRef.current = null; // resetea para que handleAssistant tampoco lo logre postear
+          lastQuestionRef.current = null;
           return;
         }
 

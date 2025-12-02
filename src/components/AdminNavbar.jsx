@@ -14,75 +14,76 @@ export function AdminNavbar() {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const closeSidebar = () => setSidebarOpen(false);
 
-
   return (
     <div className="admin-layout">
-      {/* SIDEBAR */}
       {!isStaff && (
-      <aside className={`sidebar ${sidebarOpen ? "open" : "close"}`}>
-        <div className="close-container">
-          <button
-            onClick={closeSidebar}
-            className="material-symbols-outlined text-gray-600 hover:text-black"
-          >
-            close
-          </button>
-        </div>
+        <aside className={`sidebar ${sidebarOpen ? "open" : "close"}`}>
+          <div className="close-container">
+            <button
+              onClick={closeSidebar}
+              className="material-symbols-outlined text-gray-600 hover:text-black"
+            >
+              close
+            </button>
+          </div>
 
-        <div className="links-container">
-          <Link to="/admin" className="link" onClick={closeSidebar}>
-            Inicio
-          </Link>
-          <Link to="/admin/editor" className="link" onClick={closeSidebar}>
-            Editor
-          </Link>
-          <Link to="/admin/instructivo" className="link" onClick={closeSidebar}>
-            Instructivo
-          </Link>
-          <Link
-            to="/dashboard/listado_solicitudes"
-            className="link"
-            onClick={closeSidebar}
-          >
-            Listado de solicitudes
-          </Link>
-          <Link
-            to="/dashboard/metricas_solicitudes"
-            className="link"
-            onClick={closeSidebar}
-          >
-            Dashboard de solicitudes
-          </Link>
-          <Link
-            to="/dashboard/metricas_qr"
-            className="link"
-            onClick={closeSidebar}
-          >
-            Dashboard de métricas QR
-          </Link>
-          <Link
-            to="/dashboard/metricas_chatbot"
-            className="link"
-            onClick={closeSidebar}
-          >
-            Dashboard de métricas Chatbot
-          </Link>
-        </div>
-      </aside>
+          <div className="links-container">
+            <Link to="/admin" className="link" onClick={closeSidebar}>
+              Inicio
+            </Link>
+            <Link to="/admin/editor" className="link" onClick={closeSidebar}>
+              Editor
+            </Link>
+            <Link
+              to="/admin/instructivo"
+              className="link"
+              onClick={closeSidebar}
+            >
+              Instructivo
+            </Link>
+            <Link
+              to="/dashboard/listado_solicitudes"
+              className="link"
+              onClick={closeSidebar}
+            >
+              Listado de solicitudes
+            </Link>
+            <Link
+              to="/dashboard/metricas_solicitudes"
+              className="link"
+              onClick={closeSidebar}
+            >
+              Dashboard de solicitudes
+            </Link>
+            <Link
+              to="/dashboard/metricas_qr"
+              className="link"
+              onClick={closeSidebar}
+            >
+              Dashboard de métricas QR
+            </Link>
+            <Link
+              to="/dashboard/metricas_chatbot"
+              className="link"
+              onClick={closeSidebar}
+            >
+              Dashboard de métricas Chatbot
+            </Link>
+          </div>
+        </aside>
       )}
 
-      {/* HEADER */}
       <header className="admin-header" ref={headerRef}>
         <div className="admin-header__inner">
           <div className="header-left">
-          {!isStaff && (
-            <button
-              className="material-symbols-outlined menu-button"
-              onClick={toggleSidebar}
-            >
-              menu
-            </button>
-          )}
+            {!isStaff && (
+              <button
+                className="material-symbols-outlined menu-button"
+                onClick={toggleSidebar}
+              >
+                menu
+              </button>
+            )}
 
             <div className="brand">
               <img src={logo} alt="UC CHRISTUS" className="brand__logo" />
@@ -99,7 +100,6 @@ export function AdminNavbar() {
                   },
                 })
               }
-              
             >
               Cerrar sesión
             </button>
