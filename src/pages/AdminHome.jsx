@@ -1,19 +1,16 @@
 import { useAuth0 } from "@auth0/auth0-react";
-//import logo from "../assets/logotipo.jpg";
 import "../styles/adminHome.css";
 import Card from "../components/Card";
-//import { useEffect } from "react";
-//import { useNavigate } from "react-router-dom";
 import { AdminNavbar } from "../components/AdminNavbar.jsx";
 
 export const AdminHome = () => {
   const { user } = useAuth0();
-  const role = user.role
+  const role = user.role;
 
   if (role === "staff") {
     return (
       <div className="admin-home">
-        <AdminNavbar/>
+        <AdminNavbar />
 
         <main>
           <h2>Panel de Administración QR UC CHRISTUS</h2>
@@ -23,7 +20,6 @@ export const AdminHome = () => {
           </p>
 
           <div className="admin-links">
-            
             <Card
               image="https://media.istockphoto.com/id/1434437996/photo/woman-hand-writing-on-clipboard-with-a-pen.jpg?s=612x612&w=0&k=20&c=IaDtgURkVQ4Onq9WV04kCp1rzjYj1GPUatE0mTOYc-A="
               title="Listado de Solicitudes"
@@ -38,19 +34,16 @@ export const AdminHome = () => {
               linkText="Acceder"
               linkHref="/dashboard/metricas_solicitudes"
             />
-            
-            
           </div>
         </main>
       </div>
     );
   }
 
-
   if (role === "admin") {
     return (
       <div className="admin-home">
-        <AdminNavbar/>
+        <AdminNavbar />
 
         <main>
           <h2>Panel de Administración QR UC CHRISTUS</h2>
@@ -107,5 +100,4 @@ export const AdminHome = () => {
       </div>
     );
   }
-  
 };

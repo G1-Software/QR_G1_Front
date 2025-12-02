@@ -1,4 +1,3 @@
-// components/Modal.jsx
 import React from "react";
 
 export function Modal({ isOpen, onClose, message }) {

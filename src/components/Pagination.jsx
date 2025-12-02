@@ -4,7 +4,6 @@ export function Pagination({ pagination, onPageChange }) {
   const { page, totalPages } = pagination;
 
   const handleClick = (newPage) => {
-    console.log("CLICK en paginación — newPage:", newPage);
     onPageChange(newPage);
   };
 

@@ -57,7 +57,6 @@ export function RequestFilters({ filters, onFilterChange }) {
     bed: [],
   });
 
-  // Obtener opciones de QR desde backend
   useEffect(() => {
     const fetchQrOptions = async () => {
       try {
@@ -88,7 +87,6 @@ export function RequestFilters({ filters, onFilterChange }) {
     });
   };
 
-  // Enviar los cambios al padre cuando localFilters cambie
   useEffect(() => {
     onFilterChange(localFilters);
   }, [localFilters, onFilterChange]);
@@ -98,7 +96,6 @@ export function RequestFilters({ filters, onFilterChange }) {
       <h2 className="filters-title">Filtros</h2>
 
       <div className="filters-row">
-        {/* Nuevos filtros de QR */}
         <label>
           Institución
           <select
@@ -197,7 +194,6 @@ export function RequestFilters({ filters, onFilterChange }) {
       </div>
 
       <div className="filters-row">
-        {/* Área */}
         <label>
           Área
           <select name="area" value={localFilters.area} onChange={handleChange}>
@@ -210,7 +206,6 @@ export function RequestFilters({ filters, onFilterChange }) {
           </select>
         </label>
 
-        {/* Subárea */}
         <label>
           Subárea
           <select
@@ -227,7 +222,6 @@ export function RequestFilters({ filters, onFilterChange }) {
           </select>
         </label>
 
-        {/* Estado */}
         <label>
           Estado
           <select
@@ -243,7 +237,6 @@ export function RequestFilters({ filters, onFilterChange }) {
         </label>
       </div>
 
-      {/* Fechas */}
       <label className="label-creation-date">Rango de creación</label>
       <div className="filters-row filters-dates">
         <label>

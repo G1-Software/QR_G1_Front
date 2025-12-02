@@ -30,31 +30,29 @@ export function DashboardListOfRequests() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [error, setError] = useState(null);
 
-  /** Construye headers con token */
   const buildAuthHeaders = async () => {
-  try {
-    console.log("🔵 buildAuthHeaders ejecutándose...");
+    try {
+      const token = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+          scope: "read:requests update:requests",
+        },
+      });
 
-    const token = await getAccessTokenSilently({
-      authorizationParams: {
-        audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-        scope: "read:requests update:requests",
-      },
-    });
+      return {
+        Authorization: `Bearer ${token}`,
+      };
+    } catch (error) {
+      console.error("ERROR EN getAccessTokenSilently:", error);
+      throw error;
+    }
+  };
 
-    console.log("🟢 TOKEN OBTENIDO:", token?.slice(0, 25) + "...");
-
-    return {
-      Authorization: `Bearer ${token}`,
-    };
-  } catch (error) {
-    console.error("🔴 ERROR EN getAccessTokenSilently:", error);
-    throw error;
-  }
-};
-
-  /** Petición principal */
-  const fetchRequests = async (appliedFilters = {}, currentPage = 1, skipLoading = false) => {
+  const fetchRequests = async (
+    appliedFilters = {},
+    currentPage = 1,
+    skipLoading = false
+  ) => {
     try {
       if (!skipLoading) setLoading(true);
 
@@ -76,7 +74,6 @@ export function DashboardListOfRequests() {
 
       setRequests(response.data.data || []);
       setPagination(response.data.pagination || null);
-
     } catch (err) {
       console.error("ERROR FETCH:", err);
       setError(buildErrorState(err, "Error al obtener las solicitudes"));
@@ -85,7 +82,6 @@ export function DashboardListOfRequests() {
     }
   };
 
-  /** Efecto cuando cambian filtros/página/vista */
   useEffect(() => {
     if (view === "list") {
       fetchRequests(filters, page);
@@ -106,7 +102,6 @@ export function DashboardListOfRequests() {
 
   const handlePageChange = (newPage) => setPage(newPage);
 
-  /** Actualizar estado */
   const updateRequestStatus = async (id, newStatus) => {
     try {
       setIsUpdating(true);
@@ -120,7 +115,6 @@ export function DashboardListOfRequests() {
       );
 
       await fetchRequests(filters, page, true);
-
     } catch (err) {
       console.error("Error actualizando:", err);
       alert("Error al actualizar la solicitud.");
@@ -132,13 +126,14 @@ export function DashboardListOfRequests() {
   if (loading && !isUpdating && view === "list") return <Loader />;
   if (error) return <ErrorPage status={error.status} message={error.message} />;
 
-  /** vista dashboard */
   if (view === "dashboard") {
     return (
       <div className="dashboard-container">
         <AdminNavbar />
         <h2 className="dashboard-title padding-title">
-          <span className="view-toggle" onClick={() => setView("list")}>◀</span>
+          <span className="view-toggle" onClick={() => setView("list")}>
+            ◀
+          </span>
           Dashboard de métricas de solicitudes
         </h2>
         <RequestsDashboard embbed={true} />
@@ -146,14 +141,15 @@ export function DashboardListOfRequests() {
     );
   }
 
-  /** vista lista */
   return (
     <main className="dashboard-container">
       <AdminNavbar />
 
       <h2 className="dashboard-title">
         Listado de solicitudes
-        <span className="view-toggle" onClick={() => setView("dashboard")}>▶</span>
+        <span className="view-toggle" onClick={() => setView("dashboard")}>
+          ▶
+        </span>
       </h2>
 
       <section className="filters-container">
@@ -161,7 +157,10 @@ export function DashboardListOfRequests() {
       </section>
 
       <div className="request-table">
-        <RequestTable requests={requests} onUpdateStatus={updateRequestStatus} />
+        <RequestTable
+          requests={requests}
+          onUpdateStatus={updateRequestStatus}
+        />
       </div>
 
       <div className="pagination-container">
