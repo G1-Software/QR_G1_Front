@@ -46,7 +46,6 @@ export function RequestTable({ requests, onUpdateStatus }) {
               <td>{req.requester_full_name}</td>
               <td>{req.requester_email}</td>
 
-              {/* Datos del QR asociados */}
               <td>{req.institution || "-"}</td>
               <td>{req.building || "-"}</td>
               <td>{req.floor ?? "-"}</td>
